@@ -7,6 +7,16 @@
     "build": "next build",
     "start": "next start"
   },
+  "lint-staged": {
+    "**/*.+(js|jsx|ts|tsx|mdx)": [
+      "prettier-standard"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsc && lint-staged"
+    }
+  },
   "dependencies": {
     "@next/mdx": "^9.5.5",
     "lodash": "^4.17.20",
