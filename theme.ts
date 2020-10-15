@@ -1,7 +1,7 @@
 export default {
   breakpoints: ['480px', '768px'],
-  space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
-  sizes: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+  space: [0, 4, 8, 16, 32, 64, 128, 256, 384, 512],
+  sizes: [0, 4, 8, 16, 32, 64, 128, 256, 384, 512],
   fontSizes: [10, 14, 18, 24, 28, 32, 36, 38, 52],
   maxWidth: 1400, // TODO: a conventional way to do this?
   colors: {

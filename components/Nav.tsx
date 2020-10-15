@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import FullWidthCentered from './FullWidthCentered'
 
 export default function Nav () {
-  const router = useRouter()
+  const { pathname } = useRouter()
 
   return (
     <FullWidthCentered bg='none'>
@@ -20,12 +20,24 @@ export default function Nav () {
         </Link>
         <Flex sx={{ display: ['none', 'initial'], alignItems: 'center' }}>
           <Link href='/' passHref={true}>
-            <NavLink mr={4} sx={{ color: 'white' }}>
+            <NavLink
+              mr={4}
+              sx={{
+                color: 'white',
+                borderBottom: pathname === '/' ? 'solid white 2px' : 'none'
+              }}
+            >
               HOME
             </NavLink>
           </Link>
           <Link href='/about' passHref={true}>
-            <NavLink mr={4} sx={{ color: 'white' }}>
+            <NavLink
+              mr={4}
+              sx={{
+                color: 'white',
+                borderBottom: pathname === '/about' ? 'solid white 2px' : 'none'
+              }}
+            >
               ABOUT
             </NavLink>
           </Link>
