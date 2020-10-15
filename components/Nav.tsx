@@ -23,7 +23,6 @@ export default function Nav () {
             <NavLink
               mr={4}
               sx={{
-                color: 'white',
                 borderBottom: pathname === '/' ? 'solid white 2px' : 'none'
               }}
             >
@@ -34,7 +33,6 @@ export default function Nav () {
             <NavLink
               mr={4}
               sx={{
-                color: 'white',
                 borderBottom: pathname === '/about' ? 'solid white 2px' : 'none'
               }}
             >

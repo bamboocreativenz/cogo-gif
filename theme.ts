@@ -6,23 +6,14 @@ export default {
   maxWidth: 1400, // TODO: a conventional way to do this?
   colors: {
     text: '#333333',
-    grey: '#7d7d7d',
-    lighterGrey: '#DEDEDE',
-    background: '#fff',
-    eggshell: '#e2e3d1',
-    platinum: '#e9e9e9',
-    cream: '#f1f1e6',
-    pigmentGreen: '#19a44b',
-    pistachio: '#a4d784',
-    emerald: '#5ab373',
-    jungle: '#01a17a',
-    aubergine: '#544d60',
-    warmGray: '#C8CBB6',
-    grapefruit: '#f9adaa',
-    copper: '#a77a76',
-    paleYellow: '#f7d488',
-    orange: '#f9a03f',
-    tomato: '#cf4718'
+    background: 'white',
+    grey: '#ECECEC',
+    lightGrey: '#A0A0A0',
+    reportCircleBlack: '#3A3A3A',
+    climate: '#6666CC',
+    waste: '#FF9933',
+    community: '#FF66CC',
+    landAndWater: '#66CC66'
   },
   fonts: {
     body: '"Montserrat", system-ui, sans-serif',
@@ -57,20 +48,20 @@ export default {
     p2: {
       fontSize: 18,
       fontWeight: 400,
-      lineHeight: 28,
+      lineHeight: '28px',
       color: 'text'
     },
     p3: {
       fontSize: 18,
       fontWeight: 400,
-      lineHeight: 22,
+      lineHeight: '22px',
       color: 'text'
     },
     p4: {
       fontSize: 18,
       fontWeight: 400,
       fontStyle: 'italic',
-      lineHeight: 22,
+      lineHeight: '22px',
       color: 'text'
     },
     p5: {
@@ -82,7 +73,7 @@ export default {
     link: {
       fontSize: 18,
       fontWeight: 400,
-      lineHeight: 28,
+      lineHeight: '28px',
       textDecoration: 'underline',
       color: 'text'
     },
@@ -115,70 +106,21 @@ export default {
   buttons: {
     primary: {
       fontFamily: 'body',
-      color: 'background',
-      bg: 'pigmentGreen',
-      '&:hover': {
-        bg: 'pistachio'
-      },
-      cursor: 'pointer',
-      borderRadius: 50
-    },
-    primaryRed: {
-      fontFamily: 'body',
-      color: 'tomato',
-      bg: 'background',
-      borderRadius: 50,
-      borderColor: 'tomato',
-      borderWidth: 2,
-      borderStyle: 'solid',
-      '&:hover': {
-        // borderColor: ''
-        opacity: 0.7
-      },
-      cursor: 'pointer'
-    },
-    secondary: {
-      fontFamily: 'body',
-      color: 'pigmentGreen',
-      bg: 'background',
-      cursor: 'pointer',
-      borderRadius: 50,
-      borderColor: 'pigmentGreen',
-      borderWidth: 2,
-      borderStyle: 'solid',
-      '&:hover': {
-        // color: 'pistachio',
-        borderColor: 'pistachio'
-      }
-    },
-    tertiary: {
-      fontFamily: 'body',
+      fontSize: 13,
+      fontWeight: 900,
       color: 'text',
-      bg: 'background',
+      bg: 'grey',
       cursor: 'pointer',
-      '&:hover': {
-        opacity: 0.7
-      }
-    },
-    tertiaryRed: {
-      fontFamily: 'body',
-      color: 'tomato',
-      bg: 'background',
-      cursor: 'pointer',
+      borderWidth: '2px',
+      borderStyle: 'solid',
+      borderColor: 'text',
       '&:hover': {
         opacity: 0.7
       }
     },
     disabled: {
       fontFamily: 'body',
-      bg: 'grey', // TODO: choose a better colour
-      cursor: 'auto',
-      borderRadius: 50
-    },
-    tertiaryDisabled: {
-      fontFamily: 'body',
-      bg: 'background',
-      color: 'grey',
+      bg: 'grey',
       cursor: 'auto'
     }
   },
@@ -192,11 +134,21 @@ export default {
   },
   links: {
     nav: {
-      color: 'grey',
+      color: 'white',
       '&:hover': {
-        color: 'pigmentGreen'
+        opacity: 0.7
       },
       cursor: 'pointer'
+    },
+    learn: {
+      fontSize: 18,
+      fontWeight: 900,
+      color: 'text',
+      cursor: 'pointer',
+      borderBottom: 'solid black 2px',
+      '&:hover': {
+        opacity: 0.7
+      }
     }
   },
   forms: {
