@@ -21,7 +21,7 @@ export default function ThemeLearnMore ({
   link
 }: ThemeLearnMoreProps) {
   return (
-    <Flex mx={4} sx={{ flexDirection: 'column', width: 8 }}>
+    <Flex mx={[0, 4]} sx={{ flexDirection: 'column', width: ['100%', 8] }}>
       <Box py={2} px={3} bg={titleColorMap[title]} sx={{ borderRadius: 50 }}>
         <Heading variant='h1' sx={{ color: 'white' }}>
           {title}

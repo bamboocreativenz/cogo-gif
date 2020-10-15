@@ -23,6 +23,7 @@ export default function ReportCircle ({
 
   return (
     <Flex
+      mr={[3, 5]}
       sx={{
         position: 'relative',
         flexDirection: 'column',

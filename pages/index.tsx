@@ -16,6 +16,7 @@ export default function Home () {
       />
 
       <Flex
+        px={[3, 5]}
         sx={{ width: '100%', flexDirection: 'column', alignItems: 'center' }}
       >
         <Flex my={4} sx={{ flexDirection: ['column', 'row'] }}>
