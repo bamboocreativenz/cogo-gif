@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Banner from '../components/Banner'
 import ThemeLearnMore from '../components/ThemeLearnMore'
 import IndustryReports from '../components/IndustryReports'
+import CaseStudies from '../components/CaseStudies'
 
 export default function Home () {
   return (
@@ -47,6 +48,8 @@ export default function Home () {
       </Flex>
 
       <IndustryReports />
+
+      <CaseStudies />
     </Flex>
   )
 }

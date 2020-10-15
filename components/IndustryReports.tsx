@@ -1,16 +1,8 @@
 /** @jsx jsx */
-import {
-  jsx,
-  Flex,
-  Box,
-  Heading,
-  Text,
-  Link as TUILink,
-  Button
-} from 'theme-ui'
-import Link from 'next/link'
+import { jsx, Flex, Box, Heading, Text, Button } from 'theme-ui'
 
 import FullWidthCentered from './FullWidthCentered'
+import OneThenTwoColumns from './OneThenTwoColumns'
 import ReportCircle from './ReportCircle'
 
 interface IndustryReportsProps {}
@@ -18,37 +10,49 @@ interface IndustryReportsProps {}
 export default function IndustryReports ({}: IndustryReportsProps) {
   return (
     <FullWidthCentered>
-      <Flex px={[3, 5]} sx={{ flexDirection: 'column' }}>
-        <Flex
+      <Flex px={[3, 5]} mb={5} sx={{ flexDirection: 'column' }}>
+        <OneThenTwoColumns
           mb={4}
-          sx={{
-            flexDirection: ['column', 'row'],
-            justifyContent: 'space-between'
-          }}
-        >
-          <Text variant='button2'>FILTER BY:</Text>
-          <Flex ml={[0, 4]}>
-            <select>
-              <option>test industry</option>
-            </select>
-            <select>
-              <option>test theme</option>
-            </select>
-          </Flex>
-        </Flex>
-
-        <Flex sx={{ flexDirection: ['column', 'row'] }}>
-          <Heading variant='h1'>Industry Reports</Heading>
-          <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
-            <Text variant='p3'>
-              Doing good is not only good for your customers, it's good for your
-              business too.
+          firstColumnContent={
+            <Text variant='button2' sx={{ flex: 1 }}>
+              FILTER BY:
             </Text>
-            <Box>
-              <Button variant='primary'>DOWNLOAD REPORT</Button>
-            </Box>
-          </Flex>
-        </Flex>
+          }
+          remainingContent={
+            <Flex ml={[0, 4]} sx={{ flex: 2 }}>
+              <select>
+                <option>test industry</option>
+              </select>
+              <select>
+                <option>test theme</option>
+              </select>
+            </Flex>
+          }
+        />
+
+        <OneThenTwoColumns
+          mb={4}
+          firstColumnContent={<Heading variant='h1'>Industry Reports</Heading>}
+          remainingContent={
+            <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
+              <Text variant='p3'>
+                Doing good is not only good for your customers, it's good for
+                your business too.
+              </Text>
+            </Flex>
+          }
+        />
+        <OneThenTwoColumns
+          mb={4}
+          firstColumnContent={null}
+          remainingContent={
+            <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
+              <Box>
+                <Button variant='primary'>DOWNLOAD REPORT</Button>
+              </Box>
+            </Flex>
+          }
+        />
 
         <Flex>
           <ReportCircle
