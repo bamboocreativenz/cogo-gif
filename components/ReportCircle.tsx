@@ -38,7 +38,7 @@ export default function ReportCircle ({
           cy={size / 2}
           r={RADIUS}
           fill='transparent'
-          stroke-width='2'
+          strokeWidth='2'
           sx={{ stroke: 'lightGrey' }}
         ></circle>
 
@@ -47,9 +47,9 @@ export default function ReportCircle ({
           cy={size / 2}
           r={RADIUS}
           fill='transparent'
-          stroke-width='2'
-          stroke-dasharray={proportion}
-          stroke-dashoffset={25}
+          strokeWidth='2'
+          strokeDasharray={proportion}
+          strokeDashoffset={25}
           sx={{ stroke: 'reportCircleBlack' }}
         ></circle>
       </svg>
