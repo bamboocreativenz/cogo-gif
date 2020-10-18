@@ -18,10 +18,10 @@ export default function Nav () {
             </Flex>
           </NavLink>
         </Link>
-        <Flex sx={{ display: ['none', 'initial'], alignItems: 'center' }}>
+        <Flex sx={{ alignItems: 'center' }}>
           <Link href='/' passHref={true}>
             <NavLink
-              mr={4}
+              mr={[3, 4]}
               sx={{
                 borderBottom: pathname === '/' ? 'solid white 2px' : 'none'
               }}
@@ -31,7 +31,6 @@ export default function Nav () {
           </Link>
           <Link href='/about' passHref={true}>
             <NavLink
-              mr={4}
               sx={{
                 borderBottom: pathname === '/about' ? 'solid white 2px' : 'none'
               }}
