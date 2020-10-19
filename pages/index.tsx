@@ -1,13 +1,18 @@
 /** @jsx jsx */
 import { jsx, Flex, Box, Heading, Text, Link as TUILink } from 'theme-ui'
 import Link from 'next/link'
+import { Airtable } from '@bamboocreativenz/pip-airtable'
 
 import Banner from '../components/Banner'
 import ThemeLearnMore from '../components/ThemeLearnMore'
 import IndustryReports from '../components/IndustryReports'
 import CaseStudies from '../components/CaseStudies'
 
-export default function Home () {
+interface HomeProps {
+  caseStudies: any // TODO: type better
+}
+
+export default function Home ({ caseStudies }: HomeProps) {
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
@@ -49,7 +54,25 @@ export default function Home () {
 
       <IndustryReports />
 
-      <CaseStudies />
+      <CaseStudies caseStudies={caseStudies} />
     </Flex>
   )
+}
+
+export async function getStaticProps (context) {
+  const airtable = new Airtable(
+    process.env.AIRTABLE_API_KEY,
+    process.env.AIRTABLE_BASE
+  )
+  const results = await airtable.listRecords({
+    tableName: 'Case Studies',
+    viewName: 'Grid View'
+  })
+  const caseStudies = results.map(c => c.fields)
+
+  return {
+    props: {
+      caseStudies
+    }
+  }
 }

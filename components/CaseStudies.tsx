@@ -3,49 +3,14 @@ import { jsx, Flex, Box, Heading, Text, Image, Button } from 'theme-ui'
 
 import FullWidthCentered from './FullWidthCentered'
 import OneThenTwoColumns from './OneThenTwoColumns'
-import ReportCircle from './ReportCircle'
 
-function CaseStudy () {
-  return (
-    <Flex sx={{ flexDirection: 'column', width: 500 }}>
-      <Flex sx={{ position: 'relative' }}>
-        <Heading
-          variant='h2'
-          sx={{ position: 'absolute', bottom: 2, left: 3, color: 'white' }}
-        >
-          MEVO
-        </Heading>
-        <Image src='/images/case-study-banner-mevo.png' />
-      </Flex>
-
-      <Flex p={3} sx={{ flexDirection: 'column' }}>
-        <Flex>
-          <Text>
-            Mevo is Australasia's first car-share that isn’t tied to one
-            particular parking spot. Mevo is changing how we move by providing a
-            better alternative to private car ownership.
-          </Text>
-          <Image
-            src='/images/case-study-logo-mevo.png'
-            ml={3}
-            sx={{ width: 7 }}
-          />
-        </Flex>
-        <Flex>
-          <Button>DOWNLOAD FULL</Button>
-          <Flex>
-            <Box>CLIMATE</Box>
-            <Box>ICON</Box>
-          </Flex>
-        </Flex>
-      </Flex>
-    </Flex>
-  )
+interface CaseStudiesProps {
+  caseStudies: any // TODO: type better
 }
 
-interface CaseStudiesProps {}
+export default function CaseStudies ({ caseStudies }: CaseStudiesProps) {
+  console.log({ caseStudies })
 
-export default function CaseStudies ({}: CaseStudiesProps) {
   return (
     <FullWidthCentered>
       <Flex px={[3, 5]} mb={5} sx={{ flexDirection: 'column' }}>
@@ -61,8 +26,65 @@ export default function CaseStudies ({}: CaseStudiesProps) {
           }
         />
 
-        <Flex>
-          <CaseStudy />
+        <Flex sx={{ overflowX: 'scroll' }}>
+          {caseStudies.map((cs, i) => {
+            const banner =
+              (cs['Prod Banner Image'] && cs['Prod Banner Image'][0].url) ||
+              '/images/case-study-banner-mevo.png'
+            const logo =
+              (cs['Logo Image'] && cs['Logo Image'][0].url) ||
+              '/images/case-study-logo-mevo.png'
+            const bio = cs['Prod Bio'] || 'insert bio here'
+            const cta = cs['Call To Action Text'] || 'DOWNLOAD FULL'
+            const industry = cs['Industry'] || 'industry'
+            const theme = cs['Theme'] || 'theme'
+
+            return (
+              <Flex
+                key={i}
+                mr={4}
+                sx={{
+                  flexDirection: 'column',
+                  minWidth: 500,
+                  boxShadow: '0 0 4px 0 rgba(0,0,0,0.25)'
+                }}
+              >
+                <Flex sx={{ position: 'relative' }}>
+                  <Heading
+                    variant='h2'
+                    sx={{
+                      position: 'absolute',
+                      bottom: 2,
+                      left: 3,
+                      color: 'white'
+                    }}
+                  >
+                    {cs['Prod Heading']}
+                  </Heading>
+                  <Image src={banner} />
+                </Flex>
+
+                <Flex
+                  p={3}
+                  sx={{
+                    flexDirection: 'column'
+                  }}
+                >
+                  <Flex sx={{ justifyContent: 'space-between' }}>
+                    <Text>{bio}</Text>
+                    <Image src={logo} ml={3} sx={{ maxWidth: 6 }} />
+                  </Flex>
+                  <Flex sx={{ justifyContent: 'space-between' }}>
+                    <Button variant='tertiary'>{cta}</Button>
+                    <Flex>
+                      <Box mr={3}>{theme}</Box>
+                      <Box>{industry}</Box>
+                    </Flex>
+                  </Flex>
+                </Flex>
+              </Flex>
+            )
+          })}
         </Flex>
       </Flex>
     </FullWidthCentered>
