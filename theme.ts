@@ -111,9 +111,37 @@ export default {
       color: 'text',
       bg: 'grey',
       cursor: 'pointer',
+      borderRadius: 0,
       borderWidth: '2px',
       borderStyle: 'solid',
       borderColor: 'text',
+      '&:hover': {
+        opacity: 0.7
+      }
+    },
+    secondary: {
+      fontFamily: 'body',
+      fontSize: 13,
+      fontWeight: 900,
+      color: 'text',
+      bg: 'white',
+      cursor: 'pointer',
+      borderRadius: 0,
+      borderWidth: '2px',
+      borderStyle: 'solid',
+      borderColor: 'text',
+      '&:hover': {
+        opacity: 0.7
+      }
+    },
+    tertiary: {
+      padding: 0,
+      fontFamily: 'body',
+      fontSize: 18,
+      fontWeight: 600,
+      color: 'text',
+      bg: 'white',
+      cursor: 'pointer',
       '&:hover': {
         opacity: 0.7
       }
