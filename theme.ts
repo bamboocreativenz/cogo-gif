@@ -1,5 +1,5 @@
 export default {
-  breakpoints: ['480px', '768px'],
+  breakpoints: ['480px'],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 384, 512],
   sizes: [0, 4, 8, 16, 32, 64, 128, 256, 384, 512],
   fontSizes: [10, 14, 18, 24, 28, 32, 36, 38, 52],
