@@ -59,26 +59,38 @@ export default function AccreditorsAndCertifications ({
                 mr={4}
                 sx={{
                   flexDirection: 'column',
-                  width: 500,
+                  width: [300, staffName ? 500 : 300],
                   boxShadow: '0 0 4px 0 rgba(0,0,0,0.25)'
                 }}
               >
                 <Flex sx={{ justifyContent: 'space-between' }}>
                   <ThemePill theme={a.Theme} size='small' />
-                  <Image src={a.Logo[0].url} ml={3} sx={{ maxWidth: 6 }} />
+                  <Image
+                    src={a.Logo[0].url}
+                    ml={3}
+                    sx={{ maxHeight: 5, maxWidth: 6 }}
+                  />
                 </Flex>
 
-                <Heading variant='h2'>{a.Heading}</Heading>
-                <Text mt={1}>{a.Bio}</Text>
+                <Heading variant='h2' sx={{ textTransform: 'uppercase' }}>
+                  {a.Heading}
+                </Heading>
+                <Text variant='p3' mt={1}>
+                  {a.Bio}
+                </Text>
 
                 <Flex
                   mt={3}
                   sx={{
-                    flexDirection: ['column', 'row']
+                    flexDirection: ['column', 'row'],
+                    justifyContent: staffName ? 'initial' : 'flex-end'
                   }}
                 >
                   {staffQuote && (
-                    <Text sx={{ display: ['initial', 'none'] }}>
+                    <Text
+                      variant='p4'
+                      sx={{ display: ['initial', 'none'], color: 'light' }}
+                    >
                       {staffQuote}
                     </Text>
                   )}
