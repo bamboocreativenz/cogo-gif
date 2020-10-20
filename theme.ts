@@ -208,7 +208,10 @@ export default {
   },
   forms: {
     input: {
-      fontFamily: 'body'
+      fontFamily: 'body',
+      bg: 'grey',
+      color: 'text',
+      borderRadius: 0
     },
     textarea: {
       fontFamily: 'body'
