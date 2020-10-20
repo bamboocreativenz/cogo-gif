@@ -102,6 +102,11 @@ export default {
       fontWeight: 500,
       fontSize: 3,
       color: 'white'
+    },
+    smallBold: {
+      fontSize: 14,
+      fontWeight: 800,
+      color: 'text'
     }
   },
   buttons: {

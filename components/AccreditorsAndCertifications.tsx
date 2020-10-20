@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import FullWidthCentered from './FullWidthCentered'
 import OneThenTwoColumns from './OneThenTwoColumns'
+import ThemePill from './ThemePill'
 
 type Accreditor = {
   Heading: string
@@ -14,7 +15,7 @@ type Accreditor = {
   'Staff Name'?: string
   'Staff Role'?: string
   'Staff Quote'?: string
-  Theme: string
+  Theme: 'Climate' | 'Waste' | 'Community' | 'Land & Water'
   Status: string
 }
 
@@ -63,7 +64,7 @@ export default function AccreditorsAndCertifications ({
                 }}
               >
                 <Flex sx={{ justifyContent: 'space-between' }}>
-                  <Text>{a.Theme}</Text>
+                  <ThemePill theme={a.Theme} size='small' />
                   <Image src={a.Logo[0].url} ml={3} sx={{ maxWidth: 6 }} />
                 </Flex>
 
