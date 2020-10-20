@@ -9,41 +9,85 @@ interface FooterProps {}
 export default function Footer ({}: FooterProps) {
   return (
     <FullWidthCentered bg='text'>
-      <Flex px={[5, 6]} py={5} sx={{ flexDirection: 'column' }}>
+      <Flex
+        px={[5, 6]}
+        py={5}
+        sx={{ flexDirection: 'column', alignItems: ['center', 'initial'] }}
+      >
         <Text variant='h3' sx={{ color: 'white' }}>
           Brought to you by
         </Text>
         <Flex
           mt={4}
-          sx={{ justifyContent: 'space-between', alignItems: 'center' }}
+          sx={{
+            flexDirection: ['column', 'row'],
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}
         >
           <Image
-            mr={4}
+            mr={[0, 4]}
+            mb={[4, 0]}
             src='/images/westpac.png'
-            sx={{ flex: 1, maxHeight: 50, objectFit: 'contain' }}
+            sx={{
+              flex: 1,
+              maxHeight: ['none', 50],
+              maxWidth: [100, 'none'],
+              objectFit: 'contain'
+            }}
           />
           <Image
-            mx={4}
+            mx={[0, 4]}
+            mb={[4, 0]}
             src='/images/wwf.png'
-            sx={{ flex: 1, maxHeight: 50, objectFit: 'contain' }}
+            sx={{
+              flex: 1,
+              maxHeight: ['none', 50],
+              maxWidth: [100, 'none'],
+              objectFit: 'contain'
+            }}
           />
           <Image
-            mx={4}
+            mx={[0, 4]}
+            mb={[4, 0]}
             src='/images/business-govt-nz.png'
-            sx={{ flex: 1, maxHeight: 50, objectFit: 'contain' }}
+            sx={{
+              flex: 1,
+              maxHeight: ['none', 50],
+              maxWidth: [100, 'none'],
+              objectFit: 'contain'
+            }}
           />
           <Image
-            mx={4}
+            mx={[0, 4]}
+            mb={[4, 0]}
             src='/images/sustainable-business-network.png'
-            sx={{ flex: 1, maxHeight: 50, objectFit: 'contain' }}
+            sx={{
+              flex: 1,
+              maxHeight: ['none', 50],
+              maxWidth: [100, 'none'],
+              objectFit: 'contain'
+            }}
           />
           <Image
-            ml={4}
+            ml={[0, 4]}
+            mb={[4, 0]}
             src='/images/cogo.png'
-            sx={{ flex: 1, maxHeight: 50, objectFit: 'contain' }}
+            sx={{
+              flex: 1,
+              maxHeight: ['none', 50],
+              maxWidth: [100, 'none'],
+              objectFit: 'contain'
+            }}
           />
         </Flex>
-        <Flex mt={4} sx={{ flexDirection: 'column', alignItems: 'flex-end' }}>
+        <Flex
+          mt={4}
+          sx={{
+            flexDirection: 'column',
+            alignItems: ['flex-start', 'flex-end']
+          }}
+        >
           <Text variant='p3' sx={{ color: 'white' }}>
             Contact
           </Text>

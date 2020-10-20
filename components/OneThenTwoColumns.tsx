@@ -17,7 +17,7 @@ export default function OneThenTwoColumns ({
       sx={{
         flexDirection: ['column', 'row'],
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: ['flex-start', 'center']
       }}
       {...rest}
     >
