@@ -9,6 +9,7 @@ export default {
     background: 'white',
     grey: '#ECECEC',
     lightGrey: '#A0A0A0',
+    light: '#979797',
     reportCircleBlack: '#3A3A3A',
     climate: '#6666CC',
     waste: '#FF9933',
@@ -174,6 +175,27 @@ export default {
       color: 'text',
       cursor: 'pointer',
       borderBottom: 'solid black 2px',
+      '&:hover': {
+        opacity: 0.7
+      }
+    },
+    site: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 2,
+      minWidth: 5,
+      fontFamily: 'body',
+      fontSize: 13,
+      fontWeight: 900,
+      textDecoration: 'none',
+      color: 'text',
+      bg: 'white',
+      cursor: 'pointer',
+      borderRadius: 0,
+      borderWidth: '2px',
+      borderStyle: 'solid',
+      borderColor: 'text',
       '&:hover': {
         opacity: 0.7
       }

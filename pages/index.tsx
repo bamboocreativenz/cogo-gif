@@ -7,12 +7,14 @@ import Banner from '../components/Banner'
 import ThemeLearnMore from '../components/ThemeLearnMore'
 import IndustryReports from '../components/IndustryReports'
 import CaseStudies from '../components/CaseStudies'
+import AccreditorsAndCertifications from '../components/AccreditorsAndCertifications'
 
 interface HomeProps {
   caseStudies: any // TODO: type better
+  accreditors: any // TODO: type better
 }
 
-export default function Home ({ caseStudies }: HomeProps) {
+export default function Home ({ caseStudies, accreditors }: HomeProps) {
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
@@ -55,6 +57,8 @@ export default function Home ({ caseStudies }: HomeProps) {
       <IndustryReports />
 
       <CaseStudies caseStudies={caseStudies} />
+
+      <AccreditorsAndCertifications accreditors={accreditors} />
     </Flex>
   )
 }
@@ -64,15 +68,21 @@ export async function getStaticProps (context) {
     process.env.AIRTABLE_API_KEY,
     process.env.AIRTABLE_BASE
   )
-  const results = await airtable.listRecords({
+  const caseStudiesRecords = await airtable.listRecords({
     tableName: 'Case Studies',
     viewName: 'Grid View'
   })
-  const caseStudies = results.map(c => c.fields)
+  const caseStudies = caseStudiesRecords.map(c => c.fields)
+  const accreditorsRecords = await airtable.listRecords({
+    tableName: 'Accreditors',
+    viewName: 'Grid View'
+  })
+  const accreditors = accreditorsRecords.map(c => c.fields)
 
   return {
     props: {
-      caseStudies
+      caseStudies,
+      accreditors
     }
   }
 }
