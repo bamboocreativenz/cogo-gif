@@ -29,12 +29,12 @@ export default function Home ({ caseStudies, accreditors }: HomeProps) {
       >
         <Flex my={4} sx={{ flexDirection: ['column', 'row'] }}>
           <ThemeLearnMore
-            title='CLIMATE'
+            title='Climate'
             text='The Climate theme focuses on businesses that are demonstrating improving their relationship with the climate and reducing impacts. This may be through demonstrating reductions in CO2 emissions, becoming carbon neutral or even positive.'
             link='/climate'
           />
           <ThemeLearnMore
-            title='WASTE'
+            title='Waste'
             text='The Climate theme focuses on businesses that are demonstrating improving their relationship with the climate and reducing impacts. This may be through demonstrating reductions in CO2 emissions, becoming carbon neutral or even positive.'
             link='/waste'
           />
@@ -42,12 +42,12 @@ export default function Home ({ caseStudies, accreditors }: HomeProps) {
 
         <Flex my={4} sx={{ flexDirection: ['column', 'row'] }}>
           <ThemeLearnMore
-            title='COMMUNITY'
+            title='Community'
             text='The Climate theme focuses on businesses that are demonstrating improving their relationship with the climate and reducing impacts. This may be through demonstrating reductions in CO2 emissions, becoming carbon neutral or even positive.'
             link='/community'
           />
           <ThemeLearnMore
-            title='LAND & WATER'
+            title='Land & Water'
             text='The Climate theme focuses on businesses that are demonstrating improving their relationship with the climate and reducing impacts. This may be through demonstrating reductions in CO2 emissions, becoming carbon neutral or even positive.'
             link='/land-and-water'
           />

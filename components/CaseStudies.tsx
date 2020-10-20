@@ -3,6 +3,7 @@ import { jsx, Flex, Box, Heading, Text, Image, Button } from 'theme-ui'
 
 import FullWidthCentered from './FullWidthCentered'
 import OneThenTwoColumns from './OneThenTwoColumns'
+import ThemePill from './ThemePill'
 
 interface CaseStudiesProps {
   caseStudies: any // TODO: type better
@@ -77,7 +78,9 @@ export default function CaseStudies ({ caseStudies }: CaseStudiesProps) {
                   <Flex sx={{ justifyContent: 'space-between' }}>
                     <Button variant='tertiary'>{cta}</Button>
                     <Flex>
-                      <Box mr={3}>{theme}</Box>
+                      <Box mr={3}>
+                        <ThemePill theme={theme} size='small' />
+                      </Box>
                       <Box>{industry}</Box>
                     </Flex>
                   </Flex>
