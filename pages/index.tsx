@@ -9,6 +9,7 @@ import IndustryReports from '../components/IndustryReports'
 import CaseStudies from '../components/CaseStudies'
 import AccreditorsAndCertifications from '../components/AccreditorsAndCertifications'
 import Latest from '../components/Latest'
+import Footer from '../components/Footer'
 
 interface HomeProps {
   caseStudies: any // TODO: type better
@@ -62,6 +63,8 @@ export default function Home ({ caseStudies, accreditors }: HomeProps) {
       <AccreditorsAndCertifications accreditors={accreditors} />
 
       <Latest />
+
+      <Footer />
     </Flex>
   )
 }
