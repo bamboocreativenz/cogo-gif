@@ -8,6 +8,7 @@ import ThemeLearnMore from '../components/ThemeLearnMore'
 import IndustryReports from '../components/IndustryReports'
 import CaseStudies from '../components/CaseStudies'
 import AccreditorsAndCertifications from '../components/AccreditorsAndCertifications'
+import Latest from '../components/Latest'
 
 interface HomeProps {
   caseStudies: any // TODO: type better
@@ -59,6 +60,8 @@ export default function Home ({ caseStudies, accreditors }: HomeProps) {
       <CaseStudies caseStudies={caseStudies} />
 
       <AccreditorsAndCertifications accreditors={accreditors} />
+
+      <Latest />
     </Flex>
   )
 }
