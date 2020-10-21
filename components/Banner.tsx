@@ -7,12 +7,14 @@ import Headline from './Headline'
 
 interface BannerProps {
   backgroundImage: string
+  backgroundImagePosition?: string
   headline: string
   subHeadline: string
 }
 
 export default function Banner ({
   backgroundImage,
+  backgroundImagePosition = 'center',
   headline,
   subHeadline
 }: BannerProps) {
@@ -23,7 +25,7 @@ export default function Banner ({
         justifyContent: 'space-between',
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundPosition: backgroundImagePosition,
         height: [360, 8]
       }}
     >
