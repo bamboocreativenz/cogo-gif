@@ -24,7 +24,7 @@ export default function CaseStudies ({ caseStudies, copy }: CaseStudiesProps) {
           }
         />
 
-        <Flex py={[0, 3]} sx={{ overflowX: 'scroll' }}>
+        <Flex py={3} px={1} sx={{ overflowX: 'scroll' }}>
           {caseStudies.map((cs, i) => {
             const banner =
               (cs['Prod Banner Image'] && cs['Prod Banner Image'][0].url) ||

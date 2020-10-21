@@ -29,7 +29,7 @@ export default function AccreditorsAndCertifications ({
   copy
 }: AccreditorsAndCertificationsProps) {
   return (
-    <FullWidthCentered>
+    <FullWidthCentered bg='greyBackground'>
       <Flex px={[3, 5]} mb={5} sx={{ flexDirection: 'column' }}>
         <OneThenTwoColumns
           mb={4}
@@ -41,7 +41,7 @@ export default function AccreditorsAndCertifications ({
           }
         />
 
-        <Flex py={3} sx={{ overflowX: 'scroll' }}>
+        <Flex py={3} px={1} sx={{ overflowX: 'scroll' }}>
           {accreditors.map((a, i) => {
             const staffImage = a['Staff Image']
             const staffName = a['Staff Name']
@@ -51,11 +51,13 @@ export default function AccreditorsAndCertifications ({
             return (
               <Flex
                 key={i}
+                bg='white'
                 p={3}
                 mr={4}
                 sx={{
                   flexDirection: 'column',
-                  width: [300, staffName ? 500 : 300],
+                  minWidth: [300, staffName ? 500 : 300],
+                  maxWidth: [300, staffName ? 500 : 300],
                   boxShadow: '0 0 4px 0 rgba(0,0,0,0.25)'
                 }}
               >
@@ -76,7 +78,7 @@ export default function AccreditorsAndCertifications ({
                 </Text>
 
                 <Flex
-                  mt={3}
+                  mt={[2, 3]}
                   sx={{
                     flexDirection: ['column', 'row'],
                     justifyContent: staffName ? 'initial' : 'flex-end'
@@ -84,51 +86,64 @@ export default function AccreditorsAndCertifications ({
                 >
                   {staffQuote && (
                     <Text
-                      variant='p4'
+                      variant='quote'
                       sx={{ display: ['initial', 'none'], color: 'light' }}
                     >
                       {staffQuote}
                     </Text>
                   )}
-                  {staffImage && (
-                    <Image src={staffImage[0].url} sx={{ maxWidth: 100 }} />
-                  )}
-                  <Flex
-                    ml={3}
-                    sx={{
-                      flexDirection: 'column',
-                      justifyContent: 'space-between'
-                    }}
-                  >
-                    <Text
-                      variant='p4'
-                      sx={{ display: ['none', 'initial'], color: 'light' }}
-                    >
-                      {staffQuote}
-                    </Text>
+                  <Flex sx={{ flexDirection: ['row', 'column'] }}>
+                    {staffImage && (
+                      <Image
+                        mt={2}
+                        src={staffImage[0].url}
+                        sx={{ maxWidth: 100 }}
+                      />
+                    )}
                     <Flex
                       sx={{
-                        flexDirection: ['column', 'row'],
-                        justifyContent: [
-                          'space-between',
-                          staffName ? 'space-between' : 'flex-end'
-                        ],
-                        width: '100%'
+                        flexDirection: 'column',
+                        justifyContent: 'space-between'
                       }}
                     >
-                      <Flex sx={{ flexDirection: 'column' }}>
-                        <Text variant='h3' sx={{ color: 'light' }}>
-                          {staffName}
+                      {staffQuote && (
+                        <Text
+                          variant='quote'
+                          sx={{ display: ['none', 'initial'], color: 'light' }}
+                        >
+                          {staffQuote}
                         </Text>
-                        <Text variant='p5' sx={{ color: 'light' }}>
-                          {staffRole}
-                        </Text>
+                      )}
+                      <Flex
+                        ml={staffName ? 3 : 0}
+                        sx={{
+                          flexDirection: ['column', 'row'],
+                          justifyContent: [
+                            'space-between',
+                            staffName ? 'space-between' : 'flex-end'
+                          ],
+                          width: '100%',
+                          height: '100%'
+                        }}
+                      >
+                        <Flex mt={[2, 0]} sx={{ flexDirection: 'column' }}>
+                          {staffName && (
+                            <Text variant='h3' sx={{ color: 'light' }}>
+                              {staffName}
+                            </Text>
+                          )}
+                          {staffRole && (
+                            <Text variant='p5' sx={{ color: 'light' }}>
+                              {staffRole}
+                            </Text>
+                          )}
+                        </Flex>
+                        <Link href={a.Site} passHref>
+                          <TUILink variant='site' target='_blank'>
+                            VISIT SITE
+                          </TUILink>
+                        </Link>
                       </Flex>
-                      <Link href={a.Site} passHref>
-                        <TUILink variant='site' target='_blank'>
-                          VISIT SITE
-                        </TUILink>
-                      </Link>
                     </Flex>
                   </Flex>
                 </Flex>

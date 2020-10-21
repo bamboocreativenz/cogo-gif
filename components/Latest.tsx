@@ -10,7 +10,7 @@ interface LatestProps {
 
 export default function Latest ({ copy }: LatestProps) {
   return (
-    <FullWidthCentered>
+    <FullWidthCentered bg='greyBackground'>
       <Flex px={[3, 5]} mb={5} sx={{ flexDirection: 'column' }}>
         <OneThenTwoColumns
           firstColumnContent={<Heading variant='h1'>{copy.Title}</Heading>}

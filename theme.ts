@@ -108,6 +108,12 @@ export default {
       fontSize: 14,
       fontWeight: 800,
       color: 'text'
+    },
+    quote: {
+      fontSize: [15],
+      fontWeight: 400,
+      fontStyle: 'italic',
+      color: 'text'
     }
   },
   buttons: {
