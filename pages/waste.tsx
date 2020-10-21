@@ -26,7 +26,7 @@ export default function Waste ({
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
-        backgroundImage={waste.Banner.Image[0].url}
+        backgroundImage={waste.Banner.Image}
         backgroundImagePosition='right'
         headline={waste.Banner.Title}
         subHeadline={waste.Banner.Content}

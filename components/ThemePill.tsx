@@ -23,7 +23,6 @@ interface ThemePillProps {
 }
 
 export default function ThemePill ({ theme, size }: ThemePillProps) {
-  console.log(theme.toLowerCase())
   return (
     <Box>
       <Flex

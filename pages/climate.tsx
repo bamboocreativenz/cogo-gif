@@ -26,7 +26,7 @@ export default function Climate ({
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
-        backgroundImage={climate.Banner.Image[0].url}
+        backgroundImage={climate.Banner.Image}
         backgroundImagePosition='center'
         headline={climate.Banner.Title}
         subHeadline={climate.Banner.Content}

@@ -6,7 +6,7 @@ import Nav from './Nav'
 import Headline from './Headline'
 
 interface BannerProps {
-  backgroundImage: string
+  backgroundImage: any
   backgroundImagePosition?: string
   headline: string
   subHeadline: string
@@ -23,7 +23,10 @@ export default function Banner ({
       sx={{
         flexDirection: 'column',
         justifyContent: 'space-between',
-        backgroundImage: `url(${backgroundImage})`,
+        backgroundImage: [
+          `url(${backgroundImage[0].thumbnails.large.url})`,
+          `url(${backgroundImage[0].url})`
+        ],
         backgroundSize: 'cover',
         backgroundPosition: backgroundImagePosition,
         height: [360, 8]

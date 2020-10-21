@@ -19,7 +19,7 @@ export default function About ({ about }: AboutProps) {
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
-        backgroundImage={about.Banner.Image[0].url}
+        backgroundImage={about.Banner.Image}
         headline={about.Banner.Title}
         subHeadline={about.Banner.Content}
       />

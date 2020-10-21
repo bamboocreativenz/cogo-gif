@@ -19,10 +19,11 @@ interface HomeProps {
 }
 
 export default function Home ({ caseStudies, accreditors, home }: HomeProps) {
+  console.log({ home })
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
-        backgroundImage={home.Banner.Image[0].url}
+        backgroundImage={home.Banner.Image}
         headline={home.Banner.Title}
         subHeadline={home.Banner.Content}
       />
