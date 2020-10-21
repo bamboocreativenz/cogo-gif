@@ -1068,7 +1068,7 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@bamboocreativenz/pip-airtable@1.0.1":
+"@bamboocreativenz/pip-airtable@^1.0.1":
   version "1.0.1"
   resolved "https://npm.pkg.github.com/download/@bamboocreativenz/pip-airtable/1.0.1/82bf3682c9f595dc8c3ffe8bf8bb8af48db97e778571dae072a59335496eacf6#5e6fcca7b1e960af7332b37e9e8c83b9838cb2e8"
   integrity sha512-LOM04ZH76S/LZaMRSEqyxUiIKJWlnrleUgff/ZD9ta6wNFD//FaC9w3gCaBvw6W3zhHhy+KLXyH+QbZsMNziqA==
@@ -1481,6 +1481,11 @@
   version "14.11.8"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.8.tgz#fe2012f2355e4ce08bca44aeb3abbb21cf88d33f"
   integrity sha512-KPcKqKm5UKDkaYPTuXSx8wEP7vE9GnuaXIZKijwRYcePpZFDVuy2a57LarFKiORbHOuTOOwYzxVxcUzsh2P2Pw==
+
+"@types/node@^14.14.0":
+  version "14.14.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.0.tgz#f1091b6ad5de18e8e91bdbd43ec63f13de372538"
+  integrity sha512-BfbIHP9IapdupGhq/hc+jT5dyiBVZ2DdeC5WwJWQWDb0GijQlzUFAeIQn/2GtvZcd2HVUU7An8felIICFTC2qg==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
