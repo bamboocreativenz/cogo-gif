@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, Flex, Box, Heading, Text, Link as TUILink } from 'theme-ui'
-import Link from 'next/link'
 import { Airtable } from '@bamboocreativenz/pip-airtable'
+import keyBy from 'lodash/keyBy'
 
 import Banner from '../components/Banner'
 import ThemeLearnMore from '../components/ThemeLearnMore'
@@ -14,55 +14,59 @@ import Footer from '../components/Footer'
 interface HomeProps {
   caseStudies: any // TODO: type better
   accreditors: any // TODO: type better
+  home: any // TODO: type better
 }
 
-export default function Home ({ caseStudies, accreditors }: HomeProps) {
+export default function Home ({ caseStudies, accreditors, home }: HomeProps) {
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
-        backgroundImage='/images/banner.png'
-        headline='Create impact your customers will value'
-        subHeadline='People are making more purchases from businesses that are taking action on issues they care about.'
+        backgroundImage={home.Banner.Image[0].url}
+        headline={home.Banner.Title}
+        subHeadline={home.Banner.Content}
       />
 
       <Flex
         px={[3, 5]}
         sx={{ width: '100%', flexDirection: 'column', alignItems: 'center' }}
       >
-        <Flex my={4} sx={{ flexDirection: ['column', 'row'] }}>
+        <Flex sx={{ flexDirection: ['column', 'row'] }}>
           <ThemeLearnMore
-            title='Climate'
-            text='The Climate theme focuses on businesses that are demonstrating improving their relationship with the climate and reducing impacts. This may be through demonstrating reductions in CO2 emissions, becoming carbon neutral or even positive.'
+            title={home.Climate.Title}
+            text={home.Climate.Content}
             link='/climate'
           />
           <ThemeLearnMore
-            title='Waste'
-            text='The Climate theme focuses on businesses that are demonstrating improving their relationship with the climate and reducing impacts. This may be through demonstrating reductions in CO2 emissions, becoming carbon neutral or even positive.'
+            title={home.Waste.Title}
+            text={home.Waste.Content}
             link='/waste'
           />
         </Flex>
 
-        <Flex my={4} sx={{ flexDirection: ['column', 'row'] }}>
+        <Flex sx={{ flexDirection: ['column', 'row'] }}>
           <ThemeLearnMore
-            title='Community'
-            text='The Climate theme focuses on businesses that are demonstrating improving their relationship with the climate and reducing impacts. This may be through demonstrating reductions in CO2 emissions, becoming carbon neutral or even positive.'
+            title={home.Community.Title}
+            text={home.Community.Content}
             link='/community'
           />
           <ThemeLearnMore
-            title='Land & Water'
-            text='The Climate theme focuses on businesses that are demonstrating improving their relationship with the climate and reducing impacts. This may be through demonstrating reductions in CO2 emissions, becoming carbon neutral or even positive.'
+            title={home['Land & Water'].Title}
+            text={home['Land & Water'].Content}
             link='/land-and-water'
           />
         </Flex>
       </Flex>
 
-      <IndustryReports />
+      <IndustryReports copy={home['Industry Reports']} />
 
-      <CaseStudies caseStudies={caseStudies} />
+      <CaseStudies caseStudies={caseStudies} copy={home['Case Studies']} />
 
-      <AccreditorsAndCertifications accreditors={accreditors} />
+      <AccreditorsAndCertifications
+        accreditors={accreditors}
+        copy={home.Accreditors}
+      />
 
-      <Latest />
+      <Latest copy={home.Latest} />
 
       <Footer />
     </Flex>
@@ -84,11 +88,20 @@ export async function getStaticProps (context) {
     viewName: 'Grid View'
   })
   const accreditors = accreditorsRecords.map(c => c.fields)
+  const homeRecords = await airtable.listRecords({
+    tableName: 'Home Page',
+    viewName: 'Grid View'
+  })
+  const home = keyBy(
+    homeRecords.map(c => c.fields),
+    'Name'
+  )
 
   return {
     props: {
       caseStudies,
-      accreditors
+      accreditors,
+      home
     }
   }
 }

@@ -5,12 +5,14 @@ import FullWidthCentered from './FullWidthCentered'
 import OneThenTwoColumns from './OneThenTwoColumns'
 import ReportCircle from './ReportCircle'
 
-interface IndustryReportsProps {}
+interface IndustryReportsProps {
+  copy: any // TODO: type better
+}
 
-export default function IndustryReports ({}: IndustryReportsProps) {
+export default function IndustryReports ({ copy }: IndustryReportsProps) {
   return (
-    <FullWidthCentered>
-      <Flex px={[3, 5]} mb={5} sx={{ flexDirection: 'column' }}>
+    <FullWidthCentered bg='greyBackground'>
+      <Flex px={[3, 5]} mb={5} mt={4} sx={{ flexDirection: 'column' }}>
         <OneThenTwoColumns
           mb={4}
           firstColumnContent={
@@ -32,13 +34,10 @@ export default function IndustryReports ({}: IndustryReportsProps) {
 
         <OneThenTwoColumns
           mb={4}
-          firstColumnContent={<Heading variant='h1'>Industry Reports</Heading>}
+          firstColumnContent={<Heading variant='h1'>{copy.Title}</Heading>}
           remainingContent={
             <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
-              <Text variant='p3'>
-                Doing good is not only good for your customers, it's good for
-                your business too.
-              </Text>
+              <Text variant='p3'>{copy.Content}</Text>
             </Flex>
           }
         />
@@ -46,7 +45,10 @@ export default function IndustryReports ({}: IndustryReportsProps) {
           mb={4}
           firstColumnContent={null}
           remainingContent={
-            <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
+            <Flex
+              ml={[0, 4]}
+              sx={{ display: ['none', 'initial'], flexDirection: 'column' }}
+            >
               <Box>
                 <Button variant='primary'>DOWNLOAD REPORT</Button>
               </Box>
@@ -65,6 +67,15 @@ export default function IndustryReports ({}: IndustryReportsProps) {
             text='of Kiwis will make eco-conscious choices, even if more expensive'
             image='/images/CoGo-report.png'
           />
+        </Flex>
+
+        <Flex
+          mt={4}
+          sx={{ display: ['initial', 'none'], flexDirection: 'column' }}
+        >
+          <Box>
+            <Button variant='primary'>DOWNLOAD REPORT</Button>
+          </Box>
         </Flex>
       </Flex>
     </FullWidthCentered>

@@ -7,6 +7,7 @@ export default {
   colors: {
     text: '#333333',
     background: 'white',
+    greyBackground: '#FAFAFA',
     grey: '#ECECEC',
     lightGrey: '#A0A0A0',
     light: '#979797',
@@ -53,7 +54,7 @@ export default {
       color: 'text'
     },
     p3: {
-      fontSize: 18,
+      fontSize: [15, 18],
       fontWeight: 400,
       lineHeight: '22px',
       color: 'text'
@@ -143,7 +144,7 @@ export default {
     tertiary: {
       padding: 0,
       fontFamily: 'body',
-      fontSize: 18,
+      fontSize: [15, 18],
       fontWeight: 600,
       color: 'text',
       bg: 'white',
@@ -177,6 +178,7 @@ export default {
     learn: {
       fontSize: 18,
       fontWeight: 900,
+      textDecoration: 'none',
       color: 'text',
       cursor: 'pointer',
       borderBottom: 'solid black 2px',

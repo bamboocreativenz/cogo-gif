@@ -23,8 +23,12 @@ export default function ThemeLearnMore ({
   link
 }: ThemeLearnMoreProps) {
   return (
-    <Flex mx={[0, 4]} sx={{ flexDirection: 'column', width: ['100%', 8] }}>
-      <Flex>
+    <Flex
+      mx={[0, 4]}
+      my={4}
+      sx={{ flexDirection: 'column', width: ['100%', 8] }}
+    >
+      <Flex mb={3}>
         <ThemePill theme={title} size='large' />
       </Flex>
       {/* <Box py={2} px={3} bg={titleColorMap[title]} sx={{ borderRadius: 50 }}>
@@ -33,9 +37,11 @@ export default function ThemeLearnMore ({
         </Heading>
       </Box> */}
       <Text variant='p2'>{text}</Text>
-      <Link href={link} passHref>
-        <TUILink variant='learn'>LEARN MORE</TUILink>
-      </Link>
+      <Box mt={3}>
+        <Link href={link} passHref>
+          <TUILink variant='learn'>LEARN MORE</TUILink>
+        </Link>
+      </Box>
     </Flex>
   )
 }

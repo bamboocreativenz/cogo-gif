@@ -4,16 +4,16 @@ import { jsx, Flex, Text, Image } from 'theme-ui'
 import OneThenTwoColumns from './OneThenTwoColumns'
 
 interface TeamMemberProps {
-  teamMember: any // TODO: type better
+  copy: any // TODO: type better
 }
 
-export default function TeamMember ({ teamMember }: TeamMemberProps) {
+export default function TeamMember ({ copy }: TeamMemberProps) {
   return (
     <OneThenTwoColumns
       mt={[4, 5]}
       firstColumnContent={
         <Flex mb={[2, 0]} sx={{ justifyContent: 'flex-end' }}>
-          <Image src={teamMember.Image[0].url} sx={{ maxHeight: 200 }} />
+          <Image src={copy.Image[0].url} sx={{ maxHeight: 200 }} />
         </Flex>
       }
       remainingContent={
@@ -21,12 +21,12 @@ export default function TeamMember ({ teamMember }: TeamMemberProps) {
           <Text
             variant='p1'
             sx={{ whiteSpace: 'pre-wrap' }}
-            dangerouslySetInnerHTML={{ __html: teamMember.Title }}
+            dangerouslySetInnerHTML={{ __html: copy.Title }}
           />
           <Text
             variant='p1'
             sx={{ whiteSpace: 'pre-wrap' }}
-            dangerouslySetInnerHTML={{ __html: teamMember.Content }}
+            dangerouslySetInnerHTML={{ __html: copy.Content }}
           />
         </Flex>
       }

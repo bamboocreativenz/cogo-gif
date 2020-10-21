@@ -21,26 +21,22 @@ type Accreditor = {
 
 interface AccreditorsAndCertificationsProps {
   accreditors: Array<Accreditor> // TODO: type better
+  copy: any // TODO: type better
 }
 
 export default function AccreditorsAndCertifications ({
-  accreditors
+  accreditors,
+  copy
 }: AccreditorsAndCertificationsProps) {
   return (
     <FullWidthCentered>
       <Flex px={[3, 5]} mb={5} sx={{ flexDirection: 'column' }}>
         <OneThenTwoColumns
           mb={4}
-          firstColumnContent={
-            <Heading variant='h1'>Accreditors & Certifications</Heading>
-          }
+          firstColumnContent={<Heading variant='h1'>{copy.Title}</Heading>}
           remainingContent={
             <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
-              <Text variant='p3'>
-                How do you know what you are doing in making a difference. We
-                are partnering with 14 accreditors so we know that you are doing
-                good and telling people about it.
-              </Text>
+              <Text variant='p3'>{copy.Content}</Text>
             </Flex>
           }
         />

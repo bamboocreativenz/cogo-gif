@@ -75,18 +75,18 @@ export default function About ({ about }: AboutProps) {
           />
 
           <Box my={[3, 4]}>
-            <Partner partner={about['Partner 1']} />
-            <Partner partner={about['Partner 2']} />
-            <Partner partner={about['Partner 3']} />
-            <Partner partner={about['Partner 4']} />
-            <Partner partner={about['Partner 5']} />
+            <Partner copy={about['Partner 1']} />
+            <Partner copy={about['Partner 2']} />
+            <Partner copy={about['Partner 3']} />
+            <Partner copy={about['Partner 4']} />
+            <Partner copy={about['Partner 5']} />
           </Box>
 
           <Flex my={[5, 0]} sx={{ flexDirection: 'column' }}>
             <Heading mb={3}>Get in touch with the GIF team</Heading>
-            <TeamMember teamMember={about['Team 1']} />
-            <TeamMember teamMember={about['Team 2']} />
-            <TeamMember teamMember={about['Team 3']} />
+            <TeamMember copy={about['Team 1']} />
+            <TeamMember copy={about['Team 2']} />
+            <TeamMember copy={about['Team 3']} />
           </Flex>
         </Flex>
       </FullWidthCentered>

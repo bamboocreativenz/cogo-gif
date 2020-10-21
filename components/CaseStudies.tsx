@@ -7,27 +7,24 @@ import ThemePill from './ThemePill'
 
 interface CaseStudiesProps {
   caseStudies: any // TODO: type better
+  copy: any // TODO: type better
 }
 
-export default function CaseStudies ({ caseStudies }: CaseStudiesProps) {
-  console.log({ caseStudies })
-
+export default function CaseStudies ({ caseStudies, copy }: CaseStudiesProps) {
   return (
-    <FullWidthCentered>
-      <Flex px={[3, 5]} mb={5} sx={{ flexDirection: 'column' }}>
+    <FullWidthCentered bg='greyBackground'>
+      <Flex px={[3, 5]} mb={5} mt={4} sx={{ flexDirection: 'column' }}>
         <OneThenTwoColumns
           mb={4}
-          firstColumnContent={<Heading variant='h1'>Case Studies</Heading>}
+          firstColumnContent={<Heading variant='h1'>{copy.Title}</Heading>}
           remainingContent={
             <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
-              <Text variant='p3'>
-                Check out what businesses are doing to make good impact.
-              </Text>
+              <Text variant='p3'>{copy.Content}</Text>
             </Flex>
           }
         />
 
-        <Flex py={3} sx={{ overflowX: 'scroll' }}>
+        <Flex py={[0, 3]} sx={{ overflowX: 'scroll' }}>
           {caseStudies.map((cs, i) => {
             const banner =
               (cs['Prod Banner Image'] && cs['Prod Banner Image'][0].url) ||
@@ -44,9 +41,10 @@ export default function CaseStudies ({ caseStudies }: CaseStudiesProps) {
               <Flex
                 key={i}
                 mr={4}
+                bg='white'
                 sx={{
                   flexDirection: 'column',
-                  minWidth: 500,
+                  minWidth: [300, 500],
                   boxShadow: '0 0 4px 0 rgba(0,0,0,0.25)'
                 }}
               >
@@ -68,20 +66,37 @@ export default function CaseStudies ({ caseStudies }: CaseStudiesProps) {
                 <Flex
                   p={3}
                   sx={{
-                    flexDirection: 'column'
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    height: '100%'
                   }}
                 >
                   <Flex sx={{ justifyContent: 'space-between' }}>
-                    <Text>{bio}</Text>
-                    <Image src={logo} ml={3} sx={{ maxWidth: 6 }} />
+                    <Text variant='p3'>{bio}</Text>
+                    <Image
+                      src={logo}
+                      ml={3}
+                      sx={{ display: ['none', 'initial'], maxWidth: 6 }}
+                    />
                   </Flex>
-                  <Flex sx={{ justifyContent: 'space-between' }}>
+                  <Flex
+                    sx={{
+                      flexDirection: ['column', 'row'],
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-start'
+                    }}
+                  >
                     <Button variant='tertiary'>{cta}</Button>
-                    <Flex>
+                    <Flex sx={{ alignItems: 'center' }}>
                       <Box mr={3}>
                         <ThemePill theme={theme} size='small' />
                       </Box>
                       <Box>{industry}</Box>
+                      <Image
+                        src={logo}
+                        ml={3}
+                        sx={{ display: ['initial', 'none'], maxWidth: 5 }}
+                      />
                     </Flex>
                   </Flex>
                 </Flex>
