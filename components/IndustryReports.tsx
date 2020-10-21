@@ -38,20 +38,12 @@ export default function IndustryReports ({ copy }: IndustryReportsProps) {
           remainingContent={
             <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
               <Text variant='p3'>{copy.Content}</Text>
-            </Flex>
-          }
-        />
-        <OneThenTwoColumns
-          mb={4}
-          firstColumnContent={null}
-          remainingContent={
-            <Flex
-              ml={[0, 4]}
-              sx={{ display: ['none', 'initial'], flexDirection: 'column' }}
-            >
-              <Box>
+              <Flex
+                mt={3}
+                sx={{ display: ['none', 'initial'], flexDirection: 'column' }}
+              >
                 <Button variant='primary'>DOWNLOAD REPORT</Button>
-              </Box>
+              </Flex>
             </Flex>
           }
         />
