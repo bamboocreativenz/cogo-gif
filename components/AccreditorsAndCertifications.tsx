@@ -92,7 +92,7 @@ export default function AccreditorsAndCertifications ({
                       {staffQuote}
                     </Text>
                   )}
-                  <Flex sx={{ flexDirection: ['row', 'column'] }}>
+                  <Flex sx={{ flexDirection: 'row' }}>
                     {staffImage && (
                       <Image
                         mt={2}
@@ -101,6 +101,7 @@ export default function AccreditorsAndCertifications ({
                       />
                     )}
                     <Flex
+                      ml={staffName ? 3 : 0}
                       sx={{
                         flexDirection: 'column',
                         justifyContent: 'space-between'
@@ -109,13 +110,13 @@ export default function AccreditorsAndCertifications ({
                       {staffQuote && (
                         <Text
                           variant='quote'
+                          mt={[0, 2]}
                           sx={{ display: ['none', 'initial'], color: 'light' }}
                         >
                           {staffQuote}
                         </Text>
                       )}
                       <Flex
-                        ml={staffName ? 3 : 0}
                         sx={{
                           flexDirection: ['column', 'row'],
                           justifyContent: [
@@ -123,7 +124,7 @@ export default function AccreditorsAndCertifications ({
                             staffName ? 'space-between' : 'flex-end'
                           ],
                           width: '100%',
-                          height: '100%'
+                          height: ['100%', 'initial']
                         }}
                       >
                         <Flex mt={[2, 0]} sx={{ flexDirection: 'column' }}>
@@ -138,11 +139,13 @@ export default function AccreditorsAndCertifications ({
                             </Text>
                           )}
                         </Flex>
-                        <Link href={a.Site} passHref>
-                          <TUILink variant='site' target='_blank'>
-                            VISIT SITE
-                          </TUILink>
-                        </Link>
+                        <Box>
+                          <Link href={a.Site} passHref>
+                            <TUILink variant='site' target='_blank'>
+                              VISIT SITE
+                            </TUILink>
+                          </Link>
+                        </Box>
                       </Flex>
                     </Flex>
                   </Flex>
