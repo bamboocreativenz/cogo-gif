@@ -3,6 +3,7 @@ import { jsx, Flex, Box, Heading, Text, Link as TUILink } from 'theme-ui'
 import { Airtable } from '@bamboocreativenz/pip-airtable'
 import keyBy from 'lodash/keyBy'
 
+import FullWidthCentered from '../components/FullWidthCentered'
 import Banner from '../components/Banner'
 import ThemeLearnMore from '../components/ThemeLearnMore'
 import IndustryReports from '../components/IndustryReports'
@@ -26,36 +27,43 @@ export default function Home ({ caseStudies, accreditors, home }: HomeProps) {
         subHeadline={home.Banner.Content}
       />
 
-      <Flex
-        px={[3, 5]}
-        sx={{ width: '100%', flexDirection: 'column', alignItems: 'center' }}
-      >
-        <Flex sx={{ flexDirection: ['column', 'row'] }}>
-          <ThemeLearnMore
-            title={home.Climate.Title}
-            text={home.Climate.Content}
-            link='/climate'
-          />
-          <ThemeLearnMore
-            title={home.Waste.Title}
-            text={home.Waste.Content}
-            link='/waste'
-          />
-        </Flex>
+      <FullWidthCentered>
+        <Flex
+          px={[3, 5]}
+          sx={{ width: '100%', flexDirection: 'column', alignItems: 'center' }}
+        >
+          <Flex mt={5} mb={3} sx={{ flexDirection: 'column' }}>
+            <Heading variant='h1'>{home.Header.Title}</Heading>
+            <Text variant='p2'>{home.Header.Content}</Text>
+          </Flex>
 
-        <Flex sx={{ flexDirection: ['column', 'row'] }}>
-          <ThemeLearnMore
-            title={home.Community.Title}
-            text={home.Community.Content}
-            link='/community'
-          />
-          <ThemeLearnMore
-            title={home['Land & Water'].Title}
-            text={home['Land & Water'].Content}
-            link='/land-and-water'
-          />
+          <Flex sx={{ flexDirection: ['column', 'row'] }}>
+            <ThemeLearnMore
+              title={home.Climate.Title}
+              text={home.Climate.Content}
+              link='/climate'
+            />
+            <ThemeLearnMore
+              title={home.Waste.Title}
+              text={home.Waste.Content}
+              link='/waste'
+            />
+          </Flex>
+
+          <Flex sx={{ flexDirection: ['column', 'row'] }}>
+            <ThemeLearnMore
+              title={home.Community.Title}
+              text={home.Community.Content}
+              link='/community'
+            />
+            <ThemeLearnMore
+              title={home['Land & Water'].Title}
+              text={home['Land & Water'].Content}
+              link='/land-and-water'
+            />
+          </Flex>
         </Flex>
-      </Flex>
+      </FullWidthCentered>
 
       <IndustryReports copy={home['Industry Reports']} />
 
