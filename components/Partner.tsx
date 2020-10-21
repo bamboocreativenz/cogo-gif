@@ -25,7 +25,7 @@ export default function Partner ({ partner }: PartnerProps) {
             dangerouslySetInnerHTML={{ __html: partner.Title }}
           />
           <Text
-            variant='p3'
+            variant='p2'
             sx={{ whiteSpace: 'pre-wrap' }}
             dangerouslySetInnerHTML={{ __html: partner.Content }}
           />

@@ -8,6 +8,7 @@ import Footer from '../components/Footer'
 import FullWidthCentered from '../components/FullWidthCentered'
 import OneThenTwoColumns from '../components/OneThenTwoColumns'
 import Partner from '../components/Partner'
+import TeamMember from '../components/TeamMember'
 
 interface AboutProps {
   about: any // TODO: type better
@@ -33,7 +34,7 @@ export default function About ({ about }: AboutProps) {
             remainingContent={
               <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
                 <Text
-                  variant='p3'
+                  variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
                   dangerouslySetInnerHTML={{ __html: about.What.Content }}
                 />
@@ -49,7 +50,7 @@ export default function About ({ about }: AboutProps) {
             remainingContent={
               <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
                 <Text
-                  variant='p3'
+                  variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
                   dangerouslySetInnerHTML={{ __html: about.How.Content }}
                 />
@@ -65,7 +66,7 @@ export default function About ({ about }: AboutProps) {
             remainingContent={
               <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
                 <Text
-                  variant='p3'
+                  variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
                   dangerouslySetInnerHTML={{ __html: about.Who.Content }}
                 />
@@ -80,6 +81,13 @@ export default function About ({ about }: AboutProps) {
             <Partner partner={about['Partner 4']} />
             <Partner partner={about['Partner 5']} />
           </Box>
+
+          <Flex sx={{ flexDirection: 'column' }}>
+            <Heading>Get in touch with the GIF team</Heading>
+            <TeamMember teamMember={about['Team 1']} />
+            <TeamMember teamMember={about['Team 2']} />
+            <TeamMember teamMember={about['Team 3']} />
+          </Flex>
         </Flex>
       </FullWidthCentered>
 
