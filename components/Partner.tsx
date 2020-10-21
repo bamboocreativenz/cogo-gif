@@ -12,12 +12,15 @@ export default function Partner ({ partner }: PartnerProps) {
     <OneThenTwoColumns
       mt={5}
       firstColumnContent={
-        <Flex sx={{ justifyContent: 'center' }}>
-          <Image src={partner.Image[0].url} sx={{ maxHeight: 6 }} />
+        <Flex sx={{ justifyContent: 'center', width: '100%' }}>
+          <Image
+            src={partner.Image[0].url}
+            sx={{ maxHeight: 6, maxWidth: 7 }}
+          />
         </Flex>
       }
       remainingContent={
-        <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
+        <Flex ml={[0, 4]} mt={[4, 0]} sx={{ flexDirection: 'column' }}>
           <Text
             variant='h1'
             mb={3}
@@ -31,6 +34,9 @@ export default function Partner ({ partner }: PartnerProps) {
           />
         </Flex>
       }
+      sx={{
+        alignItems: ['center', 'flex-start']
+      }}
     />
   )
 }

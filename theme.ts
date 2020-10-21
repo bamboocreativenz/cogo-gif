@@ -42,7 +42,7 @@ export default {
       color: 'text'
     },
     p1: {
-      fontSize: 24,
+      fontSize: [18, 24],
       fontWeight: 500,
       color: 'text'
     },

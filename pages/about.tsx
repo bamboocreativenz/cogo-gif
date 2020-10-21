@@ -25,14 +25,14 @@ export default function About ({ about }: AboutProps) {
       />
 
       <FullWidthCentered>
-        <Flex px={[3, 5]} mb={5} sx={{ flexDirection: 'column' }}>
+        <Flex px={[3, 5]} mb={[3, 5]} sx={{ flexDirection: 'column' }}>
           <OneThenTwoColumns
             mt={5}
             firstColumnContent={
               <Heading variant='h1'>{about.What.Title}</Heading>
             }
             remainingContent={
-              <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
+              <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
                 <Text
                   variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
@@ -48,7 +48,7 @@ export default function About ({ about }: AboutProps) {
               <Heading variant='h1'>{about.How.Title}</Heading>
             }
             remainingContent={
-              <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
+              <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
                 <Text
                   variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
@@ -64,7 +64,7 @@ export default function About ({ about }: AboutProps) {
               <Heading variant='h1'>{about.Who.Title}</Heading>
             }
             remainingContent={
-              <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
+              <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
                 <Text
                   variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
@@ -74,7 +74,7 @@ export default function About ({ about }: AboutProps) {
             }
           />
 
-          <Box my={4}>
+          <Box my={[3, 4]}>
             <Partner partner={about['Partner 1']} />
             <Partner partner={about['Partner 2']} />
             <Partner partner={about['Partner 3']} />
@@ -82,8 +82,8 @@ export default function About ({ about }: AboutProps) {
             <Partner partner={about['Partner 5']} />
           </Box>
 
-          <Flex sx={{ flexDirection: 'column' }}>
-            <Heading>Get in touch with the GIF team</Heading>
+          <Flex my={[5, 0]} sx={{ flexDirection: 'column' }}>
+            <Heading mb={3}>Get in touch with the GIF team</Heading>
             <TeamMember teamMember={about['Team 1']} />
             <TeamMember teamMember={about['Team 2']} />
             <TeamMember teamMember={about['Team 3']} />

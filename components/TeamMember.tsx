@@ -10,9 +10,9 @@ interface TeamMemberProps {
 export default function TeamMember ({ teamMember }: TeamMemberProps) {
   return (
     <OneThenTwoColumns
-      mt={5}
+      mt={[4, 5]}
       firstColumnContent={
-        <Flex sx={{ justifyContent: 'flex-end' }}>
+        <Flex mb={[2, 0]} sx={{ justifyContent: 'flex-end' }}>
           <Image src={teamMember.Image[0].url} sx={{ maxHeight: 200 }} />
         </Flex>
       }
