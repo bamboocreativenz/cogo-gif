@@ -10,6 +10,7 @@ export default {
     greyBackground: '#FAFAFA',
     grey: '#ECECEC',
     lightGrey: '#A0A0A0',
+    midGrey: '#515151',
     light: '#979797',
     reportCircleBlack: '#3A3A3A',
     climate: '#6666CC',
