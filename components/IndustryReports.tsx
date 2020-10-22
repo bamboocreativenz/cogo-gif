@@ -58,7 +58,9 @@ function Dropdown ({ items, placeholder }: DropdownProps) {
         sx={{
           fontStyle: 'italic',
           color: 'midGrey',
-          borderBottom: '1px solid grey'
+          borderBottomWidth: 1,
+          borderBottomColor: 'text',
+          borderBottomStyle: 'solid'
         }}
       >
         <Flex
@@ -128,14 +130,12 @@ export default function IndustryReports ({ copy }: IndustryReportsProps) {
           }
           remainingContent={
             <Flex ml={[0, 4]} sx={{ flex: 2, justifyContent: 'space-between' }}>
-              <Dropdown items={industries} placeholder='Industry' />
-              <Dropdown items={themes} placeholder='Theme' />
-              {/* <Select sx={{ width: '100%' }}>
-                <option>test industry</option>
-              </Select>
-              <Select sx={{ width: '100%' }}>
-                <option>test theme</option>
-              </Select> */}
+              <Flex mr={4} sx={{ flex: 1 }}>
+                <Dropdown items={industries} placeholder='Industry' />
+              </Flex>
+              <Flex ml={4} sx={{ flex: 1 }}>
+                <Dropdown items={themes} placeholder='Theme' />
+              </Flex>
             </Flex>
           }
         />
