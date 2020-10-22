@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, Flex, Box, Heading, Text, Link as TUILink } from 'theme-ui'
+import { useState } from 'react'
 import { Airtable } from '@bamboocreativenz/pip-airtable'
 import keyBy from 'lodash/keyBy'
 
@@ -19,7 +20,9 @@ interface HomeProps {
 }
 
 export default function Home ({ caseStudies, accreditors, home }: HomeProps) {
-  console.log({ home })
+  const [selectedIndustry, setSelectedIndustry] = useState('')
+  const [selectedTheme, setSelectedTheme] = useState('')
+
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
@@ -66,13 +69,26 @@ export default function Home ({ caseStudies, accreditors, home }: HomeProps) {
         </Flex>
       </FullWidthCentered>
 
-      <IndustryReports copy={home['Industry Reports']} />
+      <IndustryReports
+        copy={home['Industry Reports']}
+        selectedIndustry={selectedIndustry}
+        setSelectedIndustry={setSelectedIndustry}
+        selectedTheme={selectedTheme}
+        setSelectedTheme={setSelectedTheme}
+      />
 
-      <CaseStudies caseStudies={caseStudies} copy={home['Case Studies']} />
+      <CaseStudies
+        caseStudies={caseStudies}
+        copy={home['Case Studies']}
+        selectedIndustry={selectedIndustry}
+        selectedTheme={selectedTheme}
+      />
 
       <AccreditorsAndCertifications
         accreditors={accreditors}
         copy={home.Accreditors}
+        selectedIndustry={selectedIndustry}
+        selectedTheme={selectedTheme}
       />
 
       <Latest copy={home.Latest} />

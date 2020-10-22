@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, Flex, Box, Heading, Text, Image } from 'theme-ui'
+import { useState } from 'react'
 import { Airtable } from '@bamboocreativenz/pip-airtable'
 import keyBy from 'lodash/keyBy'
 
@@ -23,6 +24,9 @@ export default function LandAndWater ({
   accreditors,
   landAndWater
 }: LandAndWaterProps) {
+  const [selectedIndustry, setSelectedIndustry] = useState('')
+  const [selectedTheme, setSelectedTheme] = useState('')
+
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
@@ -71,16 +75,26 @@ export default function LandAndWater ({
         <Image src={landAndWater.Why.Image[0].url} />
       </FullWidthCentered>
 
-      <IndustryReports copy={landAndWater['Industry Reports']} />
+      <IndustryReports
+        copy={landAndWater['Industry Reports']}
+        selectedIndustry={selectedIndustry}
+        setSelectedIndustry={setSelectedIndustry}
+        selectedTheme={selectedTheme}
+        setSelectedTheme={setSelectedTheme}
+      />
 
       <CaseStudies
         caseStudies={caseStudies}
         copy={landAndWater['Case Studies']}
+        selectedIndustry={selectedIndustry}
+        selectedTheme={selectedTheme}
       />
 
       <AccreditorsAndCertifications
         accreditors={accreditors}
         copy={landAndWater.Accreditors}
+        selectedIndustry={selectedIndustry}
+        selectedTheme={selectedTheme}
       />
 
       <Latest copy={landAndWater.Latest} />

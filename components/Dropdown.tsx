@@ -8,11 +8,18 @@ type DropdownItem = {
   pill?: React.ReactNode
 }
 interface DropdownProps {
+  selectedItemName?: string
   items: Array<DropdownItem>
   placeholder: string
+  onChange: any // TODO: type better
 }
 
-export default function Dropdown ({ items, placeholder }: DropdownProps) {
+export default function Dropdown ({
+  selectedItemName,
+  items,
+  placeholder,
+  onChange
+}: DropdownProps) {
   const {
     isOpen,
     selectedItem,
@@ -20,7 +27,11 @@ export default function Dropdown ({ items, placeholder }: DropdownProps) {
     getMenuProps,
     getItemProps
   } = useSelect({
-    items
+    items,
+    initialSelectedItem: selectedItemName
+      ? items.find(i => i.name === selectedItemName)
+      : null,
+    onSelectedItemChange: onChange
   })
   return (
     <Flex sx={{ position: 'relative', flex: 1, flexDirection: 'column' }}>

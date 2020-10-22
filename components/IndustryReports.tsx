@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, Flex, Box, Heading, Text, Button, Image } from 'theme-ui'
+import { Dispatch, SetStateAction } from 'react'
 
 import FullWidthCentered from './FullWidthCentered'
 import OneThenTwoColumns from './OneThenTwoColumns'
@@ -31,9 +32,19 @@ const themes = [
 
 interface IndustryReportsProps {
   copy: any // TODO: type better
+  selectedIndustry: string
+  setSelectedIndustry: Dispatch<SetStateAction<string>>
+  selectedTheme: string
+  setSelectedTheme: Dispatch<SetStateAction<string>>
 }
 
-export default function IndustryReports ({ copy }: IndustryReportsProps) {
+export default function IndustryReports ({
+  copy,
+  selectedIndustry,
+  setSelectedIndustry,
+  selectedTheme,
+  setSelectedTheme
+}: IndustryReportsProps) {
   return (
     <FullWidthCentered bg='greyBackground'>
       <Flex px={[3, 5]} mb={5} mt={4} sx={{ flexDirection: 'column' }}>
@@ -47,10 +58,24 @@ export default function IndustryReports ({ copy }: IndustryReportsProps) {
           remainingContent={
             <Flex ml={[0, 4]} sx={{ flex: 2, justifyContent: 'space-between' }}>
               <Flex mr={4} sx={{ flex: 1 }}>
-                <Dropdown items={industries} placeholder='Industry' />
+                <Dropdown
+                  items={industries}
+                  selectedItemName={selectedIndustry}
+                  placeholder='Industry'
+                  onChange={({ selectedItem }) =>
+                    setSelectedIndustry(selectedItem.name)
+                  }
+                />
               </Flex>
               <Flex ml={4} sx={{ flex: 1 }}>
-                <Dropdown items={themes} placeholder='Theme' />
+                <Dropdown
+                  items={themes}
+                  selectedItemName={selectedTheme}
+                  placeholder='Theme'
+                  onChange={({ selectedItem }) =>
+                    setSelectedTheme(selectedItem.name)
+                  }
+                />
               </Flex>
             </Flex>
           }

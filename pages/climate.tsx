@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, Flex, Box, Heading, Text, Image } from 'theme-ui'
+import { useState } from 'react'
 import { Airtable } from '@bamboocreativenz/pip-airtable'
 import keyBy from 'lodash/keyBy'
 
@@ -23,6 +24,9 @@ export default function Climate ({
   accreditors,
   climate
 }: ClimateProps) {
+  const [selectedIndustry, setSelectedIndustry] = useState('')
+  const [selectedTheme, setSelectedTheme] = useState('')
+
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
@@ -85,13 +89,26 @@ export default function Climate ({
         </Flex>
       </FullWidthCentered>
 
-      <IndustryReports copy={climate['Industry Reports']} />
+      <IndustryReports
+        copy={climate['Industry Reports']}
+        selectedIndustry={selectedIndustry}
+        setSelectedIndustry={setSelectedIndustry}
+        selectedTheme={selectedTheme}
+        setSelectedTheme={setSelectedTheme}
+      />
 
-      <CaseStudies caseStudies={caseStudies} copy={climate['Case Studies']} />
+      <CaseStudies
+        caseStudies={caseStudies}
+        copy={climate['Case Studies']}
+        selectedIndustry={selectedIndustry}
+        selectedTheme={selectedTheme}
+      />
 
       <AccreditorsAndCertifications
         accreditors={accreditors}
         copy={climate.Accreditors}
+        selectedIndustry={selectedIndustry}
+        selectedTheme={selectedTheme}
       />
 
       <Latest copy={climate.Latest} />
