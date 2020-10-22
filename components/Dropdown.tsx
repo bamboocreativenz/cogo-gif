@@ -73,7 +73,7 @@ export default function Dropdown ({ items, placeholder }: DropdownProps) {
             >
               {item.icon ? (
                 <>
-                  <Image src={item.icon} mr={2} sx={{ width: 4 }} />
+                  <Image src={item.icon} mr={3} sx={{ width: 4 }} />
                   <Text>{item.name}</Text>
                 </>
               ) : (
