@@ -5,6 +5,7 @@ import { useSelect } from 'downshift'
 import FullWidthCentered from './FullWidthCentered'
 import OneThenTwoColumns from './OneThenTwoColumns'
 import ReportCircle from './ReportCircle'
+import ThemePill from './ThemePill'
 
 const industries = [
   { name: 'Food & Drink', icon: '/icons/food-and-drink.png' },
@@ -18,8 +19,27 @@ const industries = [
   { name: 'Homeware & Gifts', icon: '/icons/homeware-and-gifts.png' },
   { name: 'Financial Services', icon: '/icons/financial-services.png' }
 ]
+const themes = [
+  { name: 'Climate', pill: <ThemePill theme='Climate' size='small' /> },
+  { name: 'Waste', pill: <ThemePill theme='Waste' size='small' /> },
+  { name: 'Community', pill: <ThemePill theme='Community' size='small' /> },
+  {
+    name: 'Land & Water',
+    pill: <ThemePill theme='Land & Water' size='small' />
+  }
+]
 
-function DropdownSelect () {
+type DropdownItem = {
+  name: string
+  icon?: string
+  pill?: React.ReactNode
+}
+interface DropdownProps {
+  items: Array<DropdownItem>
+  placeholder: string
+}
+
+function Dropdown ({ items, placeholder }: DropdownProps) {
   const {
     isOpen,
     selectedItem,
@@ -27,7 +47,7 @@ function DropdownSelect () {
     getMenuProps,
     getItemProps
   } = useSelect({
-    items: industries
+    items
   })
   return (
     <Flex sx={{ position: 'relative', flex: 1, flexDirection: 'column' }}>
@@ -45,7 +65,7 @@ function DropdownSelect () {
           bg='greyBackground'
           sx={{ justifyContent: 'space-between', alignItems: 'center' }}
         >
-          {(selectedItem && selectedItem.name) || 'Industry'}
+          {(selectedItem && selectedItem.name) || placeholder}
           <Image src='/icons/chevron-down.png' sx={{ width: 4 }} />
         </Flex>
       </Button>
@@ -62,7 +82,7 @@ function DropdownSelect () {
         }}
       >
         {isOpen &&
-          industries.map((item, index) => (
+          items.map((item, index) => (
             <Flex
               key={`${item}${index}`}
               {...getItemProps({ item, index })}
@@ -76,8 +96,14 @@ function DropdownSelect () {
                 }
               }}
             >
-              <Image src={item.icon} mr={2} sx={{ width: 4 }} />
-              <Text>{item.name}</Text>
+              {item.icon ? (
+                <>
+                  <Image src={item.icon} mr={2} sx={{ width: 4 }} />
+                  <Text>{item.name}</Text>
+                </>
+              ) : (
+                item.pill
+              )}
             </Flex>
           ))}
       </Flex>
@@ -102,8 +128,8 @@ export default function IndustryReports ({ copy }: IndustryReportsProps) {
           }
           remainingContent={
             <Flex ml={[0, 4]} sx={{ flex: 2, justifyContent: 'space-between' }}>
-              <DropdownSelect />
-              <DropdownSelect />
+              <Dropdown items={industries} placeholder='Industry' />
+              <Dropdown items={themes} placeholder='Theme' />
               {/* <Select sx={{ width: '100%' }}>
                 <option>test industry</option>
               </Select>
