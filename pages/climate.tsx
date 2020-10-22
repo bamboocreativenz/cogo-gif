@@ -13,16 +13,18 @@ import CaseStudies from '../components/CaseStudies'
 import AccreditorsAndCertifications from '../components/AccreditorsAndCertifications'
 import Latest from '../components/Latest'
 
+import getPageStaticProps from '../util/getPageStaticProps'
+
 interface ClimateProps {
   caseStudies: any // TODO: type better
   accreditors: any // TODO: type better
-  climate: any // TODO: type better
+  page: any // TODO: type better
 }
 
 export default function Climate ({
   caseStudies,
   accreditors,
-  climate
+  page
 }: ClimateProps) {
   const [selectedIndustry, setSelectedIndustry] = useState('')
   const [selectedTheme, setSelectedTheme] = useState('')
@@ -30,10 +32,10 @@ export default function Climate ({
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
-        backgroundImage={climate.Banner.Image}
+        backgroundImage={page.Banner.Image}
         backgroundImagePosition='center'
-        headline={climate.Banner.Title}
-        subHeadline={climate.Banner.Content}
+        headline={page.Banner.Title}
+        subHeadline={page.Banner.Content}
       />
 
       <FullWidthCentered>
@@ -41,14 +43,14 @@ export default function Climate ({
           <OneThenTwoColumns
             mt={5}
             firstColumnContent={
-              <Heading variant='h1'>{climate.What.Title}</Heading>
+              <Heading variant='h1'>{page.What.Title}</Heading>
             }
             remainingContent={
               <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
                 <Text
                   variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
-                  dangerouslySetInnerHTML={{ __html: climate.What.Content }}
+                  dangerouslySetInnerHTML={{ __html: page.What.Content }}
                 />
               </Flex>
             }
@@ -57,14 +59,14 @@ export default function Climate ({
           <OneThenTwoColumns
             mt={5}
             firstColumnContent={
-              <Heading variant='h1'>{climate.Why.Title}</Heading>
+              <Heading variant='h1'>{page.Why.Title}</Heading>
             }
             remainingContent={
               <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
                 <Text
                   variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
-                  dangerouslySetInnerHTML={{ __html: climate.Why.Content }}
+                  dangerouslySetInnerHTML={{ __html: page.Why.Content }}
                 />
               </Flex>
             }
@@ -73,16 +75,16 @@ export default function Climate ({
           <OneThenTwoColumns
             mt={5}
             firstColumnContent={
-              <Heading variant='h1'>{climate.Model.Title}</Heading>
+              <Heading variant='h1'>{page.Model.Title}</Heading>
             }
             remainingContent={
               <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
                 <Text
                   variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
-                  dangerouslySetInnerHTML={{ __html: climate.Model.Content }}
+                  dangerouslySetInnerHTML={{ __html: page.Model.Content }}
                 />
-                <Image src={climate.Model.Image[0].url} />
+                <Image src={page.Model.Image[0].url} />
               </Flex>
             }
           />
@@ -90,7 +92,7 @@ export default function Climate ({
       </FullWidthCentered>
 
       <IndustryReports
-        copy={climate['Industry Reports']}
+        copy={page['Industry Reports']}
         selectedIndustry={selectedIndustry}
         setSelectedIndustry={setSelectedIndustry}
         selectedTheme={selectedTheme}
@@ -99,19 +101,19 @@ export default function Climate ({
 
       <CaseStudies
         caseStudies={caseStudies}
-        copy={climate['Case Studies']}
+        copy={page['Case Studies']}
         selectedIndustry={selectedIndustry}
         selectedTheme={selectedTheme}
       />
 
       <AccreditorsAndCertifications
         accreditors={accreditors}
-        copy={climate.Accreditors}
+        copy={page.Accreditors}
         selectedIndustry={selectedIndustry}
         selectedTheme={selectedTheme}
       />
 
-      <Latest copy={climate.Latest} />
+      <Latest copy={page.Latest} />
 
       <Footer />
     </Flex>
@@ -119,34 +121,8 @@ export default function Climate ({
 }
 
 export async function getStaticProps (context) {
-  const airtable = new Airtable(
-    process.env.AIRTABLE_API_KEY,
-    process.env.AIRTABLE_BASE
-  )
-  const caseStudiesRecords = await airtable.listRecords({
-    tableName: 'Case Studies',
-    viewName: 'Grid View'
-  })
-  const caseStudies = caseStudiesRecords.map(c => c.fields)
-  const accreditorsRecords = await airtable.listRecords({
-    tableName: 'Accreditors',
-    viewName: 'Grid View'
-  })
-  const accreditors = accreditorsRecords.map(c => c.fields)
-  const climateRecords = await airtable.listRecords({
+  return getPageStaticProps({
     tableName: 'Climate Page',
-    viewName: 'Grid View'
+    shouldFetchCaseStudiesAccreditors: true
   })
-  const climate = keyBy(
-    climateRecords.map(c => c.fields),
-    'Name'
-  )
-
-  return {
-    props: {
-      caseStudies,
-      accreditors,
-      climate
-    }
-  }
 }

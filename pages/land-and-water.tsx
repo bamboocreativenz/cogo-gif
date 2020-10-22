@@ -13,16 +13,18 @@ import CaseStudies from '../components/CaseStudies'
 import AccreditorsAndCertifications from '../components/AccreditorsAndCertifications'
 import Latest from '../components/Latest'
 
+import getPageStaticProps from '../util/getPageStaticProps'
+
 interface LandAndWaterProps {
   caseStudies: any // TODO: type better
   accreditors: any // TODO: type better
-  landAndWater: any // TODO: type better
+  page: any // TODO: type better
 }
 
 export default function LandAndWater ({
   caseStudies,
   accreditors,
-  landAndWater
+  page
 }: LandAndWaterProps) {
   const [selectedIndustry, setSelectedIndustry] = useState('')
   const [selectedTheme, setSelectedTheme] = useState('')
@@ -30,10 +32,10 @@ export default function LandAndWater ({
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
-        backgroundImage={landAndWater.Banner.Image}
+        backgroundImage={page.Banner.Image}
         backgroundImagePosition='right'
-        headline={landAndWater.Banner.Title}
-        subHeadline={landAndWater.Banner.Content}
+        headline={page.Banner.Title}
+        subHeadline={page.Banner.Content}
       />
 
       <FullWidthCentered>
@@ -41,7 +43,7 @@ export default function LandAndWater ({
           <OneThenTwoColumns
             mt={5}
             firstColumnContent={
-              <Heading variant='h1'>{landAndWater.What.Title}</Heading>
+              <Heading variant='h1'>{page.What.Title}</Heading>
             }
             remainingContent={
               <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
@@ -49,7 +51,7 @@ export default function LandAndWater ({
                   variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
                   dangerouslySetInnerHTML={{
-                    __html: landAndWater.What.Content
+                    __html: page.What.Content
                   }}
                 />
               </Flex>
@@ -59,24 +61,24 @@ export default function LandAndWater ({
           <OneThenTwoColumns
             mt={5}
             firstColumnContent={
-              <Heading variant='h1'>{landAndWater.Why.Title}</Heading>
+              <Heading variant='h1'>{page.Why.Title}</Heading>
             }
             remainingContent={
               <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
                 <Text
                   variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
-                  dangerouslySetInnerHTML={{ __html: landAndWater.Why.Content }}
+                  dangerouslySetInnerHTML={{ __html: page.Why.Content }}
                 />
               </Flex>
             }
           />
         </Flex>
-        <Image src={landAndWater.Why.Image[0].url} />
+        <Image src={page.Why.Image[0].url} />
       </FullWidthCentered>
 
       <IndustryReports
-        copy={landAndWater['Industry Reports']}
+        copy={page['Industry Reports']}
         selectedIndustry={selectedIndustry}
         setSelectedIndustry={setSelectedIndustry}
         selectedTheme={selectedTheme}
@@ -85,19 +87,19 @@ export default function LandAndWater ({
 
       <CaseStudies
         caseStudies={caseStudies}
-        copy={landAndWater['Case Studies']}
+        copy={page['Case Studies']}
         selectedIndustry={selectedIndustry}
         selectedTheme={selectedTheme}
       />
 
       <AccreditorsAndCertifications
         accreditors={accreditors}
-        copy={landAndWater.Accreditors}
+        copy={page.Accreditors}
         selectedIndustry={selectedIndustry}
         selectedTheme={selectedTheme}
       />
 
-      <Latest copy={landAndWater.Latest} />
+      <Latest copy={page.Latest} />
 
       <Footer />
     </Flex>
@@ -105,34 +107,8 @@ export default function LandAndWater ({
 }
 
 export async function getStaticProps (context) {
-  const airtable = new Airtable(
-    process.env.AIRTABLE_API_KEY,
-    process.env.AIRTABLE_BASE
-  )
-  const caseStudiesRecords = await airtable.listRecords({
-    tableName: 'Case Studies',
-    viewName: 'Grid View'
-  })
-  const caseStudies = caseStudiesRecords.map(c => c.fields)
-  const accreditorsRecords = await airtable.listRecords({
-    tableName: 'Accreditors',
-    viewName: 'Grid View'
-  })
-  const accreditors = accreditorsRecords.map(c => c.fields)
-  const landAndWaterRecords = await airtable.listRecords({
+  return getPageStaticProps({
     tableName: 'Land & Water Page',
-    viewName: 'Grid View'
+    shouldFetchCaseStudiesAccreditors: true
   })
-  const landAndWater = keyBy(
-    landAndWaterRecords.map(c => c.fields),
-    'Name'
-  )
-
-  return {
-    props: {
-      caseStudies,
-      accreditors,
-      landAndWater
-    }
-  }
 }

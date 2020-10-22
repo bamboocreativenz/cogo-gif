@@ -10,18 +10,19 @@ import OneThenTwoColumns from '../components/OneThenTwoColumns'
 import Partner from '../components/Partner'
 import TeamMember from '../components/TeamMember'
 
+import getPageStaticProps from '../util/getPageStaticProps'
+
 interface AboutProps {
-  about: any // TODO: type better
+  page: any // TODO: type better
 }
 
-export default function About ({ about }: AboutProps) {
-  console.log({ about })
+export default function About ({ page }: AboutProps) {
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
-        backgroundImage={about.Banner.Image}
-        headline={about.Banner.Title}
-        subHeadline={about.Banner.Content}
+        backgroundImage={page.Banner.Image}
+        headline={page.Banner.Title}
+        subHeadline={page.Banner.Content}
       />
 
       <FullWidthCentered>
@@ -29,14 +30,14 @@ export default function About ({ about }: AboutProps) {
           <OneThenTwoColumns
             mt={5}
             firstColumnContent={
-              <Heading variant='h1'>{about.What.Title}</Heading>
+              <Heading variant='h1'>{page.What.Title}</Heading>
             }
             remainingContent={
               <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
                 <Text
                   variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
-                  dangerouslySetInnerHTML={{ __html: about.What.Content }}
+                  dangerouslySetInnerHTML={{ __html: page.What.Content }}
                 />
               </Flex>
             }
@@ -45,14 +46,14 @@ export default function About ({ about }: AboutProps) {
           <OneThenTwoColumns
             mt={5}
             firstColumnContent={
-              <Heading variant='h1'>{about.How.Title}</Heading>
+              <Heading variant='h1'>{page.How.Title}</Heading>
             }
             remainingContent={
               <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
                 <Text
                   variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
-                  dangerouslySetInnerHTML={{ __html: about.How.Content }}
+                  dangerouslySetInnerHTML={{ __html: page.How.Content }}
                 />
               </Flex>
             }
@@ -61,32 +62,32 @@ export default function About ({ about }: AboutProps) {
           <OneThenTwoColumns
             mt={5}
             firstColumnContent={
-              <Heading variant='h1'>{about.Who.Title}</Heading>
+              <Heading variant='h1'>{page.Who.Title}</Heading>
             }
             remainingContent={
               <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
                 <Text
                   variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
-                  dangerouslySetInnerHTML={{ __html: about.Who.Content }}
+                  dangerouslySetInnerHTML={{ __html: page.Who.Content }}
                 />
               </Flex>
             }
           />
 
           <Box my={[3, 4]}>
-            <Partner copy={about['Partner 1']} />
-            <Partner copy={about['Partner 2']} />
-            <Partner copy={about['Partner 3']} />
-            <Partner copy={about['Partner 4']} />
-            <Partner copy={about['Partner 5']} />
+            <Partner copy={page['Partner 1']} />
+            <Partner copy={page['Partner 2']} />
+            <Partner copy={page['Partner 3']} />
+            <Partner copy={page['Partner 4']} />
+            <Partner copy={page['Partner 5']} />
           </Box>
 
           <Flex my={[5, 0]} sx={{ flexDirection: 'column' }}>
             <Heading mb={3}>Get in touch with the GIF team</Heading>
-            <TeamMember copy={about['Team 1']} />
-            <TeamMember copy={about['Team 2']} />
-            <TeamMember copy={about['Team 3']} />
+            <TeamMember copy={page['Team 1']} />
+            <TeamMember copy={page['Team 2']} />
+            <TeamMember copy={page['Team 3']} />
           </Flex>
         </Flex>
       </FullWidthCentered>
@@ -97,22 +98,8 @@ export default function About ({ about }: AboutProps) {
 }
 
 export async function getStaticProps (context) {
-  const airtable = new Airtable(
-    process.env.AIRTABLE_API_KEY,
-    process.env.AIRTABLE_BASE
-  )
-  const aboutRecords = await airtable.listRecords({
+  return getPageStaticProps({
     tableName: 'About Page',
-    viewName: 'Grid View'
+    shouldFetchCaseStudiesAccreditors: false
   })
-  const about = keyBy(
-    aboutRecords.map(c => c.fields),
-    'Name'
-  )
-
-  return {
-    props: {
-      about
-    }
-  }
 }

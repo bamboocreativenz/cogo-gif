@@ -13,22 +13,24 @@ import AccreditorsAndCertifications from '../components/AccreditorsAndCertificat
 import Latest from '../components/Latest'
 import Footer from '../components/Footer'
 
+import getPageStaticProps from '../util/getPageStaticProps'
+
 interface HomeProps {
   caseStudies: any // TODO: type better
   accreditors: any // TODO: type better
-  home: any // TODO: type better
+  page: any // TODO: type better
 }
 
-export default function Home ({ caseStudies, accreditors, home }: HomeProps) {
+export default function Home ({ caseStudies, accreditors, page }: HomeProps) {
   const [selectedIndustry, setSelectedIndustry] = useState('')
   const [selectedTheme, setSelectedTheme] = useState('')
 
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
-        backgroundImage={home.Banner.Image}
-        headline={home.Banner.Title}
-        subHeadline={home.Banner.Content}
+        backgroundImage={page.Banner.Image}
+        headline={page.Banner.Title}
+        subHeadline={page.Banner.Content}
       />
 
       <FullWidthCentered>
@@ -37,32 +39,32 @@ export default function Home ({ caseStudies, accreditors, home }: HomeProps) {
           sx={{ width: '100%', flexDirection: 'column', alignItems: 'center' }}
         >
           <Flex mt={5} mb={3} sx={{ flexDirection: 'column' }}>
-            <Heading variant='h1'>{home.Header.Title}</Heading>
-            <Text variant='p2'>{home.Header.Content}</Text>
+            <Heading variant='h1'>{page.Header.Title}</Heading>
+            <Text variant='p2'>{page.Header.Content}</Text>
           </Flex>
 
           <Flex sx={{ flexDirection: ['column', 'row'] }}>
             <ThemeLearnMore
-              title={home.Climate.Title}
-              text={home.Climate.Content}
+              title={page.Climate.Title}
+              text={page.Climate.Content}
               link='/climate'
             />
             <ThemeLearnMore
-              title={home.Waste.Title}
-              text={home.Waste.Content}
+              title={page.Waste.Title}
+              text={page.Waste.Content}
               link='/waste'
             />
           </Flex>
 
           <Flex sx={{ flexDirection: ['column', 'row'] }}>
             <ThemeLearnMore
-              title={home.Community.Title}
-              text={home.Community.Content}
+              title={page.Community.Title}
+              text={page.Community.Content}
               link='/community'
             />
             <ThemeLearnMore
-              title={home['Land & Water'].Title}
-              text={home['Land & Water'].Content}
+              title={page['Land & Water'].Title}
+              text={page['Land & Water'].Content}
               link='/land-and-water'
             />
           </Flex>
@@ -70,7 +72,7 @@ export default function Home ({ caseStudies, accreditors, home }: HomeProps) {
       </FullWidthCentered>
 
       <IndustryReports
-        copy={home['Industry Reports']}
+        copy={page['Industry Reports']}
         selectedIndustry={selectedIndustry}
         setSelectedIndustry={setSelectedIndustry}
         selectedTheme={selectedTheme}
@@ -79,19 +81,19 @@ export default function Home ({ caseStudies, accreditors, home }: HomeProps) {
 
       <CaseStudies
         caseStudies={caseStudies}
-        copy={home['Case Studies']}
+        copy={page['Case Studies']}
         selectedIndustry={selectedIndustry}
         selectedTheme={selectedTheme}
       />
 
       <AccreditorsAndCertifications
         accreditors={accreditors}
-        copy={home.Accreditors}
+        copy={page.Accreditors}
         selectedIndustry={selectedIndustry}
         selectedTheme={selectedTheme}
       />
 
-      <Latest copy={home.Latest} />
+      <Latest copy={page.Latest} />
 
       <Footer />
     </Flex>
@@ -99,34 +101,8 @@ export default function Home ({ caseStudies, accreditors, home }: HomeProps) {
 }
 
 export async function getStaticProps (context) {
-  const airtable = new Airtable(
-    process.env.AIRTABLE_API_KEY,
-    process.env.AIRTABLE_BASE
-  )
-  const caseStudiesRecords = await airtable.listRecords({
-    tableName: 'Case Studies',
-    viewName: 'Grid View'
-  })
-  const caseStudies = caseStudiesRecords.map(c => c.fields)
-  const accreditorsRecords = await airtable.listRecords({
-    tableName: 'Accreditors',
-    viewName: 'Grid View'
-  })
-  const accreditors = accreditorsRecords.map(c => c.fields)
-  const homeRecords = await airtable.listRecords({
+  return getPageStaticProps({
     tableName: 'Home Page',
-    viewName: 'Grid View'
+    shouldFetchCaseStudiesAccreditors: true
   })
-  const home = keyBy(
-    homeRecords.map(c => c.fields),
-    'Name'
-  )
-
-  return {
-    props: {
-      caseStudies,
-      accreditors,
-      home
-    }
-  }
 }

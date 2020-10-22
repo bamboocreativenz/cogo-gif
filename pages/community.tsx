@@ -13,16 +13,18 @@ import CaseStudies from '../components/CaseStudies'
 import AccreditorsAndCertifications from '../components/AccreditorsAndCertifications'
 import Latest from '../components/Latest'
 
+import getPageStaticProps from '../util/getPageStaticProps'
+
 interface CommunityProps {
   caseStudies: any // TODO: type better
   accreditors: any // TODO: type better
-  community: any // TODO: type better
+  page: any // TODO: type better
 }
 
 export default function Community ({
   caseStudies,
   accreditors,
-  community
+  page
 }: CommunityProps) {
   const [selectedIndustry, setSelectedIndustry] = useState('')
   const [selectedTheme, setSelectedTheme] = useState('')
@@ -30,10 +32,10 @@ export default function Community ({
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
-        backgroundImage={community.Banner.Image}
+        backgroundImage={page.Banner.Image}
         backgroundImagePosition='right'
-        headline={community.Banner.Title}
-        subHeadline={community.Banner.Content}
+        headline={page.Banner.Title}
+        subHeadline={page.Banner.Content}
       />
 
       <FullWidthCentered>
@@ -41,14 +43,14 @@ export default function Community ({
           <OneThenTwoColumns
             mt={5}
             firstColumnContent={
-              <Heading variant='h1'>{community.What.Title}</Heading>
+              <Heading variant='h1'>{page.What.Title}</Heading>
             }
             remainingContent={
               <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
                 <Text
                   variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
-                  dangerouslySetInnerHTML={{ __html: community.What.Content }}
+                  dangerouslySetInnerHTML={{ __html: page.What.Content }}
                 />
               </Flex>
             }
@@ -57,24 +59,24 @@ export default function Community ({
           <OneThenTwoColumns
             mt={5}
             firstColumnContent={
-              <Heading variant='h1'>{community.Why.Title}</Heading>
+              <Heading variant='h1'>{page.Why.Title}</Heading>
             }
             remainingContent={
               <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
                 <Text
                   variant='p2'
                   sx={{ whiteSpace: 'pre-wrap' }}
-                  dangerouslySetInnerHTML={{ __html: community.Why.Content }}
+                  dangerouslySetInnerHTML={{ __html: page.Why.Content }}
                 />
               </Flex>
             }
           />
         </Flex>
-        <Image src={community.Why.Image[0].url} />
+        <Image src={page.Why.Image[0].url} />
       </FullWidthCentered>
 
       <IndustryReports
-        copy={community['Industry Reports']}
+        copy={page['Industry Reports']}
         selectedIndustry={selectedIndustry}
         setSelectedIndustry={setSelectedIndustry}
         selectedTheme={selectedTheme}
@@ -83,19 +85,19 @@ export default function Community ({
 
       <CaseStudies
         caseStudies={caseStudies}
-        copy={community['Case Studies']}
+        copy={page['Case Studies']}
         selectedIndustry={selectedIndustry}
         selectedTheme={selectedTheme}
       />
 
       <AccreditorsAndCertifications
         accreditors={accreditors}
-        copy={community.Accreditors}
+        copy={page.Accreditors}
         selectedIndustry={selectedIndustry}
         selectedTheme={selectedTheme}
       />
 
-      <Latest copy={community.Latest} />
+      <Latest copy={page.Latest} />
 
       <Footer />
     </Flex>
@@ -103,34 +105,8 @@ export default function Community ({
 }
 
 export async function getStaticProps (context) {
-  const airtable = new Airtable(
-    process.env.AIRTABLE_API_KEY,
-    process.env.AIRTABLE_BASE
-  )
-  const caseStudiesRecords = await airtable.listRecords({
-    tableName: 'Case Studies',
-    viewName: 'Grid View'
-  })
-  const caseStudies = caseStudiesRecords.map(c => c.fields)
-  const accreditorsRecords = await airtable.listRecords({
-    tableName: 'Accreditors',
-    viewName: 'Grid View'
-  })
-  const accreditors = accreditorsRecords.map(c => c.fields)
-  const communityRecords = await airtable.listRecords({
+  return getPageStaticProps({
     tableName: 'Community Page',
-    viewName: 'Grid View'
+    shouldFetchCaseStudiesAccreditors: true
   })
-  const community = keyBy(
-    communityRecords.map(c => c.fields),
-    'Name'
-  )
-
-  return {
-    props: {
-      caseStudies,
-      accreditors,
-      community
-    }
-  }
 }
