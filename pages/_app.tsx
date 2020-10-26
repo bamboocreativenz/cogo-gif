@@ -1,10 +1,13 @@
 import { ThemeProvider } from 'theme-ui'
 import { Global } from '@emotion/core'
 import Head from 'next/head'
+import Modal from 'react-modal'
 
 import theme from '../theme'
 
 export default function App ({ Component, pageProps }) {
+  Modal.setAppElement('#__next')
+
   return (
     <>
       <Head>

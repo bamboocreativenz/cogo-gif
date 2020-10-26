@@ -1,5 +1,7 @@
 /** @jsx jsx */
-import { jsx, Flex, Box, Heading, Text, Image, Button } from 'theme-ui'
+import { jsx, Flex, Box, Heading, Text, Image, Button, Input } from 'theme-ui'
+import { useState } from 'react'
+import Modal from 'react-modal'
 
 import FullWidthCentered from './FullWidthCentered'
 import OneThenTwoColumns from './OneThenTwoColumns'
@@ -8,6 +10,7 @@ import ThemePill from './ThemePill'
 interface CaseStudiesProps {
   caseStudies: any // TODO: type better
   copy: any // TODO: type better
+  download: any // TODO: type better
   selectedIndustry: string
   selectedTheme: string
 }
@@ -15,9 +18,12 @@ interface CaseStudiesProps {
 export default function CaseStudies ({
   caseStudies,
   copy,
+  download,
   selectedIndustry,
   selectedTheme
 }: CaseStudiesProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
     <FullWidthCentered bg='greyBackground'>
       <Flex px={[3, 5]} mb={5} mt={3} sx={{ flexDirection: 'column' }}>
@@ -103,7 +109,12 @@ export default function CaseStudies ({
                         alignItems: 'flex-start'
                       }}
                     >
-                      <Button variant='tertiary'>{cta}</Button>
+                      <Button
+                        variant='tertiary'
+                        onClick={() => setIsModalOpen(true)}
+                      >
+                        {cta}
+                      </Button>
                       <Flex sx={{ alignItems: 'center' }}>
                         <Box mr={3}>
                           <ThemePill theme={theme} size='small' />
@@ -122,6 +133,39 @@ export default function CaseStudies ({
             })}
         </Flex>
       </Flex>
+
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '80%',
+          background: 'white',
+          borderStyle: 'solid',
+          borderWidth: '1px',
+          borderColor: 'lightGrey;'
+        }}
+      >
+        <Flex p={5} sx={{ flexDirection: 'column' }}>
+          <Flex>
+            <Heading variant='h1' mr={3} sx={{ flex: 2 }}>
+              {download.Title}
+            </Heading>
+            <Text mt={2} variant='p3' sx={{ flex: 1 }}>
+              {download.Content}
+            </Text>
+          </Flex>
+          <Flex mt={3} sx={{ alignItems: 'center' }}>
+            <Input placeholder='Email' />
+            <Button ml={2} variant='primary' sx={{ minWidth: 160, height: 40 }}>
+              DOWNLOAD PDF
+            </Button>
+          </Flex>
+        </Flex>
+      </Modal>
     </FullWidthCentered>
   )
 }

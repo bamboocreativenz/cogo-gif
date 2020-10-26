@@ -21,6 +21,7 @@ export default function ReportsCaseStudiesAccreditors ({
     <>
       <IndustryReports
         copy={page['Industry Reports']}
+        download={page['Download Industry Report']}
         marketInsights={marketInsights}
         selectedIndustry={selectedIndustry}
         setSelectedIndustry={setSelectedIndustry}
@@ -31,6 +32,7 @@ export default function ReportsCaseStudiesAccreditors ({
       <CaseStudies
         caseStudies={caseStudies}
         copy={page['Case Studies']}
+        download={page['Download Case Study']}
         selectedIndustry={selectedIndustry}
         selectedTheme={selectedTheme}
       />

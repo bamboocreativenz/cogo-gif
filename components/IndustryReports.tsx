@@ -1,6 +1,7 @@
 /** @jsx jsx */
-import { jsx, Flex, Box, Heading, Text, Button, Image } from 'theme-ui'
-import { Dispatch, SetStateAction } from 'react'
+import { jsx, Flex, Box, Heading, Text, Button, Image, Input } from 'theme-ui'
+import { Dispatch, SetStateAction, useState } from 'react'
+import Modal from 'react-modal'
 
 import FullWidthCentered from './FullWidthCentered'
 import OneThenTwoColumns from './OneThenTwoColumns'
@@ -32,6 +33,7 @@ const themes = [
 
 interface IndustryReportsProps {
   copy: any // TODO: type better
+  download: any // TODO: type better
   marketInsights: any // TODO: type better
   selectedIndustry: string
   setSelectedIndustry: Dispatch<SetStateAction<string>>
@@ -41,12 +43,15 @@ interface IndustryReportsProps {
 
 export default function IndustryReports ({
   copy,
+  download,
   marketInsights,
   selectedIndustry,
   setSelectedIndustry,
   selectedTheme,
   setSelectedTheme
 }: IndustryReportsProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
     <FullWidthCentered bg='greyBackground'>
       <Flex px={[3, 5]} mb={5} mt={4} sx={{ flexDirection: 'column' }}>
@@ -93,7 +98,9 @@ export default function IndustryReports ({
                 mt={3}
                 sx={{ display: ['none', 'initial'], flexDirection: 'column' }}
               >
-                <Button variant='primary'>DOWNLOAD REPORT</Button>
+                <Button variant='primary' onClick={() => setIsModalOpen(true)}>
+                  DOWNLOAD REPORT
+                </Button>
               </Flex>
             </Flex>
           }
@@ -143,6 +150,47 @@ export default function IndustryReports ({
           </Box>
         </Flex>
       </Flex>
+
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '80%',
+          background: 'white',
+          borderStyle: 'solid',
+          borderWidth: '1px',
+          borderColor: 'lightGrey;'
+        }}
+      >
+        <Flex p={5} sx={{ flexDirection: 'column' }}>
+          <Flex>
+            <Heading variant='h1' mr={3} sx={{ flex: 2 }}>
+              {download.Title}
+            </Heading>
+            <Text mt={2} variant='p3' sx={{ flex: 1 }}>
+              {download.Content}
+            </Text>
+          </Flex>
+          <Flex mt={3} sx={{ flexWrap: 'wrap' }}>
+            {industries.map(i => (
+              <Flex pr={3} py={2} sx={{ width: 160, alignItems: 'center' }}>
+                <Image mr={2} src={i.icon} sx={{ width: 4, minWidth: 4 }} />
+                <Text>{i.name}</Text>
+              </Flex>
+            ))}
+          </Flex>
+          <Flex mt={3} sx={{ alignItems: 'center' }}>
+            <Input placeholder='Email' />
+            <Button ml={2} variant='primary' sx={{ minWidth: 160, height: 40 }}>
+              DOWNLOAD PDF
+            </Button>
+          </Flex>
+        </Flex>
+      </Modal>
     </FullWidthCentered>
   )
 }
