@@ -1,27 +1,27 @@
 /** @jsx jsx */
-import { jsx, Flex, Box, Heading, Text, Link as TUILink } from 'theme-ui'
+import { jsx, Flex, Heading, Text } from 'theme-ui'
 import { useState } from 'react'
-import { Airtable } from '@bamboocreativenz/pip-airtable'
-import keyBy from 'lodash/keyBy'
 
 import FullWidthCentered from '../components/FullWidthCentered'
 import Banner from '../components/Banner'
 import ThemeLearnMore from '../components/ThemeLearnMore'
-import IndustryReports from '../components/IndustryReports'
-import CaseStudies from '../components/CaseStudies'
-import AccreditorsAndCertifications from '../components/AccreditorsAndCertifications'
-import Latest from '../components/Latest'
-import Footer from '../components/Footer'
 
 import getPageStaticProps from '../util/getPageStaticProps'
+import ReportsCaseStudiesAccreditors from '../components/ReportsCaseStudiesAccreditors'
 
 interface HomeProps {
+  marketInsights: any // TODO: type better
   caseStudies: any // TODO: type better
   accreditors: any // TODO: type better
   page: any // TODO: type better
 }
 
-export default function Home ({ caseStudies, accreditors, page }: HomeProps) {
+export default function Home ({
+  marketInsights,
+  caseStudies,
+  accreditors,
+  page
+}: HomeProps) {
   const [selectedIndustry, setSelectedIndustry] = useState('')
   const [selectedTheme, setSelectedTheme] = useState('')
 
@@ -71,31 +71,16 @@ export default function Home ({ caseStudies, accreditors, page }: HomeProps) {
         </Flex>
       </FullWidthCentered>
 
-      <IndustryReports
-        copy={page['Industry Reports']}
+      <ReportsCaseStudiesAccreditors
+        page={page}
         selectedIndustry={selectedIndustry}
         setSelectedIndustry={setSelectedIndustry}
         selectedTheme={selectedTheme}
         setSelectedTheme={setSelectedTheme}
-      />
-
-      <CaseStudies
+        marketInsights={marketInsights}
         caseStudies={caseStudies}
-        copy={page['Case Studies']}
-        selectedIndustry={selectedIndustry}
-        selectedTheme={selectedTheme}
-      />
-
-      <AccreditorsAndCertifications
         accreditors={accreditors}
-        copy={page.Accreditors}
-        selectedIndustry={selectedIndustry}
-        selectedTheme={selectedTheme}
       />
-
-      <Latest copy={page.Latest} />
-
-      <Footer />
     </Flex>
   )
 }
@@ -103,6 +88,6 @@ export default function Home ({ caseStudies, accreditors, page }: HomeProps) {
 export async function getStaticProps (context) {
   return getPageStaticProps({
     tableName: 'Home Page',
-    shouldFetchCaseStudiesAccreditors: true
+    shouldFetchReportsCaseStudiesAccreditors: true
   })
 }

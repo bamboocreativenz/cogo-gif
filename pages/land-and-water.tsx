@@ -1,27 +1,23 @@
 /** @jsx jsx */
-import { jsx, Flex, Box, Heading, Text, Image } from 'theme-ui'
+import { jsx, Flex, Heading, Text, Image } from 'theme-ui'
 import { useState } from 'react'
-import { Airtable } from '@bamboocreativenz/pip-airtable'
-import keyBy from 'lodash/keyBy'
 
 import Banner from '../components/Banner'
-import Footer from '../components/Footer'
 import FullWidthCentered from '../components/FullWidthCentered'
 import OneThenTwoColumns from '../components/OneThenTwoColumns'
-import IndustryReports from '../components/IndustryReports'
-import CaseStudies from '../components/CaseStudies'
-import AccreditorsAndCertifications from '../components/AccreditorsAndCertifications'
-import Latest from '../components/Latest'
+import ReportsCaseStudiesAccreditors from '../components/ReportsCaseStudiesAccreditors'
 
 import getPageStaticProps from '../util/getPageStaticProps'
 
 interface LandAndWaterProps {
+  marketInsights: any // TODO: type better
   caseStudies: any // TODO: type better
   accreditors: any // TODO: type better
   page: any // TODO: type better
 }
 
 export default function LandAndWater ({
+  marketInsights,
   caseStudies,
   accreditors,
   page
@@ -77,31 +73,16 @@ export default function LandAndWater ({
         <Image src={page.Why.Image[0].url} />
       </FullWidthCentered>
 
-      <IndustryReports
-        copy={page['Industry Reports']}
+      <ReportsCaseStudiesAccreditors
+        page={page}
         selectedIndustry={selectedIndustry}
         setSelectedIndustry={setSelectedIndustry}
         selectedTheme={selectedTheme}
         setSelectedTheme={setSelectedTheme}
-      />
-
-      <CaseStudies
+        marketInsights={marketInsights}
         caseStudies={caseStudies}
-        copy={page['Case Studies']}
-        selectedIndustry={selectedIndustry}
-        selectedTheme={selectedTheme}
-      />
-
-      <AccreditorsAndCertifications
         accreditors={accreditors}
-        copy={page.Accreditors}
-        selectedIndustry={selectedIndustry}
-        selectedTheme={selectedTheme}
       />
-
-      <Latest copy={page.Latest} />
-
-      <Footer />
     </Flex>
   )
 }
@@ -109,6 +90,6 @@ export default function LandAndWater ({
 export async function getStaticProps (context) {
   return getPageStaticProps({
     tableName: 'Land & Water Page',
-    shouldFetchCaseStudiesAccreditors: true
+    shouldFetchReportsCaseStudiesAccreditors: true
   })
 }

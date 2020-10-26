@@ -32,6 +32,7 @@ const themes = [
 
 interface IndustryReportsProps {
   copy: any // TODO: type better
+  marketInsights: any // TODO: type better
   selectedIndustry: string
   setSelectedIndustry: Dispatch<SetStateAction<string>>
   selectedTheme: string
@@ -40,11 +41,13 @@ interface IndustryReportsProps {
 
 export default function IndustryReports ({
   copy,
+  marketInsights,
   selectedIndustry,
   setSelectedIndustry,
   selectedTheme,
   setSelectedTheme
 }: IndustryReportsProps) {
+  console.log({ marketInsights })
   return (
     <FullWidthCentered bg='greyBackground'>
       <Flex px={[3, 5]} mb={5} mt={4} sx={{ flexDirection: 'column' }}>
@@ -97,8 +100,29 @@ export default function IndustryReports ({
           }
         />
 
-        <Flex>
-          <ReportCircle
+        <Flex py={4} sx={{ overflowX: 'scroll' }}>
+          {marketInsights
+            .filter(mi =>
+              selectedTheme && selectedIndustry
+                ? mi.Themes.includes(selectedTheme) &&
+                  mi.Industries.includes(selectedIndustry)
+                : selectedTheme
+                ? mi.Themes.includes(selectedTheme)
+                : selectedIndustry
+                ? mi.Industries.includes(selectedIndustry)
+                : mi
+            )
+            .map(mi => (
+              <Box
+                mr={[3, 5]}
+                sx={{
+                  minWidth: 7
+                }}
+              >
+                <Image src={mi.Image[0].url} />
+              </Box>
+            ))}
+          {/* <ReportCircle
             statisticPercent={87}
             text='of users on CoGo want to see businesses take action on Climate'
             image='/images/CoGo-report.png'
@@ -107,7 +131,7 @@ export default function IndustryReports ({
             statisticPercent={67}
             text='of Kiwis will make eco-conscious choices, even if more expensive'
             image='/images/CoGo-report.png'
-          />
+          /> */}
         </Flex>
 
         <Flex

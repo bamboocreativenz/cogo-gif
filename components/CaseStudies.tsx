@@ -20,7 +20,7 @@ export default function CaseStudies ({
 }: CaseStudiesProps) {
   return (
     <FullWidthCentered bg='greyBackground'>
-      <Flex px={[3, 5]} mb={5} mt={4} sx={{ flexDirection: 'column' }}>
+      <Flex px={[3, 5]} mb={5} mt={3} sx={{ flexDirection: 'column' }}>
         <OneThenTwoColumns
           mb={4}
           firstColumnContent={<Heading variant='h1'>{copy.Title}</Heading>}

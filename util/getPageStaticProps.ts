@@ -3,22 +3,28 @@ import keyBy from 'lodash/keyBy'
 
 interface GetPageStaticProps {
   tableName: string
-  shouldFetchCaseStudiesAccreditors: boolean
+  shouldFetchReportsCaseStudiesAccreditors: boolean
 }
 
 export default async function getPageStaticProps ({
   tableName,
-  shouldFetchCaseStudiesAccreditors
+  shouldFetchReportsCaseStudiesAccreditors
 }: GetPageStaticProps) {
   const airtable = new Airtable(
     process.env.AIRTABLE_API_KEY,
     process.env.AIRTABLE_BASE
   )
 
+  let marketInsights = null
   let caseStudies = null
   let accreditors = null
 
-  if (shouldFetchCaseStudiesAccreditors) {
+  if (shouldFetchReportsCaseStudiesAccreditors) {
+    const marketInsightsRecords = await airtable.listRecords({
+      tableName: 'Market Insights',
+      viewName: 'Grid View'
+    })
+    marketInsights = marketInsightsRecords.map(c => c.fields)
     const caseStudiesRecords = await airtable.listRecords({
       tableName: 'Case Studies',
       viewName: 'Grid View'
@@ -42,6 +48,7 @@ export default async function getPageStaticProps ({
 
   return {
     props: {
+      marketInsights,
       caseStudies,
       accreditors,
       page

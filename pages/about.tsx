@@ -100,6 +100,6 @@ export default function About ({ page }: AboutProps) {
 export async function getStaticProps (context) {
   return getPageStaticProps({
     tableName: 'About Page',
-    shouldFetchCaseStudiesAccreditors: false
+    shouldFetchReportsCaseStudiesAccreditors: false
   })
 }
