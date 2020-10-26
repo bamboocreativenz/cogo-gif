@@ -31,4 +31,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Deployment from Airtable
 
-Refer to the "Deployment" table in the Airtable base - click on the relevant link for the deployment you are trying to update (i.e. production, staging) to start a new deployment. Usually this will take around 2-3 minutes for your changes to show up on the live site. If nothing seems to be happening after that, it's possible there was an error - contact the dev team.
+Deployments are managed via Vercel webhook URL's, which when accessed trigger a new fetch of data from Airtable and a subsequent new build / deployment of the site. Refer to the "Deployment" table in the Airtable base - click on the relevant link for the deployment you are trying to update (i.e. production, staging) to start a new deployment. Usually this will take around 2-3 minutes for your changes to show up on the live site. If nothing seems to be happening after that, it's possible there was an error - contact the dev team.
