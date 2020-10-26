@@ -47,7 +47,6 @@ export default function IndustryReports ({
   selectedTheme,
   setSelectedTheme
 }: IndustryReportsProps) {
-  console.log({ marketInsights })
   return (
     <FullWidthCentered bg='greyBackground'>
       <Flex px={[3, 5]} mb={5} mt={4} sx={{ flexDirection: 'column' }}>
@@ -112,8 +111,9 @@ export default function IndustryReports ({
                 ? mi.Industries.includes(selectedIndustry)
                 : mi
             )
-            .map(mi => (
+            .map((mi, i) => (
               <Box
+                key={i}
                 mr={[3, 5]}
                 sx={{
                   minWidth: 7
