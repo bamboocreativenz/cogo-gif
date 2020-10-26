@@ -28,3 +28,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Deployment from Airtable
+
+Refer to the "Deployment" table in the Airtable base - click on the relevant link for the deployment you are trying to update (i.e. production, staging) to start a new deployment. Usually this will take around 2-3 minutes for your changes to show up on the live site. If nothing seems to be happening after that, it's possible there was an error - contact the dev team.
