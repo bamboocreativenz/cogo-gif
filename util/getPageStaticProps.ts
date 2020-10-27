@@ -10,6 +10,8 @@ export default async function getPageStaticProps ({
   tableName,
   shouldFetchReportsCaseStudiesAccreditors
 }: GetPageStaticProps) {
+  // TODO: consider whether to use Zod types to parse and fail bad data if we are building for production?
+
   const airtable = new Airtable(
     process.env.AIRTABLE_API_KEY,
     process.env.AIRTABLE_BASE

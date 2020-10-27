@@ -1,5 +1,5 @@
 export default {
-  breakpoints: ['480px'],
+  breakpoints: ['600px'],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 384, 512],
   sizes: [0, 4, 8, 16, 32, 64, 128, 256, 384, 512],
   fontSizes: [10, 14, 18, 24, 28, 32, 36, 38, 52],
@@ -16,7 +16,8 @@ export default {
     climate: '#6666CC',
     waste: '#FF9933',
     community: '#FF66CC',
-    landAndWater: '#66CC66'
+    landAndWater: '#66CC66',
+    tomato: '#cf4718'
   },
   fonts: {
     body: '"Montserrat", system-ui, sans-serif',
