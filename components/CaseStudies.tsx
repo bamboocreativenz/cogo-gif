@@ -1,11 +1,35 @@
 /** @jsx jsx */
 import { jsx, Flex, Box, Heading, Text, Image, Button, Input } from 'theme-ui'
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
+
+import { EmailZ } from '../types/util'
 
 import FullWidthCentered from './FullWidthCentered'
 import OneThenTwoColumns from './OneThenTwoColumns'
 import ThemePill from './ThemePill'
+
+function downloadPDF ({ data, setDownloading, setDownloadSuccess }) {
+  setDownloading(true)
+  setDownloadSuccess(null)
+  return window
+    .fetch('/api/download-case-study', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(() => {
+      setDownloading(false)
+      setDownloadSuccess(true)
+    })
+    .catch(err => {
+      setDownloading(false)
+      setDownloadSuccess(false)
+    })
+}
 
 interface CaseStudiesProps {
   caseStudies: any // TODO: type better
@@ -23,6 +47,28 @@ export default function CaseStudies ({
   selectedTheme
 }: CaseStudiesProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalCaseStudy, setModalCaseStudy] = useState(null)
+  const [downloading, setDownloading] = useState(false)
+  const [downloadSuccess, setDownloadSuccess] = useState(null)
+  const { register, handleSubmit, errors } = useForm({
+    // @ts-expect-error
+    resolver: values => {
+      try {
+        EmailZ.parse(values.email)
+        return {
+          values,
+          errors: {}
+        }
+      } catch (err) {
+        return {
+          values: {},
+          errors: {
+            email: err.errors[0].message
+          }
+        }
+      }
+    }
+  })
 
   return (
     <FullWidthCentered bg='greyBackground'>
@@ -111,7 +157,10 @@ export default function CaseStudies ({
                     >
                       <Button
                         variant='tertiary'
-                        onClick={() => setIsModalOpen(true)}
+                        onClick={() => {
+                          setModalCaseStudy(cs)
+                          setIsModalOpen(true)
+                        }}
                       >
                         {cta}
                       </Button>
@@ -136,7 +185,10 @@ export default function CaseStudies ({
 
       <Modal
         isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
+        onRequestClose={() => {
+          setIsModalOpen(false)
+          setModalCaseStudy(null)
+        }}
         sx={{
           position: 'absolute',
           top: '50%',
@@ -158,9 +210,36 @@ export default function CaseStudies ({
               {download.Content}
             </Text>
           </Flex>
-          <Flex mt={3} sx={{ alignItems: 'center' }}>
-            <Input placeholder='Email' />
-            <Button ml={2} variant='primary' sx={{ minWidth: 160, height: 40 }}>
+          <Flex as='form' mt={3} sx={{ alignItems: 'flex-start' }}>
+            <Flex sx={{ flexDirection: 'column' }}>
+              <Input name='email' placeholder='Email' ref={register} />
+              {errors.email && (
+                <Text mt={1} sx={{ color: 'tomato' }}>
+                  {errors.email}
+                </Text>
+              )}
+              {downloadSuccess && (
+                <Text mt={1}>Your PDF should begin to download now.</Text>
+              )}
+              {downloadSuccess === false && (
+                <Text mt={1} sx={{ color: 'tomato' }}>
+                  Something went wrong - if this persists, contact the GIF team.
+                </Text>
+              )}
+            </Flex>
+            <Button
+              ml={2}
+              variant={downloading ? 'disabled' : 'primary'}
+              disabled={downloading}
+              onClick={handleSubmit(data =>
+                downloadPDF({
+                  data: { caseStudy: modalCaseStudy.Name, ...data },
+                  setDownloading,
+                  setDownloadSuccess
+                })
+              )}
+              sx={{ minWidth: 160, height: 38 }}
+            >
               DOWNLOAD PDF
             </Button>
           </Flex>
