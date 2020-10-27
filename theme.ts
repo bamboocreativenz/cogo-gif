@@ -163,8 +163,15 @@ export default {
     },
     disabled: {
       fontFamily: 'body',
+      fontSize: 13,
+      fontWeight: 900,
+      color: 'midGrey',
       bg: 'grey',
-      cursor: 'auto'
+      cursor: 'auto',
+      borderRadius: 0,
+      borderWidth: '2px',
+      borderStyle: 'solid',
+      borderColor: 'text'
     }
   },
   styles: {

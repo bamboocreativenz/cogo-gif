@@ -6,16 +6,27 @@ import { EmailZ } from '../types/util'
 
 import FullWidthCentered from './FullWidthCentered'
 import OneThenTwoColumns from './OneThenTwoColumns'
+import { useState } from 'react'
 
-function signUpToNewsletter (data) {
-  console.log({ data })
-  return window.fetch('/api/newsletter', {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
+function signUpToNewsletter ({ data, setSigningUp, setSignUpSuccess }) {
+  setSigningUp(true)
+  setSignUpSuccess(null)
+  return window
+    .fetch('/api/newsletter', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(() => {
+      setSigningUp(false)
+      setSignUpSuccess(true)
+    })
+    .catch(err => {
+      setSigningUp(false)
+      setSignUpSuccess(false)
+    })
 }
 
 interface LatestProps {
@@ -23,6 +34,8 @@ interface LatestProps {
 }
 
 export default function Latest ({ copy }: LatestProps) {
+  const [signingUp, setSigningUp] = useState(false)
+  const [signUpSuccess, setSignUpSuccess] = useState(null)
   const { register, handleSubmit, errors } = useForm({
     // @ts-expect-error
     resolver: values => {
@@ -59,11 +72,27 @@ export default function Latest ({ copy }: LatestProps) {
                       {errors.email}
                     </Text>
                   )}
+                  {signUpSuccess && (
+                    <Text mt={1}>Success! Thank you for signing up.</Text>
+                  )}
+                  {signUpSuccess === false && (
+                    <Text mt={1} sx={{ color: 'tomato' }}>
+                      Something went wrong - if this persists, contact the GIF
+                      team.
+                    </Text>
+                  )}
                 </Flex>
                 <Button
                   ml={2}
-                  variant='primary'
-                  onClick={handleSubmit(signUpToNewsletter)}
+                  variant={signingUp ? 'disabled' : 'primary'}
+                  disabled={signingUp}
+                  onClick={handleSubmit(data =>
+                    signUpToNewsletter({
+                      data,
+                      setSigningUp,
+                      setSignUpSuccess
+                    })
+                  )}
                   sx={{ minWidth: 100, height: 38 }}
                 >
                   SIGN UP
