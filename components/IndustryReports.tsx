@@ -2,6 +2,7 @@
 import { jsx, Flex, Box, Heading, Text, Button, Image, Input } from 'theme-ui'
 import { Dispatch, SetStateAction, useState } from 'react'
 import Modal from 'react-modal'
+import without from 'lodash/without'
 
 import FullWidthCentered from './FullWidthCentered'
 import OneThenTwoColumns from './OneThenTwoColumns'
@@ -31,6 +32,20 @@ const themes = [
   }
 ]
 
+function getHandleSelectIndustry ({
+  selectedIndustries,
+  setSelectedIndustries,
+  industry
+}) {
+  return function handleSelectIndustry () {
+    if (selectedIndustries.includes(industry)) {
+      setSelectedIndustries(without(selectedIndustries, industry))
+    } else {
+      setSelectedIndustries(selectedIndustries.concat(industry))
+    }
+  }
+}
+
 interface IndustryReportsProps {
   copy: any // TODO: type better
   download: any // TODO: type better
@@ -51,6 +66,7 @@ export default function IndustryReports ({
   setSelectedTheme
 }: IndustryReportsProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedIndustries, setSelectedIndustries] = useState([])
 
   return (
     <FullWidthCentered bg='greyBackground'>
@@ -123,27 +139,21 @@ export default function IndustryReports ({
                 key={i}
                 mr={[3, 5]}
                 sx={{
-                  minWidth: 7
+                  minWidth: [200, 7]
                 }}
               >
                 <Image src={mi.Image[0].url} />
               </Box>
             ))}
-          {/* <ReportCircle
-            statisticPercent={87}
-            text='of users on CoGo want to see businesses take action on Climate'
-            image='/images/CoGo-report.png'
-          />
-          <ReportCircle
-            statisticPercent={67}
-            text='of Kiwis will make eco-conscious choices, even if more expensive'
-            image='/images/CoGo-report.png'
-          /> */}
         </Flex>
 
         <Flex
           mt={4}
-          sx={{ display: ['initial', 'none'], flexDirection: 'column' }}
+          sx={{
+            display: ['flex', 'none'],
+            flexDirection: 'column',
+            alignItems: ['center', 'flex-start']
+          }}
         >
           <Box>
             <Button variant='primary'>DOWNLOAD REPORT</Button>
@@ -176,10 +186,36 @@ export default function IndustryReports ({
             </Text>
           </Flex>
           <Flex mt={3} sx={{ flexWrap: 'wrap' }}>
-            {industries.map(i => (
-              <Flex pr={3} py={2} sx={{ width: 160, alignItems: 'center' }}>
-                <Image mr={2} src={i.icon} sx={{ width: 4, minWidth: 4 }} />
-                <Text>{i.name}</Text>
+            {industries.map((industry, i) => (
+              <Flex
+                key={i}
+                pr={3}
+                py={2}
+                onClick={getHandleSelectIndustry({
+                  industry: industry.name,
+                  selectedIndustries,
+                  setSelectedIndustries
+                })}
+                sx={{
+                  width: 160,
+                  alignItems: 'center',
+                  cursor: 'pointer',
+                  opacity: selectedIndustries.includes(industry.name)
+                    ? '1'
+                    : '0.4',
+                  '&:hover': {
+                    opacity: selectedIndustries.includes(industry.name)
+                      ? '1'
+                      : '0.7'
+                  }
+                }}
+              >
+                <Image
+                  mr={2}
+                  src={industry.icon}
+                  sx={{ width: 4, minWidth: 4 }}
+                />
+                <Text>{industry.name}</Text>
               </Flex>
             ))}
           </Flex>

@@ -50,12 +50,12 @@ export default function CaseStudies ({
             )
             .map((cs, i) => {
               const banner =
-                (cs['Prod Banner Image'] && cs['Prod Banner Image'][0].url) ||
+                (cs['Banner'] && cs['Banner'][0].url) ||
                 '/images/case-study-banner-mevo.png'
               const logo =
-                (cs['Logo Image'] && cs['Logo Image'][0].url) ||
+                (cs['Logo'] && cs['Logo'][0].url) ||
                 '/images/case-study-logo-mevo.png'
-              const bio = cs['Prod Bio'] || 'insert bio here'
+              const bio = cs['Bio'] || 'insert bio here'
               const cta = cs['Call To Action Text'] || 'DOWNLOAD FULL'
               const industry = cs['Industry'] || 'industry'
               const theme = cs['Theme'] || 'theme'
@@ -81,7 +81,7 @@ export default function CaseStudies ({
                         color: 'white'
                       }}
                     >
-                      {cs['Prod Heading']}
+                      {cs['Heading']}
                     </Heading>
                     <Image src={banner} />
                   </Flex>
