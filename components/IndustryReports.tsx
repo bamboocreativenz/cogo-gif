@@ -1,5 +1,16 @@
 /** @jsx jsx */
-import { jsx, Flex, Box, Heading, Text, Button, Image, Input } from 'theme-ui'
+import {
+  useThemeUI,
+  jsx,
+  Flex,
+  Box,
+  Heading,
+  Text,
+  Button,
+  Image,
+  Input
+} from 'theme-ui'
+import NextImage from 'next/image'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
@@ -52,6 +63,7 @@ export default function IndustryReports ({
   selectedTheme,
   setSelectedTheme
 }: IndustryReportsProps) {
+  const { theme } = useThemeUI()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedIndustries, setSelectedIndustries] = useState([])
   const [downloading, setDownloading] = useState(false)
@@ -150,7 +162,15 @@ export default function IndustryReports ({
                   minWidth: [200, 7]
                 }}
               >
-                <Image src={mi.Image[0].url} />
+                <NextImage
+                  src={mi.Image[0].url}
+                  alt='Market Insight'
+                  // @ts-expect-error
+                  width={theme.sizes[7]}
+                  // @ts-expect-error
+                  height={theme.sizes[7]}
+                />
+                {/* <Image src={mi.Image[0].url} /> */}
               </Box>
             ))}
         </Flex>

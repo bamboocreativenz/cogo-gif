@@ -1,5 +1,16 @@
 /** @jsx jsx */
-import { jsx, Flex, Box, Heading, Text, Image, Button, Input } from 'theme-ui'
+import {
+  useThemeUI,
+  jsx,
+  Flex,
+  Box,
+  Heading,
+  Text,
+  Image,
+  Button,
+  Input
+} from 'theme-ui'
+import NextImage from 'next/image'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
@@ -29,6 +40,7 @@ export default function CaseStudies ({
   selectedIndustry,
   selectedTheme
 }: CaseStudiesProps) {
+  const { theme } = useThemeUI()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalCaseStudy, setModalCaseStudy] = useState(null)
   const [downloading, setDownloading] = useState(false)
@@ -87,7 +99,7 @@ export default function CaseStudies ({
               const bio = cs['Bio'] || 'insert bio here'
               const cta = cs['Call To Action Text'] || 'DOWNLOAD FULL'
               const industry = cs['Industry'] || 'industry'
-              const theme = cs['Theme'] || 'theme'
+              const gifTheme = cs['Theme'] || 'theme'
 
               return (
                 <Flex
@@ -112,7 +124,15 @@ export default function CaseStudies ({
                     >
                       {cs['Heading']}
                     </Heading>
-                    <Image src={banner} />
+                    <NextImage
+                      src={banner}
+                      alt='Case Study hero image'
+                      // @ts-expect-error
+                      width={theme.sizes[9]}
+                      // @ts-expect-error
+                      height={theme.sizes[7]}
+                    />
+                    {/* <Image src={banner} /> */}
                   </Flex>
 
                   <Flex
@@ -149,7 +169,7 @@ export default function CaseStudies ({
                       </Button>
                       <Flex sx={{ alignItems: 'center' }}>
                         <Box mr={3}>
-                          <ThemePill theme={theme} size='small' />
+                          <ThemePill theme={gifTheme} size='small' />
                         </Box>
                         <Box>{industry}</Box>
                         <Image
