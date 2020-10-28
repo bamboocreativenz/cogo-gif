@@ -39,14 +39,15 @@ export default (req: NowRequest, res: NowResponse) => {
           {
             fields: {
               Email: email,
-              'Case Study': caseStudy
+              'Case Study': [caseStudy]
             }
           }
         ]
       })
     })
-    .then(() => {
+    .then(records => {
       res.statusCode = 200
+      res.send('OK')
     })
     .catch(err => {
       if (err.message === ERROR_BAD_REQUEST) {

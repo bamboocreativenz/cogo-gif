@@ -31,7 +31,7 @@ export default async function getPageStaticProps ({
       tableName: 'Case Studies',
       viewName: 'Grid View'
     })
-    caseStudies = caseStudiesRecords.map(c => c.fields)
+    caseStudies = caseStudiesRecords.map(c => ({ id: c.id, ...c.fields }))
     const accreditorsRecords = await airtable.listRecords({
       tableName: 'Accreditors',
       viewName: 'Grid View'

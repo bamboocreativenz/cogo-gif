@@ -233,7 +233,7 @@ export default function CaseStudies ({
               disabled={downloading}
               onClick={handleSubmit(data =>
                 downloadPDF({
-                  data: { caseStudy: modalCaseStudy.Name, ...data },
+                  data: { caseStudy: modalCaseStudy.id, ...data },
                   setDownloading,
                   setDownloadSuccess
                 })
