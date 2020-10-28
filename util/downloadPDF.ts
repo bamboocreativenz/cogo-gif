@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction } from 'react'
 
+import { EMAIL_STORAGE_KEY } from '../constants'
+
 interface DownloadPDF {
   pdfType: 'Case Study' | 'Industry Report'
   selected: Array<any> // TODO: type better
@@ -17,7 +19,10 @@ export default function downloadPDF ({
 }: DownloadPDF) {
   setDownloading(true)
   setDownloadSuccess(null)
-  console.log({ selected })
+
+  // store email in localstorage for future downloads
+  window.localStorage.setItem(EMAIL_STORAGE_KEY, email)
+
   return window
     .fetch('/api/download-pdf', {
       method: 'POST',

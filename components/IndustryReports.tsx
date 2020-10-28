@@ -14,6 +14,8 @@ import ThemePill from './ThemePill'
 
 import downloadPDF from '../util/downloadPDF'
 
+import { EMAIL_STORAGE_KEY } from '../constants'
+
 const industries = [
   { name: 'Food & Drink', icon: '/icons/food-and-drink.png' },
   { name: 'Health & Beauty', icon: '/icons/health-and-beauty.png' },
@@ -75,7 +77,7 @@ export default function IndustryReports ({
   const [selectedIndustries, setSelectedIndustries] = useState([])
   const [downloading, setDownloading] = useState(false)
   const [downloadSuccess, setDownloadSuccess] = useState(null)
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, setValue } = useForm({
     // @ts-expect-error
     resolver: values => {
       try {
@@ -190,6 +192,12 @@ export default function IndustryReports ({
 
       <Modal
         isOpen={isModalOpen}
+        onAfterOpen={() =>
+          setValue(
+            'email',
+            window.localStorage.getItem(EMAIL_STORAGE_KEY) || ''
+          )
+        }
         onRequestClose={() => setIsModalOpen(false)}
         sx={{
           position: 'absolute',

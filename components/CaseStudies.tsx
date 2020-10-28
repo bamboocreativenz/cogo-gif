@@ -12,6 +12,8 @@ import ThemePill from './ThemePill'
 
 import downloadPDF from '../util/downloadPDF'
 
+import { EMAIL_STORAGE_KEY } from '../constants'
+
 interface CaseStudiesProps {
   caseStudies: any // TODO: type better
   copy: any // TODO: type better
@@ -31,7 +33,7 @@ export default function CaseStudies ({
   const [modalCaseStudy, setModalCaseStudy] = useState(null)
   const [downloading, setDownloading] = useState(false)
   const [downloadSuccess, setDownloadSuccess] = useState(null)
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, setValue } = useForm({
     // @ts-expect-error
     resolver: values => {
       try {
@@ -166,6 +168,12 @@ export default function CaseStudies ({
 
       <Modal
         isOpen={isModalOpen}
+        onAfterOpen={() =>
+          setValue(
+            'email',
+            window.localStorage.getItem(EMAIL_STORAGE_KEY) || ''
+          )
+        }
         onRequestClose={() => {
           setIsModalOpen(false)
           setModalCaseStudy(null)

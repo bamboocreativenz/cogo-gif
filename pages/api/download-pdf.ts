@@ -10,7 +10,7 @@ import { Airtable } from '@bamboocreativenz/pip-airtable'
 
 import { ArrayStringZ, EmailZ } from '../../types/util'
 
-const ERROR_BAD_REQUEST = 'Bad request'
+import { ERROR_BAD_REQUEST } from '../../constants'
 
 const airtable = new Airtable(
   process.env.AIRTABLE_API_KEY,
