@@ -11,6 +11,7 @@ import getPageStaticProps from '../util/getPageStaticProps'
 
 interface ClimateProps {
   marketInsights: any // TODO: type better
+  industryReports: any // TODO: type better
   caseStudies: any // TODO: type better
   accreditors: any // TODO: type better
   page: any // TODO: type better
@@ -18,6 +19,7 @@ interface ClimateProps {
 
 export default function Climate ({
   marketInsights,
+  industryReports,
   caseStudies,
   accreditors,
   page
@@ -94,6 +96,7 @@ export default function Climate ({
         selectedTheme={selectedTheme}
         setSelectedTheme={setSelectedTheme}
         marketInsights={marketInsights}
+        industryReports={industryReports}
         caseStudies={caseStudies}
         accreditors={accreditors}
       />

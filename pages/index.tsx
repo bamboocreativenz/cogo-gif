@@ -11,6 +11,7 @@ import ReportsCaseStudiesAccreditors from '../components/ReportsCaseStudiesAccre
 
 interface HomeProps {
   marketInsights: any // TODO: type better
+  industryReports: any // TODO: type better
   caseStudies: any // TODO: type better
   accreditors: any // TODO: type better
   page: any // TODO: type better
@@ -18,6 +19,7 @@ interface HomeProps {
 
 export default function Home ({
   marketInsights,
+  industryReports,
   caseStudies,
   accreditors,
   page
@@ -78,6 +80,7 @@ export default function Home ({
         selectedTheme={selectedTheme}
         setSelectedTheme={setSelectedTheme}
         marketInsights={marketInsights}
+        industryReports={industryReports}
         caseStudies={caseStudies}
         accreditors={accreditors}
       />

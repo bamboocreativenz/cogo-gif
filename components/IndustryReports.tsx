@@ -1,14 +1,18 @@
 /** @jsx jsx */
 import { jsx, Flex, Box, Heading, Text, Button, Image, Input } from 'theme-ui'
 import { Dispatch, SetStateAction, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
 import without from 'lodash/without'
 
+import { EmailZ } from '../types/util'
+
 import FullWidthCentered from './FullWidthCentered'
 import OneThenTwoColumns from './OneThenTwoColumns'
-import ReportCircle from './ReportCircle'
 import Dropdown from './Dropdown'
 import ThemePill from './ThemePill'
+
+import downloadPDF from '../util/downloadPDF'
 
 const industries = [
   { name: 'Food & Drink', icon: '/icons/food-and-drink.png' },
@@ -50,6 +54,7 @@ interface IndustryReportsProps {
   copy: any // TODO: type better
   download: any // TODO: type better
   marketInsights: any // TODO: type better
+  industryReports: any // TODO: type better
   selectedIndustry: string
   setSelectedIndustry: Dispatch<SetStateAction<string>>
   selectedTheme: string
@@ -60,6 +65,7 @@ export default function IndustryReports ({
   copy,
   download,
   marketInsights,
+  industryReports,
   selectedIndustry,
   setSelectedIndustry,
   selectedTheme,
@@ -67,6 +73,27 @@ export default function IndustryReports ({
 }: IndustryReportsProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedIndustries, setSelectedIndustries] = useState([])
+  const [downloading, setDownloading] = useState(false)
+  const [downloadSuccess, setDownloadSuccess] = useState(null)
+  const { register, handleSubmit, errors } = useForm({
+    // @ts-expect-error
+    resolver: values => {
+      try {
+        EmailZ.parse(values.email)
+        return {
+          values,
+          errors: {}
+        }
+      } catch (err) {
+        return {
+          values: {},
+          errors: {
+            email: err.errors[0].message
+          }
+        }
+      }
+    }
+  })
 
   return (
     <FullWidthCentered bg='greyBackground'>
@@ -173,7 +200,7 @@ export default function IndustryReports ({
           background: 'white',
           borderStyle: 'solid',
           borderWidth: '1px',
-          borderColor: 'lightGrey;'
+          borderColor: 'lightGrey'
         }}
       >
         <Flex p={5} sx={{ flexDirection: 'column' }}>
@@ -219,9 +246,41 @@ export default function IndustryReports ({
               </Flex>
             ))}
           </Flex>
-          <Flex mt={3} sx={{ alignItems: 'center' }}>
-            <Input placeholder='Email' />
-            <Button ml={2} variant='primary' sx={{ minWidth: 160, height: 40 }}>
+          <Flex as='form' mt={3} sx={{ alignItems: 'flex-start' }}>
+            <Flex sx={{ flexDirection: 'column' }}>
+              <Input name='email' placeholder='Email' ref={register} />
+              {errors.email && (
+                <Text mt={1} sx={{ color: 'tomato' }}>
+                  {errors.email}
+                </Text>
+              )}
+              {downloadSuccess && (
+                <Text mt={1}>Your PDF should begin to download now.</Text>
+              )}
+              {downloadSuccess === false && (
+                <Text mt={1} sx={{ color: 'tomato' }}>
+                  Something went wrong - if this persists, contact the GIF team.
+                </Text>
+              )}
+            </Flex>
+            <Button
+              ml={2}
+              variant={downloading ? 'disabled' : 'primary'}
+              disabled={downloading}
+              onClick={handleSubmit(data =>
+                downloadPDF({
+                  pdfType: 'Industry Report',
+                  selected: selectedIndustries.map(si => ({
+                    id: industryReports[si].id,
+                    Link: industryReports[si].Link
+                  })),
+                  email: data.email,
+                  setDownloading,
+                  setDownloadSuccess
+                })
+              )}
+              sx={{ minWidth: 160, height: 38 }}
+            >
               DOWNLOAD PDF
             </Button>
           </Flex>

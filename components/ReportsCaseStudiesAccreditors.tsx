@@ -14,6 +14,7 @@ export default function ReportsCaseStudiesAccreditors ({
   selectedTheme,
   setSelectedTheme,
   marketInsights,
+  industryReports,
   caseStudies,
   accreditors
 }) {
@@ -23,6 +24,7 @@ export default function ReportsCaseStudiesAccreditors ({
         copy={page['Industry Reports']}
         download={page['Download Industry Report']}
         marketInsights={marketInsights}
+        industryReports={industryReports}
         selectedIndustry={selectedIndustry}
         setSelectedIndustry={setSelectedIndustry}
         selectedTheme={selectedTheme}

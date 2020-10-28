@@ -10,36 +10,7 @@ import FullWidthCentered from './FullWidthCentered'
 import OneThenTwoColumns from './OneThenTwoColumns'
 import ThemePill from './ThemePill'
 
-function downloadPDF ({
-  caseStudy,
-  email,
-  setDownloading,
-  setDownloadSuccess
-}) {
-  setDownloading(true)
-  setDownloadSuccess(null)
-  return window
-    .fetch('/api/download-case-study', {
-      method: 'POST',
-      body: JSON.stringify({ caseStudyId: caseStudy.id, email }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(res => {
-      setDownloading(false)
-      if (!res.ok) {
-        setDownloadSuccess(false)
-      } else {
-        setDownloadSuccess(true)
-        window.open(caseStudy.Link)
-      }
-    })
-    .catch(err => {
-      setDownloading(false)
-      setDownloadSuccess(false)
-    })
-}
+import downloadPDF from '../util/downloadPDF'
 
 interface CaseStudiesProps {
   caseStudies: any // TODO: type better
@@ -243,7 +214,8 @@ export default function CaseStudies ({
               disabled={downloading}
               onClick={handleSubmit(data =>
                 downloadPDF({
-                  caseStudy: modalCaseStudy,
+                  pdfType: 'Case Study',
+                  selected: [modalCaseStudy],
                   email: data.email,
                   setDownloading,
                   setDownloadSuccess

@@ -11,6 +11,7 @@ import getPageStaticProps from '../util/getPageStaticProps'
 
 interface LandAndWaterProps {
   marketInsights: any // TODO: type better
+  industryReports: any // TODO: type better
   caseStudies: any // TODO: type better
   accreditors: any // TODO: type better
   page: any // TODO: type better
@@ -18,6 +19,7 @@ interface LandAndWaterProps {
 
 export default function LandAndWater ({
   marketInsights,
+  industryReports,
   caseStudies,
   accreditors,
   page
@@ -80,6 +82,7 @@ export default function LandAndWater ({
         selectedTheme={selectedTheme}
         setSelectedTheme={setSelectedTheme}
         marketInsights={marketInsights}
+        industryReports={industryReports}
         caseStudies={caseStudies}
         accreditors={accreditors}
       />

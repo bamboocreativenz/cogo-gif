@@ -1,6 +1,6 @@
 /*
 
-Route for handling case study download email capture.
+Route for handling pdf download email capture.
 Necessary to avoid exposing the Airtable API key to the client.
 
 */
@@ -8,7 +8,7 @@ Necessary to avoid exposing the Airtable API key to the client.
 import { NowRequest, NowResponse } from '@vercel/node'
 import { Airtable } from '@bamboocreativenz/pip-airtable'
 
-import { StringZ, EmailZ } from '../../types/util'
+import { ArrayStringZ, EmailZ } from '../../types/util'
 
 const ERROR_BAD_REQUEST = 'Bad request'
 
@@ -18,12 +18,13 @@ const airtable = new Airtable(
 )
 
 export default (req: NowRequest, res: NowResponse) => {
-  const { email, caseStudyId } = req.body
+  const { pdfType, email, ids } = req.body
+  console.log(req.body)
 
   return new Promise((resolve, reject) => {
     try {
       EmailZ.parse(email)
-      StringZ.parse(caseStudyId)
+      ArrayStringZ.parse(ids)
       resolve()
     } catch (err) {
       // TODO: capture errors somewhere?
@@ -34,12 +35,12 @@ export default (req: NowRequest, res: NowResponse) => {
   })
     .then(() => {
       return airtable.createRecords({
-        tableName: 'Case Study Downloads',
+        tableName: `${pdfType} Downloads`,
         records: [
           {
             fields: {
               Email: email,
-              'Case Study': [caseStudyId]
+              [pdfType]: ids
             }
           }
         ]

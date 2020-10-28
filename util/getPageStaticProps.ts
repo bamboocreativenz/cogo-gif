@@ -18,6 +18,7 @@ export default async function getPageStaticProps ({
   )
 
   let marketInsights = null
+  let industryReports = null
   let caseStudies = null
   let accreditors = null
 
@@ -26,7 +27,27 @@ export default async function getPageStaticProps ({
       tableName: 'Market Insights',
       viewName: 'Grid View'
     })
-    marketInsights = marketInsightsRecords.map(c => c.fields)
+    marketInsights = marketInsightsRecords.map(c => ({ id: c.id, ...c.fields }))
+    const industryReportsRecords = await airtable.listRecords({
+      tableName: 'Industry Reports',
+      viewName: 'Grid View'
+    })
+    // N.B. industryReports are only used for downloading the PDF links, so are returned keyed by industry
+    // and are reduced to choose only the most recent report for that industry
+    industryReports = industryReportsRecords
+      .map(c => ({ id: c.id, ...c.fields }))
+      .reduce(
+        (acc, curr) => ({
+          ...acc,
+          [curr.Industry]: acc[curr.Industry]
+            ? curr.Date > acc[curr.Industry].Date
+              ? curr
+              : acc[curr.Industry]
+            : curr
+        }),
+        {}
+      )
+    console.log({ industryReports })
     const caseStudiesRecords = await airtable.listRecords({
       tableName: 'Case Studies',
       viewName: 'Grid View'
@@ -36,7 +57,7 @@ export default async function getPageStaticProps ({
       tableName: 'Accreditors',
       viewName: 'Grid View'
     })
-    accreditors = accreditorsRecords.map(c => c.fields)
+    accreditors = accreditorsRecords.map(c => ({ id: c.id, ...c.fields }))
   }
 
   const pageRecords = await airtable.listRecords({
@@ -51,6 +72,7 @@ export default async function getPageStaticProps ({
   return {
     props: {
       marketInsights,
+      industryReports,
       caseStudies,
       accreditors,
       page
