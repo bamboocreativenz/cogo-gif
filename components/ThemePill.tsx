@@ -1,14 +1,5 @@
 /** @jsx jsx */
-import {
-  jsx,
-  Flex,
-  Box,
-  Heading,
-  Text,
-  Image,
-  Link as TUILink,
-  Theme
-} from 'theme-ui'
+import { jsx, Flex, Box, Text } from 'theme-ui'
 
 const themeMap = {
   climate: 'climate',

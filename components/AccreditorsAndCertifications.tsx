@@ -150,7 +150,11 @@ export default function AccreditorsAndCertifications ({
                           </Flex>
                           <Box>
                             <Link href={a.Site} passHref>
-                              <TUILink variant='site' target='_blank'>
+                              <TUILink
+                                variant='site'
+                                target='_blank'
+                                rel='noopener'
+                              >
                                 VISIT SITE
                               </TUILink>
                             </Link>

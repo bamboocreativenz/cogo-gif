@@ -1,15 +1,8 @@
 /** @jsx jsx */
-import { jsx, Flex, Box, Heading, Text, Link as TUILink } from 'theme-ui'
+import { jsx, Flex, Box, Text, Link as TUILink } from 'theme-ui'
 import Link from 'next/link'
 
 import ThemePill from './ThemePill'
-
-const titleColorMap = {
-  CLIMATE: 'climate',
-  WASTE: 'waste',
-  COMMUNITY: 'community',
-  'LAND & WATER': 'landAndWater'
-}
 
 interface ThemeLearnMoreProps {
   title: 'Climate' | 'Waste' | 'Community' | 'Land & Water'
@@ -31,11 +24,6 @@ export default function ThemeLearnMore ({
       <Flex mb={3}>
         <ThemePill theme={title} size='large' />
       </Flex>
-      {/* <Box py={2} px={3} bg={titleColorMap[title]} sx={{ borderRadius: 50 }}>
-        <Heading variant='h1' sx={{ color: 'white' }}>
-          {title}
-        </Heading>
-      </Box> */}
       <Text variant='p2'>{text}</Text>
       <Box mt={3}>
         <Link href={link} passHref>
