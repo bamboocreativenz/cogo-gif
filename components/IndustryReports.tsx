@@ -97,6 +97,8 @@ export default function IndustryReports ({
     }
   })
 
+  console.log({ selectedIndustries })
+
   return (
     <FullWidthCentered bg='greyBackground'>
       <Flex px={[3, 5]} mb={5} mt={4} sx={{ flexDirection: 'column' }}>
@@ -273,8 +275,12 @@ export default function IndustryReports ({
             </Flex>
             <Button
               ml={2}
-              variant={downloading ? 'disabled' : 'primary'}
-              disabled={downloading}
+              variant={
+                downloading || selectedIndustries.length < 1
+                  ? 'disabled'
+                  : 'primary'
+              }
+              disabled={downloading || selectedIndustries.length < 1}
               onClick={handleSubmit(data =>
                 downloadPDF({
                   pdfType: 'Industry Report',
