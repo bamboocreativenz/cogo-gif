@@ -5,11 +5,12 @@ import { useState } from 'react'
 import FullWidthCentered from '../components/FullWidthCentered'
 import Banner from '../components/Banner'
 import ThemeLearnMore from '../components/ThemeLearnMore'
-
-import getPageStaticProps from '../util/getPageStaticProps'
 import ReportsCaseStudiesAccreditors from '../components/ReportsCaseStudiesAccreditors'
 
+import getPageStaticProps from '../util/getPageStaticProps'
+
 interface HomeProps {
+  commonContent: any // TODO: type better
   marketInsights: any // TODO: type better
   industryReports: any // TODO: type better
   caseStudies: any // TODO: type better
@@ -18,12 +19,14 @@ interface HomeProps {
 }
 
 export default function Home ({
+  commonContent,
   marketInsights,
   industryReports,
   caseStudies,
   accreditors,
   page
 }: HomeProps) {
+  console.log({ commonContent })
   const [selectedIndustry, setSelectedIndustry] = useState('')
   const [selectedTheme, setSelectedTheme] = useState('')
 
@@ -74,7 +77,7 @@ export default function Home ({
       </FullWidthCentered>
 
       <ReportsCaseStudiesAccreditors
-        page={page}
+        commonContent={commonContent}
         selectedIndustry={selectedIndustry}
         setSelectedIndustry={setSelectedIndustry}
         selectedTheme={selectedTheme}

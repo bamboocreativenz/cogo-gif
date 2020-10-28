@@ -10,6 +10,7 @@ import ReportsCaseStudiesAccreditors from '../components/ReportsCaseStudiesAccre
 import getPageStaticProps from '../util/getPageStaticProps'
 
 interface WasteProps {
+  commonContent: any // TODO: type better
   marketInsights: any // TODO: type better
   industryReports: any // TODO: type better
   caseStudies: any // TODO: type better
@@ -18,6 +19,7 @@ interface WasteProps {
 }
 
 export default function Waste ({
+  commonContent,
   marketInsights,
   industryReports,
   caseStudies,
@@ -74,7 +76,7 @@ export default function Waste ({
       </FullWidthCentered>
 
       <ReportsCaseStudiesAccreditors
-        page={page}
+        commonContent={commonContent}
         selectedIndustry={selectedIndustry}
         setSelectedIndustry={setSelectedIndustry}
         selectedTheme={selectedTheme}

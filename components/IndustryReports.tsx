@@ -73,6 +73,7 @@ export default function IndustryReports ({
   selectedTheme,
   setSelectedTheme
 }: IndustryReportsProps) {
+  console.log({ download })
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedIndustries, setSelectedIndustries] = useState([])
   const [downloading, setDownloading] = useState(false)
@@ -96,8 +97,6 @@ export default function IndustryReports ({
       }
     }
   })
-
-  console.log({ selectedIndustries })
 
   return (
     <FullWidthCentered bg='greyBackground'>

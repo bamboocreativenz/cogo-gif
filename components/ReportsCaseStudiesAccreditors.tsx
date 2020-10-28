@@ -8,7 +8,7 @@ import Latest from './Latest'
 import Footer from './Footer'
 
 export default function ReportsCaseStudiesAccreditors ({
-  page,
+  commonContent,
   selectedIndustry,
   setSelectedIndustry,
   selectedTheme,
@@ -21,8 +21,8 @@ export default function ReportsCaseStudiesAccreditors ({
   return (
     <>
       <IndustryReports
-        copy={page['Industry Reports']}
-        download={page['Download Industry Report']}
+        copy={commonContent['Industry Reports']}
+        download={commonContent['Download Industry Report']}
         marketInsights={marketInsights}
         industryReports={industryReports}
         selectedIndustry={selectedIndustry}
@@ -33,20 +33,20 @@ export default function ReportsCaseStudiesAccreditors ({
 
       <CaseStudies
         caseStudies={caseStudies}
-        copy={page['Case Studies']}
-        download={page['Download Case Study']}
+        copy={commonContent['Case Studies']}
+        download={commonContent['Download Case Study']}
         selectedIndustry={selectedIndustry}
         selectedTheme={selectedTheme}
       />
 
       <AccreditorsAndCertifications
         accreditors={accreditors}
-        copy={page.Accreditors}
+        copy={commonContent.Accreditors}
         selectedIndustry={selectedIndustry}
         selectedTheme={selectedTheme}
       />
 
-      <Latest copy={page.Latest} />
+      <Latest copy={commonContent.Latest} />
 
       <Footer />
     </>

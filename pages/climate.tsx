@@ -10,6 +10,7 @@ import ReportsCaseStudiesAccreditors from '../components/ReportsCaseStudiesAccre
 import getPageStaticProps from '../util/getPageStaticProps'
 
 interface ClimateProps {
+  commonContent: any // TODO: type better
   marketInsights: any // TODO: type better
   industryReports: any // TODO: type better
   caseStudies: any // TODO: type better
@@ -18,6 +19,7 @@ interface ClimateProps {
 }
 
 export default function Climate ({
+  commonContent,
   marketInsights,
   industryReports,
   caseStudies,
@@ -90,7 +92,7 @@ export default function Climate ({
       </FullWidthCentered>
 
       <ReportsCaseStudiesAccreditors
-        page={page}
+        commonContent={commonContent}
         selectedIndustry={selectedIndustry}
         setSelectedIndustry={setSelectedIndustry}
         selectedTheme={selectedTheme}

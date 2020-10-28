@@ -17,12 +17,21 @@ export default async function getPageStaticProps ({
     process.env.AIRTABLE_BASE
   )
 
+  let commonContent = null
   let marketInsights = null
   let industryReports = null
   let caseStudies = null
   let accreditors = null
 
   if (shouldFetchReportsCaseStudiesAccreditors) {
+    const commonContentRecords = await airtable.listRecords({
+      tableName: 'Common Page Content',
+      viewName: 'Grid View'
+    })
+    commonContent = keyBy(
+      commonContentRecords.map(c => c.fields),
+      'Name'
+    )
     const marketInsightsRecords = await airtable.listRecords({
       tableName: 'Market Insights',
       viewName: 'Grid View'
@@ -47,7 +56,6 @@ export default async function getPageStaticProps ({
         }),
         {}
       )
-    console.log({ industryReports })
     const caseStudiesRecords = await airtable.listRecords({
       tableName: 'Case Studies',
       viewName: 'Grid View'
@@ -71,6 +79,7 @@ export default async function getPageStaticProps ({
 
   return {
     props: {
+      commonContent,
       marketInsights,
       industryReports,
       caseStudies,

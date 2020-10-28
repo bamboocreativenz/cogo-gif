@@ -10,6 +10,7 @@ import ReportsCaseStudiesAccreditors from '../components/ReportsCaseStudiesAccre
 import getPageStaticProps from '../util/getPageStaticProps'
 
 interface LandAndWaterProps {
+  commonContent: any // TODO: type better
   marketInsights: any // TODO: type better
   industryReports: any // TODO: type better
   caseStudies: any // TODO: type better
@@ -18,6 +19,7 @@ interface LandAndWaterProps {
 }
 
 export default function LandAndWater ({
+  commonContent,
   marketInsights,
   industryReports,
   caseStudies,
@@ -76,7 +78,7 @@ export default function LandAndWater ({
       </FullWidthCentered>
 
       <ReportsCaseStudiesAccreditors
-        page={page}
+        commonContent={commonContent}
         selectedIndustry={selectedIndustry}
         setSelectedIndustry={setSelectedIndustry}
         selectedTheme={selectedTheme}

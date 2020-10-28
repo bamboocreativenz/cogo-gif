@@ -10,6 +10,7 @@ import ReportsCaseStudiesAccreditors from '../components/ReportsCaseStudiesAccre
 import getPageStaticProps from '../util/getPageStaticProps'
 
 interface CommunityProps {
+  commonContent: any // TODO: type better
   marketInsights: any // TODO: type better
   industryReports: any // TODO: type better
   caseStudies: any // TODO: type better
@@ -18,6 +19,7 @@ interface CommunityProps {
 }
 
 export default function Community ({
+  commonContent,
   marketInsights,
   industryReports,
   caseStudies,
@@ -74,7 +76,7 @@ export default function Community ({
       </FullWidthCentered>
 
       <ReportsCaseStudiesAccreditors
-        page={page}
+        commonContent={commonContent}
         selectedIndustry={selectedIndustry}
         setSelectedIndustry={setSelectedIndustry}
         selectedTheme={selectedTheme}
