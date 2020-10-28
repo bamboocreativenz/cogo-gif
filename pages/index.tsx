@@ -26,7 +26,6 @@ export default function Home ({
   accreditors,
   page
 }: HomeProps) {
-  console.log({ commonContent })
   const [selectedIndustry, setSelectedIndustry] = useState('')
   const [selectedTheme, setSelectedTheme] = useState('')
 

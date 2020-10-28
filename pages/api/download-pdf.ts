@@ -19,7 +19,6 @@ const airtable = new Airtable(
 
 export default (req: NowRequest, res: NowResponse) => {
   const { pdfType, email, ids } = req.body
-  console.log(req.body)
 
   return new Promise((resolve, reject) => {
     try {

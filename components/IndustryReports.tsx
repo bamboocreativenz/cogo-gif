@@ -73,7 +73,6 @@ export default function IndustryReports ({
   selectedTheme,
   setSelectedTheme
 }: IndustryReportsProps) {
-  console.log({ download })
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedIndustries, setSelectedIndustries] = useState([])
   const [downloading, setDownloading] = useState(false)
