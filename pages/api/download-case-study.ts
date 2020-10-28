@@ -18,12 +18,12 @@ const airtable = new Airtable(
 )
 
 export default (req: NowRequest, res: NowResponse) => {
-  const { email, caseStudy } = req.body
+  const { email, caseStudyId } = req.body
 
   return new Promise((resolve, reject) => {
     try {
       EmailZ.parse(email)
-      StringZ.parse(caseStudy)
+      StringZ.parse(caseStudyId)
       resolve()
     } catch (err) {
       // TODO: capture errors somewhere?
@@ -39,7 +39,7 @@ export default (req: NowRequest, res: NowResponse) => {
           {
             fields: {
               Email: email,
-              'Case Study': [caseStudy]
+              'Case Study': [caseStudyId]
             }
           }
         ]
