@@ -4,6 +4,7 @@ Component that centers a max-width column Flex that will contain children within
 
 */
 
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex } from 'theme-ui'
 

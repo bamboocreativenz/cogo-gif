@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Text, Button, Image } from 'theme-ui'
 import { useSelect } from 'downshift'

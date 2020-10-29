@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Box, Heading, Text, Image } from 'theme-ui'
 import { Airtable } from '@bamboocreativenz/pip-airtable'

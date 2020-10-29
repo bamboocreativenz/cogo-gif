@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Box, Heading, Text, Link as TUILink, Image } from 'theme-ui'
 

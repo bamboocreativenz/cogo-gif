@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Box, Text, Link as TUILink } from 'theme-ui'
 import Link from 'next/link'

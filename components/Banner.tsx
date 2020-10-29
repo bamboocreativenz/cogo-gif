@@ -1,5 +1,7 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex } from 'theme-ui'
+import NextImage from 'next/image'
 
 import FullWidthCentered from './FullWidthCentered'
 import Nav from './Nav'
@@ -18,6 +20,7 @@ export default function Banner ({
   headline,
   subHeadline
 }: BannerProps) {
+  console.log({ backgroundImage })
   return (
     <Flex
       sx={{
