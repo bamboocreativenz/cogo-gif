@@ -1,12 +1,21 @@
 export default [
-  { name: 'Food & Drink', icon: '/icons/food-and-drink.png' },
-  { name: 'Health & Beauty', icon: '/icons/health-and-beauty.png' },
-  { name: 'Transport', icon: '/icons/transport.png' },
-  { name: 'Fashion', icon: '/icons/fashion.png' },
-  { name: 'Baby & Child', icon: '/icons/baby-and-child.png' },
-  { name: 'Utilities', icon: '/icons/utilities.png' },
-  { name: 'Grocery', icon: '/icons/Grocery.png' },
-  { name: 'Activities', icon: '/icons/activities.png' },
-  { name: 'Homeware & Gifts', icon: '/icons/homeware-and-gifts.png' },
-  { name: 'Financial Services', icon: '/icons/financial-services.png' }
+  { name: 'Food & Drink', icon: require('../public/icons/food-and-drink.png') },
+  {
+    name: 'Health & Beauty',
+    icon: require('../public/icons/health-and-beauty.png')
+  },
+  { name: 'Transport', icon: require('../public/icons/transport.png') },
+  { name: 'Fashion', icon: require('../public/icons/fashion.png') },
+  { name: 'Baby & Child', icon: require('../public/icons/baby-and-child.png') },
+  { name: 'Utilities', icon: require('../public/icons/utilities.png') },
+  { name: 'Grocery', icon: require('../public/icons/Grocery.png') },
+  { name: 'Activities', icon: require('../public/icons/activities.png') },
+  {
+    name: 'Homeware & Gifts',
+    icon: require('../public/icons/homeware-and-gifts.png')
+  },
+  {
+    name: 'Financial Services',
+    icon: require('../public/icons/financial-services.png')
+  }
 ]
