@@ -2,6 +2,7 @@
 /** @jsx jsx */
 import { jsx, Flex, Heading, Text, Image } from 'theme-ui'
 import { useState } from 'react'
+import NextImage from 'next/image'
 
 import Banner from '../components/Banner'
 import FullWidthCentered from '../components/FullWidthCentered'
@@ -85,7 +86,12 @@ export default function Climate ({
                   sx={{ whiteSpace: 'pre-wrap' }}
                   dangerouslySetInnerHTML={{ __html: page.Model.Content }}
                 />
-                <Image src={page.Model.Image[0].url} />
+                <NextImage
+                  src={page.Model.Image[0].url}
+                  alt='Climate Model'
+                  width={674}
+                  height={380}
+                />
               </Flex>
             }
           />

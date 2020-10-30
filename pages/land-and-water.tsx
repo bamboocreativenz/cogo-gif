@@ -1,7 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex, Heading, Text, Image } from 'theme-ui'
+import { jsx, Flex, Heading, Text } from 'theme-ui'
 import { useState } from 'react'
+import NextImage from 'next/image'
 
 import Banner from '../components/Banner'
 import FullWidthCentered from '../components/FullWidthCentered'
@@ -75,7 +76,12 @@ export default function LandAndWater ({
             }
           />
         </Flex>
-        <Image src={page.Why.Image[0].url} />
+        <NextImage
+          src={page.Why.Image[0].url}
+          alt='Page Why'
+          width={1152}
+          height={379}
+        />
       </FullWidthCentered>
 
       <ReportsCaseStudiesAccreditors

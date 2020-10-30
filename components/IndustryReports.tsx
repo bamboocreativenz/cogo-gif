@@ -171,7 +171,6 @@ export default function IndustryReports ({
                   // @ts-expect-error
                   height={theme.sizes[7]}
                 />
-                {/* <Image src={mi.Image[0].url} /> */}
               </Box>
             ))}
         </Flex>

@@ -1,4 +1,3 @@
-/** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Box, Heading, Text, Image, Link as TUILink } from 'theme-ui'
 import Link from 'next/link'
@@ -70,6 +69,7 @@ export default function AccreditorsAndCertifications ({
                 >
                   <Flex sx={{ justifyContent: 'space-between' }}>
                     <ThemePill theme={a.Theme} size='small' />
+                    {/* N.B. can't have this as a NextImage, as aspect ratio isn't known in advance */}
                     <Image
                       src={a.Logo[0].url}
                       ml={3}

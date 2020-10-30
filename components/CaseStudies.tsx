@@ -128,12 +128,9 @@ export default function CaseStudies ({
                     <NextImage
                       src={banner}
                       alt='Case Study hero image'
-                      // @ts-expect-error
-                      width={theme.sizes[9]}
-                      // @ts-expect-error
-                      height={theme.sizes[7]}
+                      width={500}
+                      height={200}
                     />
-                    {/* <Image src={banner} /> */}
                   </Flex>
 
                   <Flex
@@ -146,11 +143,14 @@ export default function CaseStudies ({
                   >
                     <Flex sx={{ justifyContent: 'space-between' }}>
                       <Text variant='p3'>{bio}</Text>
-                      <Image
-                        src={logo}
-                        ml={3}
-                        sx={{ display: ['none', 'initial'], maxWidth: 6 }}
-                      />
+                      <Box sx={{ marginLeft: 3, display: ['none', 'initial'] }}>
+                        <NextImage
+                          src={logo}
+                          alt='Case Study logo'
+                          width={90}
+                          height={90}
+                        />
+                      </Box>
                     </Flex>
                     <Flex
                       sx={{
@@ -173,11 +173,16 @@ export default function CaseStudies ({
                           <ThemePill theme={gifTheme} size='small' />
                         </Box>
                         <Box>{industry}</Box>
-                        <Image
-                          src={logo}
-                          ml={3}
-                          sx={{ display: ['initial', 'none'], maxWidth: 5 }}
-                        />
+                        <Box
+                          sx={{ marginLeft: 3, display: ['initial', 'none'] }}
+                        >
+                          <NextImage
+                            src={logo}
+                            alt='Case Study logo'
+                            width={90}
+                            height={90}
+                          />
+                        </Box>
                       </Flex>
                     </Flex>
                   </Flex>

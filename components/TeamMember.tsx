@@ -1,6 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Text, Image } from 'theme-ui'
+import NextImage from 'next/image'
 
 import OneThenTwoColumns from './OneThenTwoColumns'
 
@@ -14,7 +15,12 @@ export default function TeamMember ({ copy }: TeamMemberProps) {
       mt={[4, 5]}
       firstColumnContent={
         <Flex mb={[2, 0]} sx={{ justifyContent: 'flex-end' }}>
-          <Image src={copy.Image[0].url} sx={{ maxHeight: 200 }} />
+          <NextImage
+            src={copy.Image[0].url}
+            alt='GIF team member'
+            width={200}
+            height={200}
+          />
         </Flex>
       }
       remainingContent={
