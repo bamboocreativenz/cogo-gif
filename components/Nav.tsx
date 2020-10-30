@@ -4,6 +4,8 @@ import { jsx, Flex, Image, NavLink } from 'theme-ui'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+const logo = require('../public/images/logo.png')
+
 import FullWidthCentered from './FullWidthCentered'
 
 export default function Nav () {
@@ -13,9 +15,9 @@ export default function Nav () {
     <FullWidthCentered bg='none'>
       <Flex px={[3, 5]} py={[3, 4]} sx={{ justifyContent: 'space-between' }}>
         <Link href='/' passHref={true}>
-          <NavLink pr={3}>
+          <NavLink pr={3} sx={{ '&:hover': { opacity: 1 } }}>
             <Flex sx={{ alignItems: 'center' }}>
-              <Image src='/images/logo.png' mr={3} sx={{ height: [4, 5] }} />
+              <Image src={logo} mr={3} sx={{ height: [4, 5] }} />
             </Flex>
           </NavLink>
         </Link>
