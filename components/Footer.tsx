@@ -5,9 +5,21 @@ import { jsx, Flex, Box, Text, Image, Link as TUILink } from 'theme-ui'
 
 import FullWidthCentered from './FullWidthCentered'
 
-interface FooterProps {}
+interface FooterProps {
+  logoWestpac: any
+  logoWWF: any
+  logoBusinessGovtNZ: any
+  logoSustainableBusinessNetwork: any
+  logoCoGo: any
+}
 
-export default function Footer ({}: FooterProps) {
+export default function Footer ({
+  logoWestpac,
+  logoWWF,
+  logoBusinessGovtNZ,
+  logoSustainableBusinessNetwork,
+  logoCoGo
+}: FooterProps) {
   return (
     <FullWidthCentered bg='text'>
       <Flex
@@ -29,7 +41,7 @@ export default function Footer ({}: FooterProps) {
           <Image
             mr={[0, 4]}
             mb={[4, 0]}
-            src='/images/westpac.png'
+            src={logoWestpac[0].url}
             sx={{
               flex: 1,
               maxHeight: ['none', 50],
@@ -40,7 +52,7 @@ export default function Footer ({}: FooterProps) {
           <Image
             mx={[0, 4]}
             mb={[4, 0]}
-            src='/images/wwf.png'
+            src={logoWWF[0].url}
             sx={{
               flex: 1,
               maxHeight: ['none', 50],
@@ -51,7 +63,7 @@ export default function Footer ({}: FooterProps) {
           <Image
             mx={[0, 4]}
             mb={[4, 0]}
-            src='/images/business-govt-nz.png'
+            src={logoBusinessGovtNZ[0].url}
             sx={{
               flex: 1,
               maxHeight: ['none', 50],
@@ -62,7 +74,7 @@ export default function Footer ({}: FooterProps) {
           <Image
             mx={[0, 4]}
             mb={[4, 0]}
-            src='/images/sustainable-business-network.png'
+            src={logoSustainableBusinessNetwork[0].url}
             sx={{
               flex: 1,
               maxHeight: ['none', 50],
@@ -73,7 +85,7 @@ export default function Footer ({}: FooterProps) {
           <Image
             ml={[0, 4]}
             mb={[4, 0]}
-            src='/images/cogo.png'
+            src={logoCoGo[0].url}
             sx={{
               flex: 1,
               maxHeight: ['none', 50],

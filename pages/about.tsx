@@ -15,9 +15,10 @@ import getPageStaticProps from '../util/getPageStaticProps'
 
 interface AboutProps {
   page: any // TODO: type better
+  commonContent: any // TODO: type better
 }
 
-export default function About ({ page }: AboutProps) {
+export default function About ({ page, commonContent }: AboutProps) {
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       <Banner
@@ -93,7 +94,15 @@ export default function About ({ page }: AboutProps) {
         </Flex>
       </FullWidthCentered>
 
-      <Footer />
+      <Footer
+        logoWestpac={commonContent['Westpac'].Image}
+        logoWWF={commonContent['WWF'].Image}
+        logoBusinessGovtNZ={commonContent['business.govt.nz'].Image}
+        logoSustainableBusinessNetwork={
+          commonContent['Sustainable Business Network'].Image
+        }
+        logoCoGo={commonContent['CoGo'].Image}
+      />
     </Flex>
   )
 }

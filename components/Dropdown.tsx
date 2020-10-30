@@ -3,6 +3,8 @@
 import { jsx, Flex, Text, Button, Image } from 'theme-ui'
 import { useSelect } from 'downshift'
 
+const chevronDown = require('../public/icons/chevron-down.png')
+
 type DropdownItem = {
   name: string
   icon?: string
@@ -53,7 +55,7 @@ export default function Dropdown ({
           sx={{ justifyContent: 'space-between', alignItems: 'center' }}
         >
           {(selectedItem && selectedItem.name) || placeholder}
-          <Image src='/icons/chevron-down.png' sx={{ width: 4 }} />
+          <Image src={chevronDown} sx={{ width: 4 }} />
         </Flex>
       </Button>
       <Flex

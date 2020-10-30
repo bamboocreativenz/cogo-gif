@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, Flex, Box, Heading, Text, Image, Link as TUILink } from 'theme-ui'
+import NextImage from 'next/image'
 import Link from 'next/link'
 
 import FullWidthCentered from './FullWidthCentered'
@@ -101,11 +102,14 @@ export default function AccreditorsAndCertifications ({
                     )}
                     <Flex sx={{ flexDirection: 'row' }}>
                       {staffImage && (
-                        <Image
-                          mt={2}
-                          src={staffImage[0].url}
-                          sx={{ maxWidth: 100 }}
-                        />
+                        <Box mt={2} sx={{ minWidth: 108 }}>
+                          <NextImage
+                            src={staffImage[0].url}
+                            alt='Staff Image'
+                            width={108}
+                            height={146}
+                          />
+                        </Box>
                       )}
                       <Flex
                         ml={staffName ? 3 : 0}

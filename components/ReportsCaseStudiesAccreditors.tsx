@@ -19,6 +19,7 @@ export default function ReportsCaseStudiesAccreditors ({
   caseStudies,
   accreditors
 }) {
+  console.log({ commonContent })
   return (
     <>
       <IndustryReports
@@ -49,7 +50,15 @@ export default function ReportsCaseStudiesAccreditors ({
 
       <Latest copy={commonContent.Latest} />
 
-      <Footer />
+      <Footer
+        logoWestpac={commonContent['Westpac'].Image}
+        logoWWF={commonContent['WWF'].Image}
+        logoBusinessGovtNZ={commonContent['business.govt.nz'].Image}
+        logoSustainableBusinessNetwork={
+          commonContent['Sustainable Business Network'].Image
+        }
+        logoCoGo={commonContent['CoGo'].Image}
+      />
     </>
   )
 }
