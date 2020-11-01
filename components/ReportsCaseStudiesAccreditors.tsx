@@ -19,7 +19,6 @@ export default function ReportsCaseStudiesAccreditors ({
   caseStudies,
   accreditors
 }) {
-  console.log({ commonContent })
   return (
     <>
       <IndustryReports

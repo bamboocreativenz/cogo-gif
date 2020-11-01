@@ -20,7 +20,6 @@ export default function Banner ({
   headline,
   subHeadline
 }: BannerProps) {
-  console.log({ backgroundImage })
   return (
     <Flex
       sx={{
