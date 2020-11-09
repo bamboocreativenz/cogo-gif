@@ -76,12 +76,14 @@ export default function LandAndWater ({
             }
           />
         </Flex>
-        <NextImage
-          src={page.Why.Image[0].url}
-          alt='Page Why'
-          width={1152}
-          height={379}
-        />
+        {page.Why.Image && (
+          <NextImage
+            src={page.Why.Image[0].url}
+            alt='Page Why'
+            width={1152}
+            height={379}
+          />
+        )}
       </FullWidthCentered>
 
       <ReportsCaseStudiesAccreditors
