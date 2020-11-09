@@ -120,7 +120,8 @@ export default function CaseStudies ({
                         position: 'absolute',
                         bottom: 2,
                         left: 3,
-                        color: 'white'
+                        color: 'white',
+                        zIndex: 10
                       }}
                     >
                       {cs['Heading']}
