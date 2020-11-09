@@ -1,5 +1,6 @@
 import { Airtable } from '@bamboocreativenz/pip-airtable'
 import keyBy from 'lodash/keyBy'
+import isEmpty from 'lodash/isEmpty'
 
 interface GetPageStaticProps {
   tableName: string
@@ -27,7 +28,10 @@ export default async function getPageStaticProps ({
       tableName: 'Market Insights',
       viewName: 'Grid View'
     })
-    marketInsights = marketInsightsRecords.map(c => ({ id: c.id, ...c.fields }))
+
+    marketInsights = marketInsightsRecords
+      .filter(mi => !isEmpty(mi.fields))
+      .map(c => ({ id: c.id, ...c.fields }))
     const industryReportsRecords = await airtable.listRecords({
       tableName: 'Industry Reports',
       viewName: 'Grid View'
@@ -35,6 +39,7 @@ export default async function getPageStaticProps ({
     // N.B. industryReports are only used for downloading the PDF links, so are returned keyed by industry
     // and are reduced to choose only the most recent report for that industry
     industryReports = industryReportsRecords
+      .filter(c => !isEmpty(c.fields))
       .map(c => ({ id: c.id, ...c.fields }))
       .reduce(
         (acc, curr) => ({
@@ -51,12 +56,16 @@ export default async function getPageStaticProps ({
       tableName: 'Case Studies',
       viewName: 'Grid View'
     })
-    caseStudies = caseStudiesRecords.map(c => ({ id: c.id, ...c.fields }))
+    caseStudies = caseStudiesRecords
+      .filter(c => !isEmpty(c.fields))
+      .map(c => ({ id: c.id, ...c.fields }))
     const accreditorsRecords = await airtable.listRecords({
       tableName: 'Accreditors',
       viewName: 'Grid View'
     })
-    accreditors = accreditorsRecords.map(c => ({ id: c.id, ...c.fields }))
+    accreditors = accreditorsRecords
+      .filter(c => !isEmpty(c.fields))
+      .map(c => ({ id: c.id, ...c.fields }))
   }
 
   const pageRecords = await airtable.listRecords({
@@ -64,7 +73,7 @@ export default async function getPageStaticProps ({
     viewName: 'Grid View'
   })
   const page = keyBy(
-    pageRecords.map(c => c.fields),
+    pageRecords.filter(c => !isEmpty(c.fields)).map(c => c.fields),
     'Name'
   )
 
@@ -73,7 +82,7 @@ export default async function getPageStaticProps ({
     viewName: 'Grid View'
   })
   const commonContent = keyBy(
-    commonContentRecords.map(c => c.fields),
+    commonContentRecords.filter(c => !isEmpty(c.fields)).map(c => c.fields),
     'Name'
   )
 
