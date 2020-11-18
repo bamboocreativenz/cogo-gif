@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex } from 'theme-ui'
+import { jsx, Flex, Box } from 'theme-ui'
 import NextImage from 'next/image'
 
 import FullWidthCentered from './FullWidthCentered'
@@ -23,23 +23,33 @@ export default function Banner ({
   return (
     <Flex
       sx={{
+        position: 'relative',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        backgroundImage: [
-          `url(${backgroundImage[0].thumbnails.large.url})`,
-          `url(${backgroundImage[0].url})`
-        ],
-        backgroundSize: 'cover',
-        backgroundPosition: backgroundImagePosition,
         height: [360, 8]
       }}
     >
-      <Nav />
-      <FullWidthCentered bg='none'>
-        <Flex py={4} px={[3, 5]}>
-          <Headline headline={headline} subHeadline={subHeadline} />
-        </Flex>
-      </FullWidthCentered>
+      <NextImage
+        src={backgroundImage[0].url}
+        layout='fill'
+        sx={{ objectFit: 'cover', objectPosition: backgroundImagePosition }}
+      />
+      <Flex
+        sx={{
+          position: 'absolute',
+          top: 0,
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          height: '100%'
+        }}
+      >
+        <Nav />
+        <FullWidthCentered bg='none'>
+          <Flex py={4} px={[3, 5]}>
+            <Headline headline={headline} subHeadline={subHeadline} />
+          </Flex>
+        </FullWidthCentered>
+      </Flex>
     </Flex>
   )
 }
