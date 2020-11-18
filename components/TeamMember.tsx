@@ -17,7 +17,7 @@ export default function TeamMember ({ copy }: TeamMemberProps) {
         <Flex mb={[2, 0]} sx={{ justifyContent: 'flex-end' }}>
           <NextImage
             src={copy.Image[0].url}
-            alt='GIF team member'
+            alt={copy.Title}
             width={200}
             height={200}
           />

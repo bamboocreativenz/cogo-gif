@@ -112,7 +112,7 @@ export default function AccreditorsAndCertifications ({
                         >
                           <NextImage
                             src={staffImage[0].url}
-                            alt='Staff Image'
+                            alt={staffName}
                             layout='fill'
                             sx={{ objectFit: 'cover', objectPosition: 'top' }}
                           />

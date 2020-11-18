@@ -122,7 +122,7 @@ export default function CaseStudies ({
                   >
                     <NextImage
                       src={banner}
-                      alt='Case Study hero image'
+                      alt={cs['Heading']}
                       layout='fill'
                       sx={{ objectFit: 'cover', objectPosition: 'center' }}
                     />
@@ -164,7 +164,7 @@ export default function CaseStudies ({
                       <Box sx={{ marginLeft: 3, display: ['none', 'initial'] }}>
                         <NextImage
                           src={logo}
-                          alt='Case Study logo'
+                          alt={cs['Heading']}
                           width={90}
                           height={90}
                         />
@@ -196,7 +196,7 @@ export default function CaseStudies ({
                         >
                           <NextImage
                             src={logo}
-                            alt='Case Study logo'
+                            alt={cs['Heading']}
                             width={90}
                             height={90}
                           />
