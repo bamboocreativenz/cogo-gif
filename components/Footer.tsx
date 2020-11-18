@@ -1,9 +1,36 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import Link from 'next/link'
+import NextImage from 'next/image'
 import { jsx, Flex, Box, Text, Image, Link as TUILink } from 'theme-ui'
 
 import FullWidthCentered from './FullWidthCentered'
+
+interface FooterLogoProps {
+  src: string
+  alt: string
+}
+
+function FooterLogo ({ src, alt }: FooterLogoProps) {
+  return (
+    <Box
+      mr={[0, 4]}
+      mb={[4, 0]}
+      sx={{
+        position: 'relative',
+        height: ['unset', 50],
+        width: [100, '100%']
+      }}
+    >
+      <NextImage
+        src={src}
+        alt={alt}
+        layout='fill'
+        sx={{ objectFit: 'contain', objectPosition: 'center' }}
+      />
+    </Box>
+  )
+}
 
 interface FooterProps {
   logoWestpac: any
@@ -38,61 +65,14 @@ export default function Footer ({
             alignItems: 'center'
           }}
         >
-          <Image
-            mr={[0, 4]}
-            mb={[4, 0]}
-            src={logoWestpac[0].url}
-            sx={{
-              flex: 1,
-              maxHeight: ['none', 50],
-              maxWidth: [100, 'none'],
-              objectFit: 'contain'
-            }}
-          />
-          <Image
-            mx={[0, 4]}
-            mb={[4, 0]}
-            src={logoWWF[0].url}
-            sx={{
-              flex: 1,
-              maxHeight: ['none', 50],
-              maxWidth: [100, 'none'],
-              objectFit: 'contain'
-            }}
-          />
-          <Image
-            mx={[0, 4]}
-            mb={[4, 0]}
-            src={logoBusinessGovtNZ[0].url}
-            sx={{
-              flex: 1,
-              maxHeight: ['none', 50],
-              maxWidth: [100, 'none'],
-              objectFit: 'contain'
-            }}
-          />
-          <Image
-            mx={[0, 4]}
-            mb={[4, 0]}
+          <FooterLogo src={logoWestpac[0].url} alt='Westpac' />
+          <FooterLogo src={logoWWF[0].url} alt='WWF' />
+          <FooterLogo src={logoBusinessGovtNZ[0].url} alt='Business.govt.nz' />
+          <FooterLogo
             src={logoSustainableBusinessNetwork[0].url}
-            sx={{
-              flex: 1,
-              maxHeight: ['none', 50],
-              maxWidth: [100, 'none'],
-              objectFit: 'contain'
-            }}
+            alt='Sustainable Business Network'
           />
-          <Image
-            ml={[0, 4]}
-            mb={[4, 0]}
-            src={logoCoGo[0].url}
-            sx={{
-              flex: 1,
-              maxHeight: ['none', 50],
-              maxWidth: [100, 'none'],
-              objectFit: 'contain'
-            }}
-          />
+          <FooterLogo src={logoCoGo[0].url} alt='CoGo' />
         </Flex>
         <Flex
           mt={4}
