@@ -63,27 +63,41 @@ export default function AccreditorsAndCertifications ({
                   mr={4}
                   sx={{
                     flexDirection: 'column',
+                    justifyContent: 'space-between',
                     minWidth: [300, staffName ? 500 : 300],
                     maxWidth: [300, staffName ? 500 : 300],
                     boxShadow: '0 0 4px 0 rgba(0,0,0,0.25)'
                   }}
                 >
-                  <Flex sx={{ justifyContent: 'space-between' }}>
-                    <ThemePill theme={a.Theme} size='small' />
-                    {/* N.B. can't have this as a NextImage, as aspect ratio isn't known in advance */}
-                    <Image
-                      src={a.Logo[0].url}
-                      ml={3}
-                      sx={{ maxHeight: 5, maxWidth: 6 }}
-                    />
-                  </Flex>
+                  <Box>
+                    <Flex mb={2} sx={{ justifyContent: 'space-between' }}>
+                      <ThemePill theme={a.Theme} size='small' />
+                      <Flex
+                        ml={3}
+                        sx={{
+                          flex: 1,
+                          position: 'relative',
+                          justifyContent: 'flex-end',
+                          height: 5,
+                          maxWidth: 6
+                        }}
+                      >
+                        <NextImage
+                          src={a.Logo[0].url}
+                          alt={a.Heading}
+                          layout='fill'
+                          sx={{ objectFit: 'contain', objectPosition: 'right' }}
+                        />
+                      </Flex>
+                    </Flex>
 
-                  <Heading variant='h2' sx={{ textTransform: 'uppercase' }}>
-                    {a.Heading}
-                  </Heading>
-                  <Text variant='p3' mt={1}>
-                    {a.Bio}
-                  </Text>
+                    <Heading variant='h2' sx={{ textTransform: 'uppercase' }}>
+                      {a.Heading}
+                    </Heading>
+                    <Text variant='p3' mt={1}>
+                      {a.Bio}
+                    </Text>
+                  </Box>
 
                   <Flex
                     mt={[2, 3]}
