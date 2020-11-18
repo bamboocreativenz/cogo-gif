@@ -113,33 +113,50 @@ export default function CaseStudies ({
                     boxShadow: '0 0 4px 0 rgba(0,0,0,0.25)'
                   }}
                 >
-                  <Flex sx={{ position: 'relative' }}>
-                    <Heading
-                      variant='h2'
-                      sx={{
-                        position: 'absolute',
-                        bottom: 2,
-                        left: 3,
-                        color: 'white',
-                        zIndex: 10
-                      }}
-                    >
-                      {cs['Heading']}
-                    </Heading>
+                  <Flex
+                    sx={{
+                      position: 'relative',
+                      minHeight: [160, 200],
+                      width: [300, 500]
+                    }}
+                  >
                     <NextImage
                       src={banner}
                       alt='Case Study hero image'
-                      width={500}
-                      height={200}
+                      layout='fill'
+                      sx={{ objectFit: 'cover', objectPosition: 'center' }}
                     />
+                    <Flex
+                      sx={{
+                        position: 'absolute',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-end',
+                        top: 0,
+                        height: '100%',
+                        width: '100%',
+                        backgroundImage:
+                          'linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.4))'
+                      }}
+                    >
+                      <Heading
+                        variant='h2'
+                        mb={2}
+                        mx={3}
+                        sx={{
+                          color: 'white'
+                        }}
+                      >
+                        {cs['Heading']}
+                      </Heading>
+                    </Flex>
                   </Flex>
 
                   <Flex
                     p={3}
                     sx={{
+                      flex: 1,
                       flexDirection: 'column',
-                      justifyContent: 'space-between',
-                      height: '100%'
+                      justifyContent: 'space-between'
                     }}
                   >
                     <Flex sx={{ justifyContent: 'space-between' }}>
