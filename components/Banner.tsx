@@ -34,20 +34,31 @@ export default function Banner ({
         layout='fill'
         sx={{ objectFit: 'cover', objectPosition: backgroundImagePosition }}
       />
+
       <Flex
         sx={{
           position: 'absolute',
           top: 0,
           flexDirection: 'column',
+          alignItems: 'center',
           justifyContent: 'space-between',
+          width: '100%',
           height: '100%',
           backgroundImage: 'linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.4))'
         }}
       >
-        <Nav />
-        <FullWidthCentered bg='none'>
-          <Flex py={4} px={[3, 5]}>
-            <Headline headline={headline} subHeadline={subHeadline} />
+        <FullWidthCentered bg='none' height='100%'>
+          <Flex
+            sx={{
+              flexDirection: 'column',
+              height: '100%',
+              justifyContent: 'space-between'
+            }}
+          >
+            <Nav />
+            <Flex py={4} px={[3, 5]}>
+              <Headline headline={headline} subHeadline={subHeadline} />
+            </Flex>
           </Flex>
         </FullWidthCentered>
       </Flex>
