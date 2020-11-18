@@ -40,7 +40,8 @@ export default function Banner ({
           top: 0,
           flexDirection: 'column',
           justifyContent: 'space-between',
-          height: '100%'
+          height: '100%',
+          backgroundImage: 'linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.4))'
         }}
       >
         <Nav />

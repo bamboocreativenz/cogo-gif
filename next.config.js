@@ -1,7 +1,7 @@
 const withOptimizedImages = require('next-optimized-images')
 
 module.exports = withOptimizedImages({
-  optimizeImagesInDev: true,
+  // optimizeImagesInDev: true,
   responsive: {
     adapter: require('responsive-loader/jimp')
   },
