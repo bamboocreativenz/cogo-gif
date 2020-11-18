@@ -102,12 +102,19 @@ export default function AccreditorsAndCertifications ({
                     )}
                     <Flex sx={{ flexDirection: 'row' }}>
                       {staffImage && (
-                        <Box mt={2} sx={{ minWidth: 108 }}>
+                        <Box
+                          mt={2}
+                          sx={{
+                            position: 'relative',
+                            minWidth: 108,
+                            height: 146
+                          }}
+                        >
                           <NextImage
                             src={staffImage[0].url}
                             alt='Staff Image'
-                            width={108}
-                            height={146}
+                            layout='fill'
+                            sx={{ objectFit: 'cover', objectPosition: 'top' }}
                           />
                         </Box>
                       )}
