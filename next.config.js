@@ -7,5 +7,8 @@ module.exports = withOptimizedImages({
   },
   images: {
     domains: ['dl.airtable.com']
+  },
+  experimental: {
+    optimizeFonts: true
   }
 })
