@@ -18,7 +18,7 @@ function FooterLogo ({ src, alt }: FooterLogoProps) {
       mb={[4, 0]}
       sx={{
         position: 'relative',
-        height: ['unset', 50],
+        height: [5, 50],
         width: [100, '100%']
       }}
     >
