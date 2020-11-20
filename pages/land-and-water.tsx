@@ -56,6 +56,14 @@ export default function LandAndWater ({
                     __html: page.What.Content
                   }}
                 />
+                {page.What.Image && (
+                  <NextImage
+                    src={page.What.Image[0].url}
+                    alt='Image for What'
+                    width={674}
+                    height={380}
+                  />
+                )}
               </Flex>
             }
           />
@@ -72,6 +80,14 @@ export default function LandAndWater ({
                   sx={{ whiteSpace: 'pre-wrap' }}
                   dangerouslySetInnerHTML={{ __html: page.Why.Content }}
                 />
+                {page.Why.Image && (
+                  <NextImage
+                    src={page.Why.Image[0].url}
+                    alt='Image for Why'
+                    width={674}
+                    height={380}
+                  />
+                )}
               </Flex>
             }
           />

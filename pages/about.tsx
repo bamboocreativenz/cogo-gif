@@ -1,8 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Box, Heading, Text, Image } from 'theme-ui'
-import { Airtable } from '@bamboocreativenz/pip-airtable'
-import keyBy from 'lodash/keyBy'
+import NextImage from 'next/image'
 
 import Banner from '../components/Banner'
 import Footer from '../components/Footer'
@@ -41,6 +40,14 @@ export default function About ({ page, commonContent }: AboutProps) {
                   sx={{ whiteSpace: 'pre-wrap' }}
                   dangerouslySetInnerHTML={{ __html: page.What.Content }}
                 />
+                {page.What.Image && (
+                  <NextImage
+                    src={page.What.Image[0].url}
+                    alt='Image for What'
+                    width={674}
+                    height={380}
+                  />
+                )}
               </Flex>
             }
           />
@@ -57,6 +64,14 @@ export default function About ({ page, commonContent }: AboutProps) {
                   sx={{ whiteSpace: 'pre-wrap' }}
                   dangerouslySetInnerHTML={{ __html: page.How.Content }}
                 />
+                {page.How.Image && (
+                  <NextImage
+                    src={page.How.Image[0].url}
+                    alt='Image for How'
+                    width={674}
+                    height={380}
+                  />
+                )}
               </Flex>
             }
           />
@@ -73,6 +88,14 @@ export default function About ({ page, commonContent }: AboutProps) {
                   sx={{ whiteSpace: 'pre-wrap' }}
                   dangerouslySetInnerHTML={{ __html: page.Who.Content }}
                 />
+                {page.Who.Image && (
+                  <NextImage
+                    src={page.Who.Image[0].url}
+                    alt='Image for Who'
+                    width={674}
+                    height={380}
+                  />
+                )}
               </Flex>
             }
           />

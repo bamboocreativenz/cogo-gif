@@ -54,6 +54,14 @@ export default function Climate ({
                   sx={{ whiteSpace: 'pre-wrap' }}
                   dangerouslySetInnerHTML={{ __html: page.What.Content }}
                 />
+                {page.What.Image && (
+                  <NextImage
+                    src={page.What.Image[0].url}
+                    alt='Image for What'
+                    width={674}
+                    height={380}
+                  />
+                )}
               </Flex>
             }
           />
@@ -70,6 +78,14 @@ export default function Climate ({
                   sx={{ whiteSpace: 'pre-wrap' }}
                   dangerouslySetInnerHTML={{ __html: page.Why.Content }}
                 />
+                {page.Why.Image && (
+                  <NextImage
+                    src={page.Why.Image[0].url}
+                    alt='Image for Why'
+                    width={674}
+                    height={380}
+                  />
+                )}
               </Flex>
             }
           />
@@ -86,12 +102,14 @@ export default function Climate ({
                   sx={{ whiteSpace: 'pre-wrap' }}
                   dangerouslySetInnerHTML={{ __html: page.Model.Content }}
                 />
-                <NextImage
-                  src={page.Model.Image[0].url}
-                  alt='Climate Model'
-                  width={674}
-                  height={380}
-                />
+                {page.Model.Image && (
+                  <NextImage
+                    src={page.Model.Image[0].url}
+                    alt='Climate Model'
+                    width={674}
+                    height={380}
+                  />
+                )}
               </Flex>
             }
           />
