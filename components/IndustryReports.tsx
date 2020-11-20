@@ -114,12 +114,14 @@ export default function IndustryReports ({
           {marketInsights
             .filter(mi =>
               selectedTheme && selectedIndustry
-                ? mi.Themes.includes(selectedTheme) &&
+                ? mi.Themes &&
+                  mi.Themes.includes(selectedTheme) &&
+                  mi.Industries &&
                   mi.Industries.includes(selectedIndustry)
                 : selectedTheme
-                ? mi.Themes.includes(selectedTheme)
+                ? mi.Themes && mi.Themes.includes(selectedTheme)
                 : selectedIndustry
-                ? mi.Industries.includes(selectedIndustry)
+                ? mi.Industries && mi.Industries.includes(selectedIndustry)
                 : mi
             )
             .map((mi, i) => (
