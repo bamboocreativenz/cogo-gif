@@ -256,8 +256,9 @@ export default function CaseStudies ({
           background: 'white',
           borderStyle: 'solid',
           borderWidth: '1px',
-          borderColor: 'lightGrey;'
+          borderColor: 'lightGrey'
         }}
+        style={{ overlay: { zIndex: 100 } }}
       >
         <Flex p={5} sx={{ flexDirection: 'column' }}>
           <Flex>

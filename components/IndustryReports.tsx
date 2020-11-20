@@ -180,6 +180,7 @@ export default function IndustryReports ({
           borderWidth: '1px',
           borderColor: 'lightGrey'
         }}
+        style={{ overlay: { zIndex: 100 } }}
       >
         <Flex p={5} sx={{ flexDirection: 'column' }}>
           <Flex>
