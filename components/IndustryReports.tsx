@@ -21,10 +21,8 @@ import { EmailZ } from '../types/util'
 
 import FullWidthCentered from './FullWidthCentered'
 import OneThenTwoColumns from './OneThenTwoColumns'
-import Dropdown from './Dropdown'
 
 import industries from '../util/industries'
-import themes from '../util/themes'
 import downloadPDF from '../util/downloadPDF'
 
 import { EMAIL_STORAGE_KEY } from '../constants'
@@ -54,9 +52,7 @@ interface IndustryReportsProps {
   marketInsights: any // TODO: type better
   industryReports: any // TODO: type better
   selectedIndustry: string
-  setSelectedIndustry: Dispatch<SetStateAction<string>>
   selectedTheme: string
-  setSelectedTheme: Dispatch<SetStateAction<string>>
 }
 
 export default function IndustryReports ({
@@ -65,9 +61,7 @@ export default function IndustryReports ({
   marketInsights,
   industryReports,
   selectedIndustry,
-  setSelectedIndustry,
-  selectedTheme,
-  setSelectedTheme
+  selectedTheme
 }: IndustryReportsProps) {
   const { theme } = useThemeUI()
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -96,40 +90,7 @@ export default function IndustryReports ({
 
   return (
     <FullWidthCentered bg='greyBackground'>
-      <Flex px={[3, 5]} mb={5} mt={4} sx={{ flexDirection: 'column' }}>
-        <OneThenTwoColumns
-          mb={4}
-          firstColumnContent={
-            <Text variant='button2' sx={{ flex: 1 }}>
-              FILTER BY:
-            </Text>
-          }
-          remainingContent={
-            <Flex ml={[0, 4]} sx={{ flex: 2, justifyContent: 'space-between' }}>
-              <Flex mr={4} sx={{ flex: 1 }}>
-                <Dropdown
-                  items={plainIndustries}
-                  selectedItemName={selectedIndustry}
-                  placeholder='Industry'
-                  onChange={({ selectedItem }) =>
-                    setSelectedIndustry(selectedItem.name)
-                  }
-                />
-              </Flex>
-              <Flex ml={4} sx={{ flex: 1 }}>
-                <Dropdown
-                  items={themes}
-                  selectedItemName={selectedTheme}
-                  placeholder='Theme'
-                  onChange={({ selectedItem }) =>
-                    setSelectedTheme(selectedItem.name)
-                  }
-                />
-              </Flex>
-            </Flex>
-          }
-        />
-
+      <Flex px={[3, 5]} my={5} sx={{ flexDirection: 'column' }}>
         <OneThenTwoColumns
           mb={4}
           firstColumnContent={<Heading variant='h1'>{copy.Title}</Heading>}

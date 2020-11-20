@@ -1,12 +1,23 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, Flex, Box, Text } from 'theme-ui'
 
+import Dropdown from './Dropdown'
 import IndustryReports from './IndustryReports'
 import CaseStudies from './CaseStudies'
 import AccreditorsAndCertifications from './AccreditorsAndCertifications'
 import Latest from './Latest'
 import Footer from './Footer'
+import OneThenTwoColumns from './OneThenTwoColumns'
+
+import themes from '../util/themes'
+import industries from '../util/industries'
+import FullWidthCentered from './FullWidthCentered'
+
+const plainIndustries = Object.keys(industries).map(i => ({
+  name: i,
+  icon: industries[i].plain
+}))
 
 export default function ReportsCaseStudiesAccreditors ({
   commonContent,
@@ -21,15 +32,59 @@ export default function ReportsCaseStudiesAccreditors ({
 }) {
   return (
     <>
+      <Box bg='greyBackground' sx={{ position: 'sticky', top: 0, zIndex: 10 }}>
+        <FullWidthCentered bg='greyBackground'>
+          <Flex px={[3, 5]} mt={4} sx={{ flexDirection: 'column' }}>
+            <OneThenTwoColumns
+              mb={4}
+              firstColumnContent={
+                <Text variant='button2' sx={{ flex: 1 }}>
+                  FILTER BY:
+                </Text>
+              }
+              remainingContent={
+                <Flex
+                  ml={[0, 4]}
+                  sx={{
+                    flex: 2,
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-end'
+                  }}
+                >
+                  <Flex mr={4} sx={{ flex: 1 }}>
+                    <Dropdown
+                      items={plainIndustries}
+                      selectedItemName={selectedIndustry}
+                      placeholder='Industry'
+                      onChange={({ selectedItem }) =>
+                        setSelectedIndustry(selectedItem.name)
+                      }
+                    />
+                  </Flex>
+                  <Flex ml={4} sx={{ flex: 1 }}>
+                    <Dropdown
+                      items={themes}
+                      selectedItemName={selectedTheme}
+                      placeholder='Theme'
+                      onChange={({ selectedItem }) =>
+                        setSelectedTheme(selectedItem.name)
+                      }
+                    />
+                  </Flex>
+                </Flex>
+              }
+            />
+          </Flex>
+        </FullWidthCentered>
+      </Box>
+
       <IndustryReports
         copy={commonContent['Industry Reports']}
         download={commonContent['Download Industry Report']}
         marketInsights={marketInsights}
         industryReports={industryReports}
         selectedIndustry={selectedIndustry}
-        setSelectedIndustry={setSelectedIndustry}
         selectedTheme={selectedTheme}
-        setSelectedTheme={setSelectedTheme}
       />
 
       <CaseStudies
