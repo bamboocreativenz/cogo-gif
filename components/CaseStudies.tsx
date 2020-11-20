@@ -23,6 +23,7 @@ import OneThenTwoColumns from './OneThenTwoColumns'
 import ThemePill from './ThemePill'
 
 import downloadPDF from '../util/downloadPDF'
+import industries from '../util/industries'
 
 import { EMAIL_STORAGE_KEY } from '../constants'
 
@@ -174,7 +175,7 @@ export default function CaseStudies ({
                       sx={{
                         flexDirection: ['column', 'row'],
                         justifyContent: 'space-between',
-                        alignItems: 'flex-start'
+                        alignItems: ['flex-start', 'center']
                       }}
                     >
                       <Button
@@ -183,14 +184,28 @@ export default function CaseStudies ({
                           setModalCaseStudy(cs)
                           setIsModalOpen(true)
                         }}
+                        sx={{
+                          textTransform: 'uppercase'
+                        }}
                       >
                         {cta}
                       </Button>
-                      <Flex sx={{ alignItems: 'center' }}>
-                        <Box mr={3}>
-                          <ThemePill theme={gifTheme} size='small' />
-                        </Box>
-                        <Box>{industry}</Box>
+                      <Flex
+                        sx={{
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          width: ['100%', 'initial']
+                        }}
+                      >
+                        <Flex>
+                          <Box mr={3}>
+                            <ThemePill theme={gifTheme} size='small' />
+                          </Box>
+                          <Image
+                            src={industries[industry][gifTheme]}
+                            sx={{ width: 4 }}
+                          />
+                        </Flex>
                         <Box
                           sx={{ marginLeft: 3, display: ['initial', 'none'] }}
                         >

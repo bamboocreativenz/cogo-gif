@@ -29,6 +29,11 @@ import downloadPDF from '../util/downloadPDF'
 
 import { EMAIL_STORAGE_KEY } from '../constants'
 
+const plainIndustries = Object.keys(industries).map(i => ({
+  name: i,
+  icon: industries[i].plain
+}))
+
 function getHandleSelectIndustry ({
   selectedIndustries,
   setSelectedIndustries,
@@ -103,7 +108,7 @@ export default function IndustryReports ({
             <Flex ml={[0, 4]} sx={{ flex: 2, justifyContent: 'space-between' }}>
               <Flex mr={4} sx={{ flex: 1 }}>
                 <Dropdown
-                  items={industries}
+                  items={plainIndustries}
                   selectedItemName={selectedIndustry}
                   placeholder='Industry'
                   onChange={({ selectedItem }) =>
@@ -220,7 +225,7 @@ export default function IndustryReports ({
             </Text>
           </Flex>
           <Flex mt={3} sx={{ flexWrap: 'wrap' }}>
-            {industries.map((industry, i) => (
+            {plainIndustries.map((industry, i) => (
               <Flex
                 key={i}
                 pr={3}
