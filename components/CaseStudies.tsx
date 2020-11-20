@@ -162,14 +162,20 @@ export default function CaseStudies ({
                   >
                     <Flex sx={{ justifyContent: 'space-between' }}>
                       <Text variant='p3'>{bio}</Text>
-                      <Box sx={{ marginLeft: 3, display: ['none', 'initial'] }}>
+                      <Flex
+                        sx={{
+                          minWidth: 90,
+                          marginLeft: 3,
+                          display: ['none', 'initial']
+                        }}
+                      >
                         <NextImage
                           src={logo}
                           alt={cs['Heading']}
                           width={90}
                           height={90}
                         />
-                      </Box>
+                      </Flex>
                     </Flex>
                     <Flex
                       sx={{
@@ -207,7 +213,11 @@ export default function CaseStudies ({
                           />
                         </Flex>
                         <Box
-                          sx={{ marginLeft: 3, display: ['initial', 'none'] }}
+                          sx={{
+                            minWidth: 90,
+                            marginLeft: 3,
+                            display: ['initial', 'none']
+                          }}
                         >
                           <NextImage
                             src={logo}
