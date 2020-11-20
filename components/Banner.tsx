@@ -32,6 +32,7 @@ export default function Banner ({
       <NextImage
         src={backgroundImage[0].url}
         layout='fill'
+        priority={true}
         sx={{ objectFit: 'cover', objectPosition: backgroundImagePosition }}
       />
 
