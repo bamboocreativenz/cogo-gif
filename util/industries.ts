@@ -14,7 +14,7 @@ export default {
     'Land & Water': require('../public/icons/health-and-beauty-land-and-water.png')
   },
   Transport: {
-    Plain: require('../public/icons/transport.png'),
+    plain: require('../public/icons/transport.png'),
     Climate: require('../public/icons/transport-climate.png'),
     Waste: require('../public/icons/transport-waste.png'),
     Community: require('../public/icons/transport-community.png'),
