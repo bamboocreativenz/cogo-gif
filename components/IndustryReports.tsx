@@ -9,7 +9,8 @@ import {
   Text,
   Button,
   Image,
-  Input
+  Input,
+  Link
 } from 'theme-ui'
 import NextImage from 'next/image'
 import { Dispatch, SetStateAction, useState } from 'react'
@@ -129,14 +130,16 @@ export default function IndustryReports ({
                   minWidth: [200, 7]
                 }}
               >
-                <NextImage
-                  src={mi.Image[0].url}
-                  alt='Market Insight'
-                  // @ts-expect-error
-                  width={theme.sizes[7]}
-                  // @ts-expect-error
-                  height={theme.sizes[7]}
-                />
+                <Link href={mi['Source Link']} target='_blank'>
+                  <NextImage
+                    src={mi.Image[0].url}
+                    alt='Market Insight'
+                    // @ts-expect-error
+                    width={theme.sizes[7]}
+                    // @ts-expect-error
+                    height={theme.sizes[7]}
+                  />
+                </Link>
               </Box>
             ))}
         </Flex>
