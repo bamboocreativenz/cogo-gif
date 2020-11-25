@@ -1,6 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Box, Heading, Text, Image } from 'theme-ui'
+import ReactMarkdown from 'react-markdown'
+import gfm from 'remark-gfm'
 import NextImage from 'next/image'
 
 import Banner from '../components/Banner'
@@ -59,10 +61,18 @@ export default function About ({ page, commonContent }: AboutProps) {
             }
             remainingContent={
               <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
-                <Text
-                  variant='p2'
-                  sx={{ whiteSpace: 'pre-wrap' }}
-                  dangerouslySetInnerHTML={{ __html: page.How.Content }}
+                <ReactMarkdown
+                  renderers={{
+                    paragraph: props => (
+                      <Text
+                        variant='p2'
+                        sx={{ whiteSpace: 'pre-wrap' }}
+                        {...props}
+                      />
+                    )
+                  }}
+                  plugins={[gfm]}
+                  children={page.How.Content}
                 />
                 {page.How.Image && (
                   <NextImage
