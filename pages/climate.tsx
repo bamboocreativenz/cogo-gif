@@ -29,7 +29,7 @@ export default function Climate ({
   page
 }: ClimateProps) {
   const [selectedIndustry, setSelectedIndustry] = useState('')
-  const [selectedTheme, setSelectedTheme] = useState('')
+  const [selectedTheme, setSelectedTheme] = useState('Climate')
 
   return (
     <Flex sx={{ flexDirection: 'column' }}>

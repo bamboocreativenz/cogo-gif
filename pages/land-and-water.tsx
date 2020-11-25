@@ -29,7 +29,7 @@ export default function LandAndWater ({
   page
 }: LandAndWaterProps) {
   const [selectedIndustry, setSelectedIndustry] = useState('')
-  const [selectedTheme, setSelectedTheme] = useState('')
+  const [selectedTheme, setSelectedTheme] = useState('Land & Water')
 
   return (
     <Flex sx={{ flexDirection: 'column' }}>

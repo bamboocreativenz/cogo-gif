@@ -29,7 +29,7 @@ export default function Waste ({
   page
 }: WasteProps) {
   const [selectedIndustry, setSelectedIndustry] = useState('')
-  const [selectedTheme, setSelectedTheme] = useState('')
+  const [selectedTheme, setSelectedTheme] = useState('Waste')
 
   return (
     <Flex sx={{ flexDirection: 'column' }}>
