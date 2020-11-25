@@ -1,6 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex, Text, Image } from 'theme-ui'
+import { jsx, Box, Flex, Text, Image } from 'theme-ui'
+import NextImage from 'next/image'
 
 import OneThenTwoColumns from './OneThenTwoColumns'
 
@@ -13,8 +14,18 @@ export default function Partner ({ copy }: PartnerProps) {
     <OneThenTwoColumns
       mt={5}
       firstColumnContent={
-        <Flex sx={{ justifyContent: 'center', width: '100%' }}>
-          <Image src={copy.Image[0].url} sx={{ maxHeight: 6, maxWidth: 7 }} />
+        <Flex
+          mt={3}
+          sx={{ justifyContent: 'center', height: 6, width: '100%' }}
+        >
+          <Box sx={{ position: 'relative', width: '100%', maxWidth: 7 }}>
+            <NextImage
+              src={copy.Image[0].url}
+              alt='Image for Partner'
+              layout='fill'
+              sx={{ objectFit: 'contain', objectPosition: 'center top' }}
+            />
+          </Box>
         </Flex>
       }
       remainingContent={
