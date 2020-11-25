@@ -177,7 +177,7 @@ export default function CaseStudies ({
                           layout='fill'
                           sx={{
                             objectFit: 'contain',
-                            objectPosition: 'center'
+                            objectPosition: 'top'
                           }}
                         />
                       </Flex>
