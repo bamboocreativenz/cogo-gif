@@ -108,11 +108,15 @@ export default function About ({ page, commonContent }: AboutProps) {
             <Partner copy={page['Partner 5']} />
           </Box>
 
-          <Flex my={[5, 0]} sx={{ flexDirection: 'column' }}>
-            <Heading mb={3}>Get in touch with the GIF team</Heading>
-            <TeamMember copy={page['Team 1']} />
-            <TeamMember copy={page['Team 2']} />
-            <TeamMember copy={page['Team 3']} />
+          <Flex my={5} sx={{ flexDirection: 'column', alignItems: 'center' }}>
+            <Heading variant='h1' mb={3}>
+              Get in touch with the GIF team
+            </Heading>
+            <Flex sx={{ flexDirection: 'column' }}>
+              <TeamMember copy={page['Team 1']} />
+              <TeamMember copy={page['Team 2']} />
+              <TeamMember copy={page['Team 3']} />
+            </Flex>
           </Flex>
         </Flex>
       </FullWidthCentered>
