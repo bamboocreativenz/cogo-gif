@@ -164,7 +164,9 @@ export default function CaseStudies ({
                       <Text variant='p3'>{bio}</Text>
                       <Flex
                         sx={{
+                          position: 'relative',
                           minWidth: 90,
+                          height: 90,
                           marginLeft: 3,
                           display: ['none', 'initial']
                         }}
@@ -172,8 +174,11 @@ export default function CaseStudies ({
                         <NextImage
                           src={logo}
                           alt={cs['Heading']}
-                          width={90}
-                          height={90}
+                          layout='fill'
+                          sx={{
+                            objectFit: 'contain',
+                            objectPosition: 'center'
+                          }}
                         />
                       </Flex>
                     </Flex>
