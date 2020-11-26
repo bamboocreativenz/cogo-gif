@@ -70,7 +70,7 @@ export default function ReportsCaseStudiesAccreditors ({
                     width: '100%'
                   }}
                 >
-                  <Flex mr={4} sx={{ flex: 1 }}>
+                  <Flex mr={[2, 4]} sx={{ flex: 1 }}>
                     <Dropdown
                       multiple
                       items={plainIndustries}
@@ -89,7 +89,7 @@ export default function ReportsCaseStudiesAccreditors ({
                       }}
                     />
                   </Flex>
-                  <Flex ml={4} sx={{ flex: 1 }}>
+                  <Flex ml={[2, 4]} sx={{ flex: 1 }}>
                     <Dropdown
                       items={themes}
                       controlledSelectedItem={selectedTheme}
