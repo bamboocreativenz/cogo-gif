@@ -211,7 +211,7 @@ export default function CaseStudies ({
                         }}
                       >
                         <Flex>
-                          <Box mr={3}>
+                          <Box mr={[2, 3]}>
                             <ThemePill theme={gifTheme} size='small' />
                           </Box>
                           <Image
