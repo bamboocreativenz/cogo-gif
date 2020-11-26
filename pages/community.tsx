@@ -89,6 +89,30 @@ export default function Community ({
               </Flex>
             }
           />
+
+          <OneThenTwoColumns
+            mt={5}
+            firstColumnContent={
+              <Heading variant='h1'>{page.How.Title}</Heading>
+            }
+            remainingContent={
+              <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
+                <Text
+                  variant='p2'
+                  sx={{ whiteSpace: 'pre-wrap' }}
+                  dangerouslySetInnerHTML={{ __html: page.How.Content }}
+                />
+                {page.How.Image && (
+                  <NextImage
+                    src={page.How.Image[0].url}
+                    alt='Image for How'
+                    width={674}
+                    height={380}
+                  />
+                )}
+              </Flex>
+            }
+          />
         </Flex>
         {page.Why.Image && (
           <NextImage
