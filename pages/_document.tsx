@@ -15,6 +15,10 @@ class MyDocument extends Document {
             name='description'
             content='Learn about the Good Impact Framework.'
           />
+          <meta
+            name='viewport'
+            content='width=device-width, initial-scale=1'
+          ></meta>
         </Head>
         <body>
           <Main />
