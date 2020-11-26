@@ -216,7 +216,7 @@ export default function CaseStudies ({
                           </Box>
                           <Image
                             src={industries[industry][gifTheme]}
-                            sx={{ width: 34 }}
+                            sx={{ width: 34, height: 34 }}
                           />
                         </Flex>
                         <Flex
