@@ -2,7 +2,6 @@
 /** @jsx jsx */
 import { jsx, Flex, Heading, Text } from 'theme-ui'
 import Head from 'next/head'
-import { useState } from 'react'
 
 import FullWidthCentered from '../components/FullWidthCentered'
 import Banner from '../components/Banner'
@@ -10,8 +9,6 @@ import ThemeLearnMore from '../components/ThemeLearnMore'
 import ReportsCaseStudiesAccreditors from '../components/ReportsCaseStudiesAccreditors'
 
 import getPageStaticProps from '../util/getPageStaticProps'
-
-import useFilters from '../hooks/useFilters'
 
 interface HomeProps {
   commonContent: any // TODO: type better
@@ -30,9 +27,6 @@ export default function Home ({
   accreditors,
   page
 }: HomeProps) {
-  // const [selectedIndustries, setSelectedIndustries] = useState([])
-  // const [selectedTheme, setSelectedTheme] = useState('')
-
   return (
     <>
       <Head>

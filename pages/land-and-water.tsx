@@ -1,7 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Heading, Text } from 'theme-ui'
-import { useState } from 'react'
 import Head from 'next/head'
 import NextImage from 'next/image'
 
@@ -29,9 +28,6 @@ export default function LandAndWater ({
   accreditors,
   page
 }: LandAndWaterProps) {
-  const [selectedIndustry, setSelectedIndustry] = useState('')
-  const [selectedTheme, setSelectedTheme] = useState('Land & Water')
-
   return (
     <>
       <Head>
