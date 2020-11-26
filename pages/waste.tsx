@@ -130,6 +130,7 @@ export default function Waste ({
         industryReports={industryReports}
         caseStudies={caseStudies}
         accreditors={accreditors}
+        defaultTheme={'Waste'}
       />
     </Flex>
   )

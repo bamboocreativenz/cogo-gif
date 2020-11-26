@@ -130,6 +130,7 @@ export default function Community ({
         industryReports={industryReports}
         caseStudies={caseStudies}
         accreditors={accreditors}
+        defaultTheme={'Community'}
       />
     </Flex>
   )

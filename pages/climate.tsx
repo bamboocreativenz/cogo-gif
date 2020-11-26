@@ -122,6 +122,7 @@ export default function Climate ({
         industryReports={industryReports}
         caseStudies={caseStudies}
         accreditors={accreditors}
+        defaultTheme={'Climate'}
       />
     </Flex>
   )

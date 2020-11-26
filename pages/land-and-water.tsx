@@ -132,6 +132,7 @@ export default function LandAndWater ({
         industryReports={industryReports}
         caseStudies={caseStudies}
         accreditors={accreditors}
+        defaultTheme={'Land & Water'}
       />
     </Flex>
   )

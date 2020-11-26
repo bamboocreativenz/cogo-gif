@@ -1,8 +1,12 @@
 import { useState } from 'react'
 
-export default function useFilters () {
+interface UseFilters {
+  initialTheme?: string
+}
+
+export default function useFilters ({ initialTheme = '' }: UseFilters) {
   const [selectedIndustries, setSelectedIndustries] = useState([])
-  const [selectedTheme, setSelectedTheme] = useState('')
+  const [selectedTheme, setSelectedTheme] = useState(initialTheme)
 
   return {
     selectedIndustries,

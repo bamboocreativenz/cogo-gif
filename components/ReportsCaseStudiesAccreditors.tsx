@@ -29,6 +29,7 @@ interface ReportsCaseStudiesAccreditorsProps {
   industryReports: any
   caseStudies: any
   accreditors: any
+  defaultTheme?: string
 }
 
 export default function ReportsCaseStudiesAccreditors ({
@@ -36,14 +37,17 @@ export default function ReportsCaseStudiesAccreditors ({
   marketInsights,
   industryReports,
   caseStudies,
-  accreditors
+  accreditors,
+  defaultTheme
 }: ReportsCaseStudiesAccreditorsProps) {
   const {
     selectedIndustries,
     setSelectedIndustries,
     selectedTheme,
     setSelectedTheme
-  } = useFilters()
+  } = useFilters({
+    initialTheme: defaultTheme
+  })
   return (
     <>
       <Box bg='greyBackground' sx={{ position: 'sticky', top: 0, zIndex: 10 }}>
