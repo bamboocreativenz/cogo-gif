@@ -1,6 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Heading, Text } from 'theme-ui'
+import Head from 'next/head'
 import { useState } from 'react'
 
 import FullWidthCentered from '../components/FullWidthCentered'
@@ -33,59 +34,68 @@ export default function Home ({
   // const [selectedTheme, setSelectedTheme] = useState('')
 
   return (
-    <Flex sx={{ flexDirection: 'column' }}>
-      <Banner
-        backgroundImage={page.Banner.Image}
-        headline={page.Banner.Title}
-        subHeadline={page.Banner.Content}
-      />
+    <>
+      <Head>
+        <title>Good Impact Framework</title>
+      </Head>
+      <Flex sx={{ flexDirection: 'column' }}>
+        <Banner
+          backgroundImage={page.Banner.Image}
+          headline={page.Banner.Title}
+          subHeadline={page.Banner.Content}
+        />
 
-      <FullWidthCentered>
-        <Flex
-          px={[3, 5]}
-          sx={{ width: '100%', flexDirection: 'column', alignItems: 'center' }}
-        >
-          <Flex mt={5} mb={3} sx={{ flexDirection: 'column' }}>
-            <Heading variant='h1'>{page.Header.Title}</Heading>
-            <Text variant='p2'>{page.Header.Content}</Text>
+        <FullWidthCentered>
+          <Flex
+            px={[3, 5]}
+            sx={{
+              width: '100%',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}
+          >
+            <Flex mt={5} mb={3} sx={{ flexDirection: 'column' }}>
+              <Heading variant='h1'>{page.Header.Title}</Heading>
+              <Text variant='p2'>{page.Header.Content}</Text>
+            </Flex>
+
+            <Flex sx={{ flexDirection: ['column', 'row'] }}>
+              <ThemeLearnMore
+                title={page.Climate.Title}
+                text={page.Climate.Content}
+                link='/climate'
+              />
+              <ThemeLearnMore
+                title={page.Waste.Title}
+                text={page.Waste.Content}
+                link='/waste'
+              />
+            </Flex>
+
+            <Flex sx={{ flexDirection: ['column', 'row'] }}>
+              <ThemeLearnMore
+                title={page.Community.Title}
+                text={page.Community.Content}
+                link='/community'
+              />
+              <ThemeLearnMore
+                title={page['Land & Water'].Title}
+                text={page['Land & Water'].Content}
+                link='/land-and-water'
+              />
+            </Flex>
           </Flex>
+        </FullWidthCentered>
 
-          <Flex sx={{ flexDirection: ['column', 'row'] }}>
-            <ThemeLearnMore
-              title={page.Climate.Title}
-              text={page.Climate.Content}
-              link='/climate'
-            />
-            <ThemeLearnMore
-              title={page.Waste.Title}
-              text={page.Waste.Content}
-              link='/waste'
-            />
-          </Flex>
-
-          <Flex sx={{ flexDirection: ['column', 'row'] }}>
-            <ThemeLearnMore
-              title={page.Community.Title}
-              text={page.Community.Content}
-              link='/community'
-            />
-            <ThemeLearnMore
-              title={page['Land & Water'].Title}
-              text={page['Land & Water'].Content}
-              link='/land-and-water'
-            />
-          </Flex>
-        </Flex>
-      </FullWidthCentered>
-
-      <ReportsCaseStudiesAccreditors
-        commonContent={commonContent}
-        marketInsights={marketInsights}
-        industryReports={industryReports}
-        caseStudies={caseStudies}
-        accreditors={accreditors}
-      />
-    </Flex>
+        <ReportsCaseStudiesAccreditors
+          commonContent={commonContent}
+          marketInsights={marketInsights}
+          industryReports={industryReports}
+          caseStudies={caseStudies}
+          accreditors={accreditors}
+        />
+      </Flex>
+    </>
   )
 }
 

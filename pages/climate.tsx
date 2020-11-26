@@ -2,6 +2,7 @@
 /** @jsx jsx */
 import { jsx, Flex, Heading, Text, Image } from 'theme-ui'
 import { useState } from 'react'
+import Head from 'next/head'
 import NextImage from 'next/image'
 
 import Banner from '../components/Banner'
@@ -32,99 +33,104 @@ export default function Climate ({
   const [selectedTheme, setSelectedTheme] = useState('Climate')
 
   return (
-    <Flex sx={{ flexDirection: 'column' }}>
-      <Banner
-        backgroundImage={page.Banner.Image}
-        backgroundImagePosition='center'
-        headline={page.Banner.Title}
-        subHeadline={page.Banner.Content}
-      />
+    <>
+      <Head>
+        <title>Good Impact Framework - Climate</title>
+      </Head>
+      <Flex sx={{ flexDirection: 'column' }}>
+        <Banner
+          backgroundImage={page.Banner.Image}
+          backgroundImagePosition='center'
+          headline={page.Banner.Title}
+          subHeadline={page.Banner.Content}
+        />
 
-      <FullWidthCentered>
-        <Flex px={[3, 5]} mb={[3, 5]} sx={{ flexDirection: 'column' }}>
-          <OneThenTwoColumns
-            mt={5}
-            firstColumnContent={
-              <Heading variant='h1'>{page.What.Title}</Heading>
-            }
-            remainingContent={
-              <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
-                <Text
-                  variant='p2'
-                  sx={{ whiteSpace: 'pre-wrap' }}
-                  dangerouslySetInnerHTML={{ __html: page.What.Content }}
-                />
-                {page.What.Image && (
-                  <NextImage
-                    src={page.What.Image[0].url}
-                    alt='Image for What'
-                    width={674}
-                    height={380}
+        <FullWidthCentered>
+          <Flex px={[3, 5]} mb={[3, 5]} sx={{ flexDirection: 'column' }}>
+            <OneThenTwoColumns
+              mt={5}
+              firstColumnContent={
+                <Heading variant='h1'>{page.What.Title}</Heading>
+              }
+              remainingContent={
+                <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
+                  <Text
+                    variant='p2'
+                    sx={{ whiteSpace: 'pre-wrap' }}
+                    dangerouslySetInnerHTML={{ __html: page.What.Content }}
                   />
-                )}
-              </Flex>
-            }
-          />
+                  {page.What.Image && (
+                    <NextImage
+                      src={page.What.Image[0].url}
+                      alt='Image for What'
+                      width={674}
+                      height={380}
+                    />
+                  )}
+                </Flex>
+              }
+            />
 
-          <OneThenTwoColumns
-            mt={5}
-            firstColumnContent={
-              <Heading variant='h1'>{page.Why.Title}</Heading>
-            }
-            remainingContent={
-              <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
-                <Text
-                  variant='p2'
-                  sx={{ whiteSpace: 'pre-wrap' }}
-                  dangerouslySetInnerHTML={{ __html: page.Why.Content }}
-                />
-                {page.Why.Image && (
-                  <NextImage
-                    src={page.Why.Image[0].url}
-                    alt='Image for Why'
-                    width={674}
-                    height={380}
+            <OneThenTwoColumns
+              mt={5}
+              firstColumnContent={
+                <Heading variant='h1'>{page.Why.Title}</Heading>
+              }
+              remainingContent={
+                <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
+                  <Text
+                    variant='p2'
+                    sx={{ whiteSpace: 'pre-wrap' }}
+                    dangerouslySetInnerHTML={{ __html: page.Why.Content }}
                   />
-                )}
-              </Flex>
-            }
-          />
+                  {page.Why.Image && (
+                    <NextImage
+                      src={page.Why.Image[0].url}
+                      alt='Image for Why'
+                      width={674}
+                      height={380}
+                    />
+                  )}
+                </Flex>
+              }
+            />
 
-          <OneThenTwoColumns
-            mt={5}
-            firstColumnContent={
-              <Heading variant='h1'>{page.Model.Title}</Heading>
-            }
-            remainingContent={
-              <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
-                <Text
-                  variant='p2'
-                  sx={{ whiteSpace: 'pre-wrap' }}
-                  dangerouslySetInnerHTML={{ __html: page.Model.Content }}
-                />
-                {page.Model.Image && (
-                  <NextImage
-                    src={page.Model.Image[0].url}
-                    alt='Climate Model'
-                    width={674}
-                    height={380}
+            <OneThenTwoColumns
+              mt={5}
+              firstColumnContent={
+                <Heading variant='h1'>{page.Model.Title}</Heading>
+              }
+              remainingContent={
+                <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
+                  <Text
+                    variant='p2'
+                    sx={{ whiteSpace: 'pre-wrap' }}
+                    dangerouslySetInnerHTML={{ __html: page.Model.Content }}
                   />
-                )}
-              </Flex>
-            }
-          />
-        </Flex>
-      </FullWidthCentered>
+                  {page.Model.Image && (
+                    <NextImage
+                      src={page.Model.Image[0].url}
+                      alt='Climate Model'
+                      width={674}
+                      height={380}
+                    />
+                  )}
+                </Flex>
+              }
+            />
+          </Flex>
+        </FullWidthCentered>
 
-      <ReportsCaseStudiesAccreditors
-        commonContent={commonContent}
-        marketInsights={marketInsights}
-        industryReports={industryReports}
-        caseStudies={caseStudies}
-        accreditors={accreditors}
-        defaultTheme={'Climate'}
-      />
-    </Flex>
+        <ReportsCaseStudiesAccreditors
+          commonContent={commonContent}
+          marketInsights={marketInsights}
+          industryReports={industryReports}
+          caseStudies={caseStudies}
+          accreditors={accreditors}
+          defaultTheme={'Climate'}
+        />
+      </Flex>
+    </>
   )
 }
 
