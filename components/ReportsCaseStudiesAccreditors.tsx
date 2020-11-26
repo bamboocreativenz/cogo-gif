@@ -62,7 +62,8 @@ export default function ReportsCaseStudiesAccreditors ({
                   sx={{
                     flex: 2,
                     justifyContent: 'space-between',
-                    alignItems: 'flex-end'
+                    alignItems: 'flex-end',
+                    width: '100%'
                   }}
                 >
                   <Flex mr={4} sx={{ flex: 1 }}>

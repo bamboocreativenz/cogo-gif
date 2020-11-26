@@ -200,7 +200,7 @@ export function InternalDropdownMultiple ({
               }}
             >
               <Flex sx={{ alignItems: 'center' }}>
-                <Image src={item.icon} mr={3} sx={{ width: 4 }} />
+                <Image src={item.icon} mr={3} sx={{ width: 4, minWidth: 4 }} />
                 <Text>{item.name}</Text>
               </Flex>
             </Flex>
