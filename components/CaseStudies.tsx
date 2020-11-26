@@ -112,6 +112,7 @@ export default function CaseStudies ({
                   sx={{
                     flexDirection: 'column',
                     minWidth: [300, 500],
+                    width: [300, 500],
                     boxShadow: '0 0 4px 0 rgba(0,0,0,0.25)'
                   }}
                 >
@@ -215,7 +216,7 @@ export default function CaseStudies ({
                           </Box>
                           <Image
                             src={industries[industry][gifTheme]}
-                            sx={{ width: 4 }}
+                            sx={{ width: 34 }}
                           />
                         </Flex>
                         <Box
