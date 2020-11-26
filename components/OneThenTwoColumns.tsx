@@ -22,7 +22,7 @@ export default function OneThenTwoColumns ({
       }}
       {...rest}
     >
-      <Box sx={{ flex: 1 }}>{firstColumnContent}</Box>
+      <Box sx={{ flex: 1, width: ['100%', 'unset'] }}>{firstColumnContent}</Box>
       <Box sx={{ flex: 2, width: ['100%', 'unset'] }}>{remainingContent}</Box>
     </Flex>
   )

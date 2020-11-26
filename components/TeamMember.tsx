@@ -16,7 +16,7 @@ export default function TeamMember ({ copy }: TeamMemberProps) {
     <OneThenTwoColumns
       mt={[4, 5]}
       firstColumnContent={
-        <Flex mb={[2, 0]} sx={{ justifyContent: 'flex-end' }}>
+        <Flex mb={[2, 0]}>
           <NextImage
             src={copy.Image[0].url}
             alt={copy.Title}
