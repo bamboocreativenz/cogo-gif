@@ -34,15 +34,19 @@ const plainIndustries = Object.keys(industries).map(i => ({
 }))
 
 function getHandleSelectIndustry ({
-  selectedIndustries,
-  setSelectedIndustries,
+  selectedIndustriesForDownload,
+  setSelectedIndustriesForDownload,
   industry
 }) {
   return function handleSelectIndustry () {
-    if (selectedIndustries.includes(industry)) {
-      setSelectedIndustries(without(selectedIndustries, industry))
+    if (selectedIndustriesForDownload.includes(industry)) {
+      setSelectedIndustriesForDownload(
+        without(selectedIndustriesForDownload, industry)
+      )
     } else {
-      setSelectedIndustries(selectedIndustries.concat(industry))
+      setSelectedIndustriesForDownload(
+        selectedIndustriesForDownload.concat(industry)
+      )
     }
   }
 }
@@ -52,7 +56,7 @@ interface IndustryReportsProps {
   download: any // TODO: type better
   marketInsights: any // TODO: type better
   industryReports: any // TODO: type better
-  selectedIndustry: string
+  selectedIndustries: Array<string>
   selectedTheme: string
 }
 
@@ -61,12 +65,15 @@ export default function IndustryReports ({
   download,
   marketInsights,
   industryReports,
-  selectedIndustry,
+  selectedIndustries,
   selectedTheme
 }: IndustryReportsProps) {
   const { theme } = useThemeUI()
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedIndustries, setSelectedIndustries] = useState([])
+  const [
+    selectedIndustriesForDownload,
+    setSelectedIndustriesForDownload
+  ] = useState([])
   const [downloading, setDownloading] = useState(false)
   const [downloadSuccess, setDownloadSuccess] = useState(null)
   const { register, handleSubmit, errors, setValue } = useForm({
@@ -113,15 +120,16 @@ export default function IndustryReports ({
         <Flex py={4} sx={{ overflowX: 'scroll' }}>
           {marketInsights
             .filter(mi =>
-              selectedTheme && selectedIndustry
+              selectedTheme && selectedIndustries.length > 0
                 ? mi.Themes &&
                   mi.Themes.includes(selectedTheme) &&
                   mi.Industries &&
-                  mi.Industries.includes(selectedIndustry)
+                  selectedIndustries.some(mi.Industries.includes)
                 : selectedTheme
                 ? mi.Themes && mi.Themes.includes(selectedTheme)
-                : selectedIndustry
-                ? mi.Industries && mi.Industries.includes(selectedIndustry)
+                : selectedIndustries.length > 0
+                ? mi.Industries &&
+                  selectedIndustries.some(mi.Industries.includes)
                 : mi
             )
             .map((mi, i) => (
@@ -199,18 +207,20 @@ export default function IndustryReports ({
                 py={2}
                 onClick={getHandleSelectIndustry({
                   industry: industry.name,
-                  selectedIndustries,
-                  setSelectedIndustries
+                  selectedIndustriesForDownload,
+                  setSelectedIndustriesForDownload
                 })}
                 sx={{
                   width: 160,
                   alignItems: 'center',
                   cursor: 'pointer',
-                  opacity: selectedIndustries.includes(industry.name)
+                  opacity: selectedIndustriesForDownload.includes(industry.name)
                     ? '1'
                     : '0.4',
                   '&:hover': {
-                    opacity: selectedIndustries.includes(industry.name)
+                    opacity: selectedIndustriesForDownload.includes(
+                      industry.name
+                    )
                       ? '1'
                       : '0.7'
                   }
@@ -245,15 +255,15 @@ export default function IndustryReports ({
             <Button
               ml={2}
               variant={
-                downloading || selectedIndustries.length < 1
+                downloading || selectedIndustriesForDownload.length < 1
                   ? 'disabled'
                   : 'primary'
               }
-              disabled={downloading || selectedIndustries.length < 1}
+              disabled={downloading || selectedIndustriesForDownload.length < 1}
               onClick={handleSubmit(data =>
                 downloadPDF({
                   pdfType: 'Industry Report',
-                  selected: selectedIndustries.map(si => ({
+                  selected: selectedIndustriesForDownload.map(si => ({
                     id: industryReports[si].id,
                     Link: industryReports[si].Link
                   })),

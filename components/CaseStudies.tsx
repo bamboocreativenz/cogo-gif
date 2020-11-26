@@ -31,7 +31,7 @@ interface CaseStudiesProps {
   caseStudies: any // TODO: type better
   copy: any // TODO: type better
   download: any // TODO: type better
-  selectedIndustry: string
+  selectedIndustries: Array<string>
   selectedTheme: string
 }
 
@@ -39,7 +39,7 @@ export default function CaseStudies ({
   caseStudies,
   copy,
   download,
-  selectedIndustry,
+  selectedIndustries,
   selectedTheme
 }: CaseStudiesProps) {
   const { theme } = useThemeUI()
@@ -83,12 +83,13 @@ export default function CaseStudies ({
         <Flex py={3} px={1} sx={{ overflowX: 'scroll' }}>
           {caseStudies
             .filter(cs =>
-              selectedTheme && selectedIndustry
-                ? cs.Theme === selectedTheme && cs.Industry === selectedIndustry
+              selectedTheme && selectedIndustries.length > 0
+                ? cs.Theme === selectedTheme &&
+                  selectedIndustries.includes(cs.Industry)
                 : selectedTheme
                 ? cs.Theme === selectedTheme
-                : selectedIndustry
-                ? cs.Industry === selectedIndustry
+                : selectedIndustries.length > 0
+                ? selectedIndustries.includes(cs.Industry)
                 : cs
             )
             .map((cs, i) => {

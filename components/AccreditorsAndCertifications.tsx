@@ -23,14 +23,12 @@ type Accreditor = {
 interface AccreditorsAndCertificationsProps {
   accreditors: Array<Accreditor> // TODO: type better
   copy: any // TODO: type better
-  selectedIndustry: string
   selectedTheme: string
 }
 
 export default function AccreditorsAndCertifications ({
   accreditors,
   copy,
-  selectedIndustry,
   selectedTheme
 }: AccreditorsAndCertificationsProps) {
   return (

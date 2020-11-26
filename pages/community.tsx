@@ -102,10 +102,6 @@ export default function Community ({
 
       <ReportsCaseStudiesAccreditors
         commonContent={commonContent}
-        selectedIndustry={selectedIndustry}
-        setSelectedIndustry={setSelectedIndustry}
-        selectedTheme={selectedTheme}
-        setSelectedTheme={setSelectedTheme}
         marketInsights={marketInsights}
         industryReports={industryReports}
         caseStudies={caseStudies}

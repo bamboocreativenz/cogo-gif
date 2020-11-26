@@ -10,6 +10,8 @@ import ReportsCaseStudiesAccreditors from '../components/ReportsCaseStudiesAccre
 
 import getPageStaticProps from '../util/getPageStaticProps'
 
+import useFilters from '../hooks/useFilters'
+
 interface HomeProps {
   commonContent: any // TODO: type better
   marketInsights: any // TODO: type better
@@ -27,8 +29,8 @@ export default function Home ({
   accreditors,
   page
 }: HomeProps) {
-  const [selectedIndustry, setSelectedIndustry] = useState('')
-  const [selectedTheme, setSelectedTheme] = useState('')
+  // const [selectedIndustries, setSelectedIndustries] = useState([])
+  // const [selectedTheme, setSelectedTheme] = useState('')
 
   return (
     <Flex sx={{ flexDirection: 'column' }}>
@@ -78,10 +80,6 @@ export default function Home ({
 
       <ReportsCaseStudiesAccreditors
         commonContent={commonContent}
-        selectedIndustry={selectedIndustry}
-        setSelectedIndustry={setSelectedIndustry}
-        selectedTheme={selectedTheme}
-        setSelectedTheme={setSelectedTheme}
         marketInsights={marketInsights}
         industryReports={industryReports}
         caseStudies={caseStudies}
