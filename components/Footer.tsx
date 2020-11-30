@@ -33,20 +33,19 @@ function FooterLogo ({ src, alt }: FooterLogoProps) {
 }
 
 interface FooterProps {
-  logoWestpac: any
-  logoWWF: any
-  logoBusinessGovtNZ: any
-  logoSustainableBusinessNetwork: any
-  logoCoGo: any
+  // logoWestpac: any
+  // logoWWF: any
+  // logoBusinessGovtNZ: any
+  // logoSustainableBusinessNetwork: any
+  // logoCoGo: any
 }
 
-export default function Footer ({
-  logoWestpac,
-  logoWWF,
-  logoBusinessGovtNZ,
-  logoSustainableBusinessNetwork,
-  logoCoGo
-}: FooterProps) {
+export default function Footer ({}: // logoWestpac,
+// logoWWF,
+// logoBusinessGovtNZ,
+// logoSustainableBusinessNetwork,
+// logoCoGo
+FooterProps) {
   return (
     <FullWidthCentered bg='text'>
       <Flex
@@ -54,10 +53,10 @@ export default function Footer ({
         py={5}
         sx={{ flexDirection: 'column', alignItems: ['center', 'initial'] }}
       >
-        <Text variant='h3' sx={{ color: 'white' }}>
+        {/* <Text variant='h3' sx={{ color: 'white' }}>
           Brought to you by
-        </Text>
-        <Flex
+        </Text> */}
+        {/* <Flex
           mt={4}
           sx={{
             flexDirection: ['column', 'row'],
@@ -73,9 +72,9 @@ export default function Footer ({
             alt='Sustainable Business Network'
           />
           <FooterLogo src={logoCoGo[0].url} alt='CoGo' />
-        </Flex>
+        </Flex> */}
         <Flex
-          mt={4}
+          // mt={4}
           sx={{
             flexDirection: 'column',
             alignItems: ['flex-start', 'flex-end']

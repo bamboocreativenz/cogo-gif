@@ -137,13 +137,13 @@ export default function About ({ page, commonContent }: AboutProps) {
         </FullWidthCentered>
 
         <Footer
-          logoWestpac={commonContent['Westpac'].Image}
-          logoWWF={commonContent['WWF'].Image}
-          logoBusinessGovtNZ={commonContent['business.govt.nz'].Image}
-          logoSustainableBusinessNetwork={
-            commonContent['Sustainable Business Network'].Image
-          }
-          logoCoGo={commonContent['CoGo'].Image}
+        // logoWestpac={commonContent['Westpac'].Image}
+        // logoWWF={commonContent['WWF'].Image}
+        // logoBusinessGovtNZ={commonContent['business.govt.nz'].Image}
+        // logoSustainableBusinessNetwork={
+        //   commonContent['Sustainable Business Network'].Image
+        // }
+        // logoCoGo={commonContent['CoGo'].Image}
         />
       </Flex>
     </>

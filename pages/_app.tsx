@@ -12,6 +12,10 @@ export default function App ({ Component, pageProps }) {
     <>
       <Head>
         <title>Good Impact Framework</title>
+        <meta
+          name='viewport'
+          content='width=device-width, initial-scale=1'
+        ></meta>
       </Head>
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
