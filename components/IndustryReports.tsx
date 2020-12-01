@@ -95,7 +95,6 @@ export default function IndustryReports ({
       }
     }
   })
-  console.log({ plainIndustries })
 
   return (
     <FullWidthCentered bg='greyBackground'>
