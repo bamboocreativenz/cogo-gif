@@ -95,6 +95,7 @@ export default function IndustryReports ({
       }
     }
   })
+  console.log({ plainIndustries })
 
   return (
     <FullWidthCentered bg='greyBackground'>
@@ -132,9 +133,9 @@ export default function IndustryReports ({
                   selectedIndustries.some(mi.Industries.includes)
                 : mi
             )
-            .map((mi, i) => (
+            .map(mi => (
               <Box
-                key={i}
+                key={mi.id}
                 mr={[3, 5]}
                 sx={{
                   minWidth: [200, 7]

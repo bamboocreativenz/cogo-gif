@@ -8,6 +8,7 @@ import OneThenTwoColumns from './OneThenTwoColumns'
 import ThemePill from './ThemePill'
 
 type Accreditor = {
+  id: string
   Heading: string
   Bio: string
   Logo: Array<any>
@@ -47,7 +48,7 @@ export default function AccreditorsAndCertifications ({
         <Flex py={3} px={1} sx={{ overflowX: 'scroll' }}>
           {accreditors
             .filter(a => (selectedTheme ? a.Theme === selectedTheme : a))
-            .map((a, i) => {
+            .map(a => {
               const staffImage = a['Staff Image']
               const staffName = a['Staff Name']
               const staffRole = a['Staff Role']
@@ -55,7 +56,7 @@ export default function AccreditorsAndCertifications ({
 
               return (
                 <Flex
-                  key={i}
+                  key={a.id}
                   bg='white'
                   p={3}
                   mr={4}

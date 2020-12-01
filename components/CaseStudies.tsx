@@ -1,16 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import {
-  useThemeUI,
-  jsx,
-  Flex,
-  Box,
-  Heading,
-  Text,
-  Image,
-  Button,
-  Input
-} from 'theme-ui'
+import { jsx, Flex, Box, Heading, Text, Image, Button, Input } from 'theme-ui'
 import NextImage from 'next/image'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -42,7 +32,6 @@ export default function CaseStudies ({
   selectedIndustries,
   selectedTheme
 }: CaseStudiesProps) {
-  const { theme } = useThemeUI()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalCaseStudy, setModalCaseStudy] = useState(null)
   const [downloading, setDownloading] = useState(false)
@@ -92,7 +81,7 @@ export default function CaseStudies ({
                 ? selectedIndustries.includes(cs.Industry)
                 : cs
             )
-            .map((cs, i) => {
+            .map(cs => {
               const banner =
                 (cs['Banner'] && cs['Banner'][0].url) ||
                 '/images/case-study-banner-mevo.png'
@@ -106,7 +95,7 @@ export default function CaseStudies ({
 
               return (
                 <Flex
-                  key={i}
+                  key={cs.id}
                   mr={4}
                   bg='white'
                   sx={{
