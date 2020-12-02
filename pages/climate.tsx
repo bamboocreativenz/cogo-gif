@@ -13,6 +13,7 @@ import getPageStaticProps from '../util/getPageStaticProps'
 
 interface ClimateProps {
   commonContent: any // TODO: type better
+  footer: Array<any> // TODO: type better
   marketInsights: any // TODO: type better
   industryReports: any // TODO: type better
   caseStudies: any // TODO: type better
@@ -22,6 +23,7 @@ interface ClimateProps {
 
 export default function Climate ({
   commonContent,
+  footer,
   marketInsights,
   industryReports,
   caseStudies,
@@ -119,6 +121,7 @@ export default function Climate ({
 
         <ReportsCaseStudiesAccreditors
           commonContent={commonContent}
+          footer={footer}
           marketInsights={marketInsights}
           industryReports={industryReports}
           caseStudies={caseStudies}

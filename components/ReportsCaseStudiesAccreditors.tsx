@@ -25,6 +25,7 @@ const plainIndustries = Object.keys(industries).map(i => ({
 
 interface ReportsCaseStudiesAccreditorsProps {
   commonContent: any
+  footer: any
   marketInsights: any
   industryReports: any
   caseStudies: any
@@ -34,6 +35,7 @@ interface ReportsCaseStudiesAccreditorsProps {
 
 export default function ReportsCaseStudiesAccreditors ({
   commonContent,
+  footer,
   marketInsights,
   industryReports,
   caseStudies,
@@ -132,13 +134,14 @@ export default function ReportsCaseStudiesAccreditors ({
       <Latest copy={commonContent.Latest} />
 
       <Footer
-      // logoWestpac={commonContent['Westpac'].Image}
-      // logoWWF={commonContent['WWF'].Image}
-      // logoBusinessGovtNZ={commonContent['business.govt.nz'].Image}
-      // logoSustainableBusinessNetwork={
-      //   commonContent['Sustainable Business Network'].Image
-      // }
-      // logoCoGo={commonContent['CoGo'].Image}
+        footer={footer}
+        // logoWestpac={commonContent['Westpac'].Image}
+        // logoWWF={commonContent['WWF'].Image}
+        // logoBusinessGovtNZ={commonContent['business.govt.nz'].Image}
+        // logoSustainableBusinessNetwork={
+        //   commonContent['Sustainable Business Network'].Image
+        // }
+        // logoCoGo={commonContent['CoGo'].Image}
       />
     </>
   )

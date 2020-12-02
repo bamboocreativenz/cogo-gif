@@ -13,6 +13,7 @@ import getPageStaticProps from '../util/getPageStaticProps'
 
 interface LandAndWaterProps {
   commonContent: any // TODO: type better
+  footer: Array<any> // TODO: type better
   marketInsights: any // TODO: type better
   industryReports: any // TODO: type better
   caseStudies: any // TODO: type better
@@ -22,6 +23,7 @@ interface LandAndWaterProps {
 
 export default function LandAndWater ({
   commonContent,
+  footer,
   marketInsights,
   industryReports,
   caseStudies,
@@ -129,6 +131,7 @@ export default function LandAndWater ({
 
         <ReportsCaseStudiesAccreditors
           commonContent={commonContent}
+          footer={footer}
           marketInsights={marketInsights}
           industryReports={industryReports}
           caseStudies={caseStudies}

@@ -38,9 +38,12 @@ interface FooterProps {
   // logoBusinessGovtNZ: any
   // logoSustainableBusinessNetwork: any
   // logoCoGo: any
+  footer: Array<any>
 }
 
-export default function Footer ({}: // logoWestpac,
+export default function Footer ({
+  footer
+}: // logoWestpac
 // logoWWF,
 // logoBusinessGovtNZ,
 // logoSustainableBusinessNetwork,
@@ -53,26 +56,33 @@ FooterProps) {
         py={5}
         sx={{ flexDirection: 'column', alignItems: ['center', 'initial'] }}
       >
-        {/* <Text variant='h3' sx={{ color: 'white' }}>
-          Brought to you by
-        </Text> */}
-        {/* <Flex
-          mt={4}
-          sx={{
-            flexDirection: ['column', 'row'],
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }}
-        >
-          <FooterLogo src={logoWestpac[0].url} alt='Westpac' />
-          <FooterLogo src={logoWWF[0].url} alt='WWF' />
-          <FooterLogo src={logoBusinessGovtNZ[0].url} alt='Business.govt.nz' />
-          <FooterLogo
-            src={logoSustainableBusinessNetwork[0].url}
-            alt='Sustainable Business Network'
-          />
-          <FooterLogo src={logoCoGo[0].url} alt='CoGo' />
-        </Flex> */}
+        {footer.length > 0 && (
+          <>
+            <Text variant='h3' sx={{ color: 'white' }}>
+              Brought to you by
+            </Text>
+
+            <Flex
+              mt={4}
+              sx={{
+                flexDirection: ['column', 'row'],
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}
+            >
+              {footer.map(f => (
+                <FooterLogo src={f.Image[0].url} alt={f.Name} />
+              ))}
+              {/* <FooterLogo src={logoWWF[0].url} alt='WWF' />
+            <FooterLogo src={logoBusinessGovtNZ[0].url} alt='Business.govt.nz' />
+            <FooterLogo
+              src={logoSustainableBusinessNetwork[0].url}
+              alt='Sustainable Business Network'
+            />
+            <FooterLogo src={logoCoGo[0].url} alt='CoGo' /> */}
+            </Flex>
+          </>
+        )}
         <Flex
           // mt={4}
           sx={{

@@ -86,9 +86,24 @@ export default async function getPageStaticProps ({
     'Name'
   )
 
+  const footerRecords = await airtable.listRecords({
+    tableName: 'Footer',
+    viewName: 'Grid View'
+  })
+  const footer = footerRecords
+    .filter(c => {
+      if (process.env.VERCEL_ENV !== 'production') {
+        return !isEmpty(c.fields)
+      } else {
+        return !isEmpty(c.fields) && !!c.fields.Production
+      }
+    })
+    .map(c => c.fields)
+
   return {
     props: {
       commonContent,
+      footer,
       marketInsights,
       industryReports,
       caseStudies,

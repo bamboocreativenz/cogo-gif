@@ -13,6 +13,7 @@ import getPageStaticProps from '../util/getPageStaticProps'
 
 interface WasteProps {
   commonContent: any // TODO: type better
+  footer: Array<any> // TODO: type better
   marketInsights: any // TODO: type better
   industryReports: any // TODO: type better
   caseStudies: any // TODO: type better
@@ -22,6 +23,7 @@ interface WasteProps {
 
 export default function Waste ({
   commonContent,
+  footer,
   marketInsights,
   industryReports,
   caseStudies,
@@ -127,6 +129,7 @@ export default function Waste ({
 
         <ReportsCaseStudiesAccreditors
           commonContent={commonContent}
+          footer={footer}
           marketInsights={marketInsights}
           industryReports={industryReports}
           caseStudies={caseStudies}

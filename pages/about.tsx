@@ -18,9 +18,10 @@ import getPageStaticProps from '../util/getPageStaticProps'
 interface AboutProps {
   page: any // TODO: type better
   commonContent: any // TODO: type better
+  footer: Array<any> // TODO: type better
 }
 
-export default function About ({ page, commonContent }: AboutProps) {
+export default function About ({ page, commonContent, footer }: AboutProps) {
   return (
     <>
       <Head>
@@ -137,13 +138,14 @@ export default function About ({ page, commonContent }: AboutProps) {
         </FullWidthCentered>
 
         <Footer
-        // logoWestpac={commonContent['Westpac'].Image}
-        // logoWWF={commonContent['WWF'].Image}
-        // logoBusinessGovtNZ={commonContent['business.govt.nz'].Image}
-        // logoSustainableBusinessNetwork={
-        //   commonContent['Sustainable Business Network'].Image
-        // }
-        // logoCoGo={commonContent['CoGo'].Image}
+          footer={footer}
+          // logoWestpac={commonContent['Westpac'].Image}
+          // logoWWF={commonContent['WWF'].Image}
+          // logoBusinessGovtNZ={commonContent['business.govt.nz'].Image}
+          // logoSustainableBusinessNetwork={
+          //   commonContent['Sustainable Business Network'].Image
+          // }
+          // logoCoGo={commonContent['CoGo'].Image}
         />
       </Flex>
     </>
