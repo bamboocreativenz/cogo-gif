@@ -137,16 +137,7 @@ export default function About ({ page, commonContent, footer }: AboutProps) {
           </Flex>
         </FullWidthCentered>
 
-        <Footer
-          footer={footer}
-          // logoWestpac={commonContent['Westpac'].Image}
-          // logoWWF={commonContent['WWF'].Image}
-          // logoBusinessGovtNZ={commonContent['business.govt.nz'].Image}
-          // logoSustainableBusinessNetwork={
-          //   commonContent['Sustainable Business Network'].Image
-          // }
-          // logoCoGo={commonContent['CoGo'].Image}
-        />
+        <Footer footer={footer} />
       </Flex>
     </>
   )
