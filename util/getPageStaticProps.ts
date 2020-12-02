@@ -92,10 +92,11 @@ export default async function getPageStaticProps ({
   })
   const footer = footerRecords
     .filter(c => {
+      console.log(c.fields, process.env.VERCEL_ENV)
       if (process.env.VERCEL_ENV !== 'production') {
         return !isEmpty(c.fields)
       } else {
-        return !isEmpty(c.fields) && !!c.fields.Production
+        return !isEmpty(c.fields) && c.fields.Production
       }
     })
     .map(c => c.fields)
