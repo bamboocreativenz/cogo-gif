@@ -1,6 +1,9 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex, Heading, Text } from 'theme-ui'
+import { jsx, Flex, Heading, Text, Link as TUILink } from 'theme-ui'
+import ReactMarkdown from 'react-markdown'
+import gfm from 'remark-gfm'
+import Link from 'next/link'
 import Head from 'next/head'
 
 import FullWidthCentered from '../components/FullWidthCentered'
@@ -52,7 +55,26 @@ export default function Home ({
           >
             <Flex mt={5} mb={3} sx={{ flexDirection: 'column' }}>
               <Heading variant='h1'>{page.Header.Title}</Heading>
-              <Text variant='p2'>{page.Header.Content}</Text>
+              {/* <Text variant='p2'>{page.Header.Content}</Text> */}
+              <ReactMarkdown
+                renderers={{
+                  paragraph: props => (
+                    <Text
+                      variant='p2'
+                      sx={{ whiteSpace: 'pre-wrap' }}
+                      {...props}
+                    />
+                  ),
+                  link: props => (
+                    // N.B. airtable doesn't seem to save relative links in Markdown correctly, so need to refer to the host property here
+                    <Link href={new URL(props.href).host} passHref>
+                      <TUILink variant='learn' {...props} />
+                    </Link>
+                  )
+                }}
+                plugins={[gfm]}
+                children={page.Header.Content}
+              />
             </Flex>
 
             <Flex sx={{ flexDirection: ['column', 'row'] }}>
