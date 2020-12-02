@@ -1095,10 +1095,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@bamboocreativenz/pip-airtable@^1.0.5":
-  version "1.0.5"
-  resolved "https://npm.pkg.github.com/download/@bamboocreativenz/pip-airtable/1.0.5/0f6ecaa58fe04100f8297be627351766958df93c66bdbf2b123571d8b8727ad6#1ebaa31ff5c8494d3b562d3a756c2e39e29e6c44"
-  integrity sha512-Mw4uyDTwMuSPq7PjzZ56XauCja8Fdh3HVoM1CUzk96yhv9nU2P6jzJsWIhHF3NZhMgQoqVq4lqOSVRUg4aFEuQ==
+"@bamboocreativenz/pip-airtable@1.1.0":
+  version "1.1.0"
+  resolved "https://npm.pkg.github.com/download/@bamboocreativenz/pip-airtable/1.1.0/1a668c567ef3bf058db8f564280bb206f84b5b4a539b0b6c38a114a0c64bbe9a#894cced123eb3e0daf6d45d4a8cd2448920c3c61"
+  integrity sha512-x9mQhz2jCQrzrKws/dVgzFYqRst/xmBoMzhMQVAZMAtzRSCaRKUWcxz/da2wld259vHCT33BFw6JLlMMN5uH8A==
   dependencies:
     airtable "^0.9.0"
     lodash "^4.17.20"

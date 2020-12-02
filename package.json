@@ -18,7 +18,7 @@
     }
   },
   "dependencies": {
-    "@bamboocreativenz/pip-airtable": "^1.0.5",
+    "@bamboocreativenz/pip-airtable": "1.1.0",
     "downshift": "^6.0.6",
     "lodash": "^4.17.20",
     "next": "10.0.1",
