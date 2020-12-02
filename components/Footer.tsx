@@ -33,22 +33,10 @@ function FooterLogo ({ src, alt }: FooterLogoProps) {
 }
 
 interface FooterProps {
-  // logoWestpac: any
-  // logoWWF: any
-  // logoBusinessGovtNZ: any
-  // logoSustainableBusinessNetwork: any
-  // logoCoGo: any
   footer: Array<any>
 }
 
-export default function Footer ({
-  footer
-}: // logoWestpac
-// logoWWF,
-// logoBusinessGovtNZ,
-// logoSustainableBusinessNetwork,
-// logoCoGo
-FooterProps) {
+export default function Footer ({ footer }: FooterProps) {
   return (
     <FullWidthCentered bg='text'>
       <Flex
@@ -71,20 +59,12 @@ FooterProps) {
               }}
             >
               {footer.map(f => (
-                <FooterLogo src={f.Image[0].url} alt={f.Name} />
+                <FooterLogo key={f.Name} src={f.Image[0].url} alt={f.Name} />
               ))}
-              {/* <FooterLogo src={logoWWF[0].url} alt='WWF' />
-            <FooterLogo src={logoBusinessGovtNZ[0].url} alt='Business.govt.nz' />
-            <FooterLogo
-              src={logoSustainableBusinessNetwork[0].url}
-              alt='Sustainable Business Network'
-            />
-            <FooterLogo src={logoCoGo[0].url} alt='CoGo' /> */}
             </Flex>
           </>
         )}
         <Flex
-          // mt={4}
           sx={{
             flexDirection: 'column',
             alignItems: ['flex-start', 'flex-end']

@@ -1,5 +1,5 @@
 export default {
-  'Food & Beverage': {
+  'Food & Drink': {
     plain: require('../public/icons/food-and-drink.png'),
     Climate: require('../public/icons/food-and-drink-climate.png'),
     Waste: require('../public/icons/food-and-drink-waste.png'),
