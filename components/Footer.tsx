@@ -45,7 +45,7 @@ export default function Footer ({ footer }: FooterProps) {
         sx={{ flexDirection: 'column', alignItems: ['center', 'initial'] }}
       >
         {footer.length > 0 && (
-          <>
+          <Box mb={5}>
             <Text variant='h3' sx={{ color: 'white' }}>
               Brought to you by
             </Text>
@@ -62,7 +62,7 @@ export default function Footer ({ footer }: FooterProps) {
                 <FooterLogo key={f.Name} src={f.Image[0].url} alt={f.Name} />
               ))}
             </Flex>
-          </>
+          </Box>
         )}
         <Flex
           sx={{
