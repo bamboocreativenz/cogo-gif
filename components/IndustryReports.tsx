@@ -148,7 +148,7 @@ export default function IndustryReports ({
 
         <Flex sx={{ position: 'relative' }}>
           <Button
-            onClick={handleScrollContainer('left')}
+            onClick={handleScrollContainer('right')}
             variant='tertiary'
             bg='initial'
             sx={{ position: 'absolute', left: 0, top: [100, 128], zIndex: 100 }}
@@ -178,7 +178,7 @@ export default function IndustryReports ({
             ))}
           </Flex>
           <Button
-            onClick={handleScrollContainer('right')}
+            onClick={handleScrollContainer('left')}
             variant='tertiary'
             bg='initial'
             sx={{
