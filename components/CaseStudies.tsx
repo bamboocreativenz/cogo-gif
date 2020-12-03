@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import { jsx, Flex, Box, Heading, Text, Image, Button, Input } from 'theme-ui'
 import NextImage from 'next/image'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
 
@@ -32,6 +32,7 @@ export default function CaseStudies ({
   selectedIndustries,
   selectedTheme
 }: CaseStudiesProps) {
+  const scrollContainer = useRef(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalCaseStudy, setModalCaseStudy] = useState(null)
   const [downloading, setDownloading] = useState(false)
@@ -56,6 +57,21 @@ export default function CaseStudies ({
     }
   })
 
+  const handleScrollContainer = (direction: string) => () => {
+    // N.B. this isn't a perfect calculation, but it's close
+    const insightWidth =
+      scrollContainer.current.scrollWidth / caseStudies.length +
+      caseStudies.length
+
+    scrollContainer.current.scroll({
+      left:
+        direction === 'left'
+          ? scrollContainer.current.scrollLeft + insightWidth - 14
+          : scrollContainer.current.scrollLeft - insightWidth - 14,
+      behavior: 'smooth'
+    })
+  }
+
   return (
     <FullWidthCentered bg='greyBackground'>
       <Flex px={[3, 5]} mb={5} mt={3} sx={{ flexDirection: 'column' }}>
@@ -69,152 +85,111 @@ export default function CaseStudies ({
           }
         />
 
-        <Flex py={3} px={1} sx={{ overflowX: 'scroll' }}>
-          {caseStudies
-            .filter(cs =>
-              selectedTheme && selectedIndustries.length > 0
-                ? cs.Theme === selectedTheme &&
-                  selectedIndustries.includes(cs.Industry)
-                : selectedTheme
-                ? cs.Theme === selectedTheme
-                : selectedIndustries.length > 0
-                ? selectedIndustries.includes(cs.Industry)
-                : cs
-            )
-            .map(cs => {
-              const banner =
-                (cs['Banner'] && cs['Banner'][0].url) ||
-                '/images/case-study-banner-mevo.png'
-              const logo =
-                (cs['Logo'] && cs['Logo'][0].url) ||
-                '/images/case-study-logo-mevo.png'
-              const bio = cs['Bio'] || 'insert bio here'
-              const cta = cs['Call To Action Text'] || 'DOWNLOAD FULL'
-              const industry = cs['Industry'] || 'industry'
-              const gifTheme = cs['Theme'] || 'theme'
+        <Flex sx={{ position: 'relative' }}>
+          <Button
+            onClick={handleScrollContainer('right')}
+            variant='tertiary'
+            bg='initial'
+            sx={{ position: 'absolute', left: 0, top: [220, 182], zIndex: 100 }}
+          >
+            <Image src='/icons/chevron-left.svg' sx={{ height: 5 }} />
+          </Button>
+          <Flex
+            ref={scrollContainer}
+            py={3}
+            px={1}
+            sx={{ overflowX: 'scroll' }}
+          >
+            {caseStudies
+              .filter(cs =>
+                selectedTheme && selectedIndustries.length > 0
+                  ? cs.Theme === selectedTheme &&
+                    selectedIndustries.includes(cs.Industry)
+                  : selectedTheme
+                  ? cs.Theme === selectedTheme
+                  : selectedIndustries.length > 0
+                  ? selectedIndustries.includes(cs.Industry)
+                  : cs
+              )
+              .map(cs => {
+                const banner =
+                  (cs['Banner'] && cs['Banner'][0].url) ||
+                  '/images/case-study-banner-mevo.png'
+                const logo =
+                  (cs['Logo'] && cs['Logo'][0].url) ||
+                  '/images/case-study-logo-mevo.png'
+                const bio = cs['Bio'] || 'insert bio here'
+                const cta = cs['Call To Action Text'] || 'DOWNLOAD FULL'
+                const industry = cs['Industry'] || 'industry'
+                const gifTheme = cs['Theme'] || 'theme'
 
-              return (
-                <Flex
-                  key={cs.id}
-                  mr={4}
-                  bg='white'
-                  sx={{
-                    flexDirection: 'column',
-                    minWidth: [300, 500],
-                    width: [300, 500],
-                    boxShadow: '0 0 4px 0 rgba(0,0,0,0.25)'
-                  }}
-                >
+                return (
                   <Flex
+                    key={cs.id}
+                    mr={4}
+                    bg='white'
                     sx={{
-                      position: 'relative',
-                      minHeight: [160, 200],
-                      width: [300, 500]
+                      flexDirection: 'column',
+                      minWidth: [300, 500],
+                      width: [300, 500],
+                      boxShadow: '0 0 4px 0 rgba(0,0,0,0.25)'
                     }}
                   >
-                    <NextImage
-                      src={banner}
-                      alt={cs['Heading']}
-                      layout='fill'
-                      sx={{ objectFit: 'cover', objectPosition: 'center' }}
-                    />
                     <Flex
                       sx={{
-                        position: 'absolute',
-                        flexDirection: 'column',
-                        justifyContent: 'flex-end',
-                        top: 0,
-                        height: '100%',
-                        width: '100%',
-                        backgroundImage:
-                          'linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.4))'
+                        position: 'relative',
+                        minHeight: [160, 200],
+                        width: [300, 500]
                       }}
                     >
-                      <Heading
-                        variant='h2'
-                        mb={2}
-                        mx={3}
-                        sx={{
-                          color: 'white'
-                        }}
-                      >
-                        {cs['Heading']}
-                      </Heading>
-                    </Flex>
-                  </Flex>
-
-                  <Flex
-                    p={3}
-                    sx={{
-                      flex: 1,
-                      flexDirection: 'column',
-                      justifyContent: 'space-between'
-                    }}
-                  >
-                    <Flex sx={{ justifyContent: 'space-between' }}>
-                      <Text variant='p3'>{bio}</Text>
+                      <NextImage
+                        src={banner}
+                        alt={cs['Heading']}
+                        layout='fill'
+                        sx={{ objectFit: 'cover', objectPosition: 'center' }}
+                      />
                       <Flex
                         sx={{
-                          position: 'relative',
-                          minWidth: 90,
-                          height: 90,
-                          marginLeft: 3,
-                          display: ['none', 'initial']
+                          position: 'absolute',
+                          flexDirection: 'column',
+                          justifyContent: 'flex-end',
+                          top: 0,
+                          height: '100%',
+                          width: '100%',
+                          backgroundImage:
+                            'linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.4))'
                         }}
                       >
-                        <NextImage
-                          src={logo}
-                          alt={cs['Heading']}
-                          layout='fill'
+                        <Heading
+                          variant='h2'
+                          mb={2}
+                          mx={3}
                           sx={{
-                            objectFit: 'contain',
-                            objectPosition: 'top'
+                            color: 'white'
                           }}
-                        />
+                        >
+                          {cs['Heading']}
+                        </Heading>
                       </Flex>
                     </Flex>
+
                     <Flex
+                      p={3}
                       sx={{
-                        flexDirection: ['column', 'row'],
-                        justifyContent: 'space-between',
-                        alignItems: ['flex-start', 'center']
+                        flex: 1,
+                        flexDirection: 'column',
+                        justifyContent: 'space-between'
                       }}
                     >
-                      <Button
-                        variant='tertiary'
-                        onClick={() => {
-                          setModalCaseStudy(cs)
-                          setIsModalOpen(true)
-                        }}
-                        sx={{
-                          textTransform: 'uppercase'
-                        }}
-                      >
-                        {cta}
-                      </Button>
-                      <Flex
-                        sx={{
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          width: ['100%', 'initial']
-                        }}
-                      >
-                        <Flex>
-                          <Box mr={[2, 3]}>
-                            <ThemePill theme={gifTheme} size='small' />
-                          </Box>
-                          <Image
-                            src={industries[industry][gifTheme]}
-                            sx={{ width: 34, height: 34 }}
-                          />
-                        </Flex>
+                      <Flex sx={{ justifyContent: 'space-between' }}>
+                        <Text variant='p3'>{bio}</Text>
                         <Flex
                           sx={{
                             position: 'relative',
                             minWidth: 90,
                             height: 90,
                             marginLeft: 3,
-                            display: ['initial', 'none']
+                            display: ['none', 'initial']
                           }}
                         >
                           <NextImage
@@ -223,16 +198,85 @@ export default function CaseStudies ({
                             layout='fill'
                             sx={{
                               objectFit: 'contain',
-                              objectPosition: 'center'
+                              objectPosition: 'top'
                             }}
                           />
                         </Flex>
                       </Flex>
+                      <Flex
+                        sx={{
+                          flexDirection: ['column', 'row'],
+                          justifyContent: 'space-between',
+                          alignItems: ['flex-start', 'center']
+                        }}
+                      >
+                        <Button
+                          variant='tertiary'
+                          onClick={() => {
+                            setModalCaseStudy(cs)
+                            setIsModalOpen(true)
+                          }}
+                          sx={{
+                            textTransform: 'uppercase'
+                          }}
+                        >
+                          {cta}
+                        </Button>
+                        <Flex
+                          sx={{
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            width: ['100%', 'initial']
+                          }}
+                        >
+                          <Flex>
+                            <Box mr={[2, 3]}>
+                              <ThemePill theme={gifTheme} size='small' />
+                            </Box>
+                            <Image
+                              src={industries[industry][gifTheme]}
+                              sx={{ width: 34, height: 34 }}
+                            />
+                          </Flex>
+                          <Flex
+                            sx={{
+                              position: 'relative',
+                              minWidth: 90,
+                              height: 90,
+                              marginLeft: 3,
+                              display: ['initial', 'none']
+                            }}
+                          >
+                            <NextImage
+                              src={logo}
+                              alt={cs['Heading']}
+                              layout='fill'
+                              sx={{
+                                objectFit: 'contain',
+                                objectPosition: 'center'
+                              }}
+                            />
+                          </Flex>
+                        </Flex>
+                      </Flex>
                     </Flex>
                   </Flex>
-                </Flex>
-              )
-            })}
+                )
+              })}
+          </Flex>
+          <Button
+            onClick={handleScrollContainer('left')}
+            variant='tertiary'
+            bg='initial'
+            sx={{
+              position: 'absolute',
+              right: 0,
+              top: [220, 182],
+              zIndex: 100
+            }}
+          >
+            <Image src='/icons/chevron-right.svg' sx={{ height: 5 }} />
+          </Button>
         </Flex>
       </Flex>
 
