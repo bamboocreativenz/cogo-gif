@@ -238,41 +238,77 @@ export default function IndustryReports ({
             </Text>
           </Flex>
           <Flex mt={3} sx={{ flexWrap: 'wrap' }}>
-            {plainIndustries.map((industry, i) => (
-              <Flex
-                key={i}
-                pr={3}
-                py={2}
-                onClick={getHandleSelectIndustry({
-                  industry: industry.name,
-                  selectedIndustriesForDownload,
-                  setSelectedIndustriesForDownload
-                })}
-                sx={{
-                  width: 160,
-                  alignItems: 'center',
-                  cursor: 'pointer',
-                  opacity: selectedIndustriesForDownload.includes(industry.name)
-                    ? '1'
-                    : '0.4',
-                  '&:hover': {
+            {plainIndustries
+              .filter(pi => Object.keys(industryReports).includes(pi.name))
+              .map((industry, i) => (
+                <Flex
+                  key={i}
+                  pr={3}
+                  py={2}
+                  onClick={getHandleSelectIndustry({
+                    industry: industry.name,
+                    selectedIndustriesForDownload,
+                    setSelectedIndustriesForDownload
+                  })}
+                  sx={{
+                    width: 160,
+                    alignItems: 'center',
+                    cursor: 'pointer',
                     opacity: selectedIndustriesForDownload.includes(
                       industry.name
                     )
                       ? '1'
-                      : '0.7'
-                  }
-                }}
-              >
-                <Image
-                  mr={2}
-                  src={industry.icon}
-                  sx={{ width: 4, minWidth: 4 }}
-                />
-                <Text>{industry.name}</Text>
-              </Flex>
-            ))}
+                      : '0.4',
+                    '&:hover': {
+                      opacity: selectedIndustriesForDownload.includes(
+                        industry.name
+                      )
+                        ? '1'
+                        : '0.7'
+                    }
+                  }}
+                >
+                  <Image
+                    mr={2}
+                    src={industry.icon}
+                    sx={{ width: 4, minWidth: 4 }}
+                  />
+                  <Text>{industry.name}</Text>
+                </Flex>
+              ))}
           </Flex>
+          {plainIndustries.filter(
+            pi => !Object.keys(industryReports).includes(pi.name)
+          ).length > 0 && (
+            <>
+              <Heading mt={4} variant='h3'>
+                Coming soon:
+              </Heading>
+              <Flex mt={3} sx={{ flexWrap: 'wrap' }}>
+                {plainIndustries
+                  .filter(pi => !Object.keys(industryReports).includes(pi.name))
+                  .map((industry, i) => (
+                    <Flex
+                      key={i}
+                      pr={3}
+                      py={2}
+                      sx={{
+                        width: 160,
+                        alignItems: 'center',
+                        opacity: 0.4
+                      }}
+                    >
+                      <Image
+                        mr={2}
+                        src={industry.icon}
+                        sx={{ width: 4, minWidth: 4 }}
+                      />
+                      <Text>{industry.name}</Text>
+                    </Flex>
+                  ))}
+              </Flex>
+            </>
+          )}
           <Flex as='form' mt={3} sx={{ alignItems: 'flex-start' }}>
             <Flex sx={{ flexDirection: 'column' }}>
               <Input name='email' placeholder='Email' ref={register} />
