@@ -13,7 +13,7 @@ import {
   Link
 } from 'theme-ui'
 import NextImage from 'next/image'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
 import without from 'lodash/without'
@@ -69,6 +69,7 @@ export default function IndustryReports ({
   selectedTheme
 }: IndustryReportsProps) {
   const { theme } = useThemeUI()
+  const scrollContainer = useRef(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [
     selectedIndustriesForDownload,
@@ -96,6 +97,34 @@ export default function IndustryReports ({
     }
   })
 
+  const filteredMarketInsights = marketInsights.filter(mi =>
+    selectedTheme && selectedIndustries.length > 0
+      ? mi.Themes &&
+        mi.Themes.includes(selectedTheme) &&
+        mi.Industries &&
+        selectedIndustries.some(mi.Industries.includes)
+      : selectedTheme
+      ? mi.Themes && mi.Themes.includes(selectedTheme)
+      : selectedIndustries.length > 0
+      ? mi.Industries && selectedIndustries.some(mi.Industries.includes)
+      : mi
+  )
+
+  const handleScrollContainer = (direction: string) => () => {
+    // N.B. this isn't a perfect calculation, but it's close
+    const insightWidth =
+      scrollContainer.current.scrollWidth / filteredMarketInsights.length +
+      filteredMarketInsights.length
+
+    scrollContainer.current.scroll({
+      left:
+        direction === 'left'
+          ? scrollContainer.current.scrollLeft + insightWidth
+          : scrollContainer.current.scrollLeft - insightWidth,
+      behavior: 'smooth'
+    })
+  }
+
   return (
     <FullWidthCentered bg='greyBackground'>
       <Flex px={[3, 5]} my={5} sx={{ flexDirection: 'column' }}>
@@ -117,22 +146,17 @@ export default function IndustryReports ({
           }
         />
 
-        <Flex py={4} sx={{ overflowX: 'scroll' }}>
-          {marketInsights
-            .filter(mi =>
-              selectedTheme && selectedIndustries.length > 0
-                ? mi.Themes &&
-                  mi.Themes.includes(selectedTheme) &&
-                  mi.Industries &&
-                  selectedIndustries.some(mi.Industries.includes)
-                : selectedTheme
-                ? mi.Themes && mi.Themes.includes(selectedTheme)
-                : selectedIndustries.length > 0
-                ? mi.Industries &&
-                  selectedIndustries.some(mi.Industries.includes)
-                : mi
-            )
-            .map(mi => (
+        <Flex sx={{ position: 'relative' }}>
+          <Button
+            onClick={handleScrollContainer('left')}
+            variant='tertiary'
+            bg='initial'
+            sx={{ position: 'absolute', left: 0, top: [100, 128], zIndex: 100 }}
+          >
+            <Image src='/icons/chevron-left.svg' sx={{ height: 5 }} />
+          </Button>
+          <Flex ref={scrollContainer} py={4} sx={{ overflowX: 'scroll' }}>
+            {filteredMarketInsights.map(mi => (
               <Box
                 key={mi.id}
                 mr={[3, 5]}
@@ -152,6 +176,20 @@ export default function IndustryReports ({
                 </Link>
               </Box>
             ))}
+          </Flex>
+          <Button
+            onClick={handleScrollContainer('right')}
+            variant='tertiary'
+            bg='initial'
+            sx={{
+              position: 'absolute',
+              right: 0,
+              top: [100, 128],
+              zIndex: 100
+            }}
+          >
+            <Image src='/icons/chevron-right.svg' sx={{ height: 5 }} />
+          </Button>
         </Flex>
 
         <Flex
