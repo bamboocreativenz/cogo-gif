@@ -49,12 +49,22 @@ export default function About ({ page, commonContent, footer }: AboutProps) {
                     dangerouslySetInnerHTML={{ __html: page.What.Content }}
                   />
                   {page.What.Image && (
-                    <NextImage
-                      src={page.What.Image[0].url}
-                      alt='Image for What'
-                      width={674}
-                      height={380}
-                    />
+                    <Box
+                      sx={{
+                        position: 'relative',
+                        width: '100%',
+                        height: 380
+                      }}
+                    >
+                      <NextImage
+                        src={page.What.Image[0].url}
+                        alt='Image for What'
+                        layout='fill'
+                        sx={{ objectFit: 'contain', objectPosition: 'top' }}
+                        // width={674}
+                        // height={380}
+                      />
+                    </Box>
                   )}
                 </Flex>
               }
