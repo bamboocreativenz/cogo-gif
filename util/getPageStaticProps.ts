@@ -94,8 +94,8 @@ export default async function getPageStaticProps ({
             return (
               !isEmpty(c.fields) &&
               !(
-                // @ts-expect-error
                 (
+                // @ts-expect-error
                   aboutPageProdRecords.includes(c.fields.Name) &&
                   !c.fields['Production (only relevant for Who and Partners)']
                 )
