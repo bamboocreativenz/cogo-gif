@@ -71,12 +71,40 @@ export default async function getPageStaticProps ({
       .map(c => ({ id: c.id, ...c.fields }))
   }
 
+  const aboutPageProdRecords = [
+    'Who',
+    'Partner 1',
+    'Partner 2',
+    'Partner 3',
+    'Partner 4',
+    'Partner 5'
+  ]
   const pageRecords = await airtable.listRecords({
     tableName,
     viewName: 'Grid view'
   })
   const page = keyBy(
-    pageRecords.filter(c => !isEmpty(c.fields)).map(c => c.fields),
+    pageRecords
+      .filter(c => {
+        if (tableName === 'About Page') {
+          // handle partner images only being shown in non-prod for now
+          if (process.env.VERCEL_ENV !== 'production') {
+            return !isEmpty(c.fields)
+          } else {
+            // @ts-expect-error
+            return (
+              !isEmpty(c.fields) &&
+              !(
+                aboutPageProdRecords.includes(c.fields.Name) &&
+                !c.fields['Production (only relevant for Who and Partners)']
+              )
+            )
+          }
+        } else {
+          return !isEmpty(c.fields)
+        }
+      })
+      .map(c => c.fields),
     'Name'
   )
 

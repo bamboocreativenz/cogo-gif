@@ -102,36 +102,42 @@ export default function About ({ page, commonContent, footer }: AboutProps) {
               }
             />
 
-            <OneThenTwoColumns
-              mt={5}
-              firstColumnContent={
-                <Heading variant='h1'>{page.Who.Title}</Heading>
-              }
-              remainingContent={
-                <Flex ml={[0, 4]} mt={[3, 0]} sx={{ flexDirection: 'column' }}>
-                  <Text
-                    variant='p2'
-                    sx={{ whiteSpace: 'pre-wrap' }}
-                    dangerouslySetInnerHTML={{ __html: page.Who.Content }}
-                  />
-                  {page.Who.Image && (
-                    <NextImage
-                      src={page.Who.Image[0].url}
-                      alt='Image for Who'
-                      width={674}
-                      height={380}
+            {page.Who && (
+              <OneThenTwoColumns
+                mt={5}
+                firstColumnContent={
+                  <Heading variant='h1'>{page.Who.Title}</Heading>
+                }
+                remainingContent={
+                  <Flex
+                    ml={[0, 4]}
+                    mt={[3, 0]}
+                    sx={{ flexDirection: 'column' }}
+                  >
+                    <Text
+                      variant='p2'
+                      sx={{ whiteSpace: 'pre-wrap' }}
+                      dangerouslySetInnerHTML={{ __html: page.Who.Content }}
                     />
-                  )}
-                </Flex>
-              }
-            />
+                    {page.Who.Image && (
+                      <NextImage
+                        src={page.Who.Image[0].url}
+                        alt='Image for Who'
+                        width={674}
+                        height={380}
+                      />
+                    )}
+                  </Flex>
+                }
+              />
+            )}
 
             <Box my={[3, 4]}>
-              <Partner copy={page['Partner 1']} />
-              <Partner copy={page['Partner 2']} />
-              <Partner copy={page['Partner 3']} />
-              <Partner copy={page['Partner 4']} />
-              <Partner copy={page['Partner 5']} />
+              {page['Partner 1'] && <Partner copy={page['Partner 1']} />}
+              {page['Partner 2'] && <Partner copy={page['Partner 2']} />}
+              {page['Partner 3'] && <Partner copy={page['Partner 3']} />}
+              {page['Partner 4'] && <Partner copy={page['Partner 4']} />}
+              {page['Partner 5'] && <Partner copy={page['Partner 5']} />}
             </Box>
 
             <Flex my={5} sx={{ flexDirection: 'column', alignItems: 'center' }}>
