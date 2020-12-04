@@ -102,11 +102,12 @@ export default function IndustryReports ({
       ? mi.Themes &&
         mi.Themes.includes(selectedTheme) &&
         mi.Industries &&
-        selectedIndustries.some(mi.Industries.includes)
+        selectedIndustries.some(si => mi.Industries.includes(si))
       : selectedTheme
       ? mi.Themes && mi.Themes.includes(selectedTheme)
       : selectedIndustries.length > 0
-      ? mi.Industries && selectedIndustries.some(mi.Industries.includes)
+      ? mi.Industries &&
+        selectedIndustries.some(si => mi.Industries.includes(si))
       : mi
   )
 

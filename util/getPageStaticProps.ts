@@ -91,12 +91,14 @@ export default async function getPageStaticProps ({
           if (process.env.VERCEL_ENV !== 'production') {
             return !isEmpty(c.fields)
           } else {
-            // @ts-expect-error
             return (
               !isEmpty(c.fields) &&
               !(
-                aboutPageProdRecords.includes(c.fields.Name) &&
-                !c.fields['Production (only relevant for Who and Partners)']
+                // @ts-expect-error
+                (
+                  aboutPageProdRecords.includes(c.fields.Name) &&
+                  !c.fields['Production (only relevant for Who and Partners)']
+                )
               )
             )
           }
