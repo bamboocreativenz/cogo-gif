@@ -86,14 +86,21 @@ export default function CaseStudies ({
         />
 
         <Flex sx={{ position: 'relative' }}>
-          <Button
-            onClick={handleScrollContainer('right')}
-            variant='tertiary'
-            bg='initial'
-            sx={{ position: 'absolute', left: 0, top: [220, 182], zIndex: 100 }}
-          >
-            <Image src='/icons/chevron-left.svg' sx={{ height: 5 }} />
-          </Button>
+          {caseStudies.length > 0 && (
+            <Button
+              onClick={handleScrollContainer('right')}
+              variant='tertiary'
+              bg='initial'
+              sx={{
+                position: 'absolute',
+                left: 0,
+                top: [220, 182],
+                zIndex: 100
+              }}
+            >
+              <Image src='/icons/chevron-left.svg' sx={{ height: 5 }} />
+            </Button>
+          )}
           <Flex
             ref={scrollContainer}
             py={3}
@@ -264,19 +271,21 @@ export default function CaseStudies ({
                 )
               })}
           </Flex>
-          <Button
-            onClick={handleScrollContainer('left')}
-            variant='tertiary'
-            bg='initial'
-            sx={{
-              position: 'absolute',
-              right: 0,
-              top: [220, 182],
-              zIndex: 100
-            }}
-          >
-            <Image src='/icons/chevron-right.svg' sx={{ height: 5 }} />
-          </Button>
+          {caseStudies.length > 0 && (
+            <Button
+              onClick={handleScrollContainer('left')}
+              variant='tertiary'
+              bg='initial'
+              sx={{
+                position: 'absolute',
+                right: 0,
+                top: [220, 182],
+                zIndex: 100
+              }}
+            >
+              <Image src='/icons/chevron-right.svg' sx={{ height: 5 }} />
+            </Button>
+          )}
         </Flex>
       </Flex>
 
