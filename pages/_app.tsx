@@ -19,7 +19,7 @@ export default function App ({ Component, pageProps }) {
         <meta property='og:title' content='Good Impact Framework' />
         <meta
           property='og:image'
-          content='https://dl.airtable.com/.attachments/364a912fae9459884690e00ab8ce64ef/34f3377f/200702_QV_Auckland_636-4--shop.jpg'
+          content={pageProps.page.Banner.Image[0].url}
         />
       </Head>
       <ThemeProvider theme={theme}>
