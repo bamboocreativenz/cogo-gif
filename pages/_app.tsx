@@ -16,6 +16,9 @@ export default function App ({ Component, pageProps }) {
           name='viewport'
           content='width=device-width, initial-scale=1'
         ></meta>
+        <meta property='og:title' content='Good Impact Framework' />
+        <meta property='og:image' content='/images/banner.jpg' />
+        <meta property='og:type' content='website' />
       </Head>
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
