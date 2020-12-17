@@ -20,7 +20,7 @@ export default function App ({ Component, pageProps }) {
         {pageProps.page && (
           <meta
             property='og:image'
-            content={pageProps.page.Banner.Image[0].url}
+            content={pageProps.page.Banner.Image[0].thumbnails.large.url}
           />
         )}
       </Head>
