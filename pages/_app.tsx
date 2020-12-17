@@ -17,10 +17,12 @@ export default function App ({ Component, pageProps }) {
           content='width=device-width, initial-scale=1'
         ></meta>
         <meta property='og:title' content='Good Impact Framework' />
-        <meta
-          property='og:image'
-          content={pageProps.page.Banner.Image[0].url}
-        />
+        {pageProps.page && (
+          <meta
+            property='og:image'
+            content={pageProps.page.Banner.Image[0].url}
+          />
+        )}
       </Head>
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
