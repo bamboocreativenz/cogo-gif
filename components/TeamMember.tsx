@@ -1,6 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Text, Image } from 'theme-ui'
+import ReactMarkdown from 'react-markdown'
+import gfm from 'remark-gfm'
 import NextImage from 'next/image'
 
 import OneThenTwoColumns from './OneThenTwoColumns'
@@ -14,10 +16,10 @@ export default function TeamMember ({ copy }: TeamMemberProps) {
     <OneThenTwoColumns
       mt={[4, 5]}
       firstColumnContent={
-        <Flex mb={[2, 0]} sx={{ justifyContent: 'flex-end' }}>
+        <Flex mb={[2, 0]}>
           <NextImage
             src={copy.Image[0].url}
-            alt='GIF team member'
+            alt={copy.Title}
             width={200}
             height={200}
           />
@@ -25,15 +27,32 @@ export default function TeamMember ({ copy }: TeamMemberProps) {
       }
       remainingContent={
         <Flex ml={[0, 4]} sx={{ flexDirection: 'column' }}>
-          <Text
-            variant='p1'
-            sx={{ whiteSpace: 'pre-wrap' }}
-            dangerouslySetInnerHTML={{ __html: copy.Title }}
+          <ReactMarkdown
+            renderers={{
+              paragraph: props => (
+                <Text
+                  variant='p1'
+                  mb={2}
+                  sx={{ whiteSpace: 'pre-wrap' }}
+                  {...props}
+                />
+              )
+            }}
+            plugins={[gfm]}
+            children={copy.Title}
           />
-          <Text
-            variant='p1'
-            sx={{ whiteSpace: 'pre-wrap' }}
-            dangerouslySetInnerHTML={{ __html: copy.Content }}
+          <ReactMarkdown
+            renderers={{
+              paragraph: props => (
+                <Text
+                  variant='quote'
+                  sx={{ whiteSpace: 'pre-wrap' }}
+                  {...props}
+                />
+              )
+            }}
+            plugins={[gfm]}
+            children={copy.Content}
           />
         </Flex>
       }

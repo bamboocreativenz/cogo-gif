@@ -9,10 +9,11 @@ import {
   Text,
   Button,
   Image,
-  Input
+  Input,
+  Link
 } from 'theme-ui'
 import NextImage from 'next/image'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
 import without from 'lodash/without'
@@ -21,24 +22,31 @@ import { EmailZ } from '../types/util'
 
 import FullWidthCentered from './FullWidthCentered'
 import OneThenTwoColumns from './OneThenTwoColumns'
-import Dropdown from './Dropdown'
 
 import industries from '../util/industries'
-import themes from '../util/themes'
 import downloadPDF from '../util/downloadPDF'
 
 import { EMAIL_STORAGE_KEY } from '../constants'
 
+const plainIndustries = Object.keys(industries).map(i => ({
+  name: i,
+  icon: industries[i].plain
+}))
+
 function getHandleSelectIndustry ({
-  selectedIndustries,
-  setSelectedIndustries,
+  selectedIndustriesForDownload,
+  setSelectedIndustriesForDownload,
   industry
 }) {
   return function handleSelectIndustry () {
-    if (selectedIndustries.includes(industry)) {
-      setSelectedIndustries(without(selectedIndustries, industry))
+    if (selectedIndustriesForDownload.includes(industry)) {
+      setSelectedIndustriesForDownload(
+        without(selectedIndustriesForDownload, industry)
+      )
     } else {
-      setSelectedIndustries(selectedIndustries.concat(industry))
+      setSelectedIndustriesForDownload(
+        selectedIndustriesForDownload.concat(industry)
+      )
     }
   }
 }
@@ -48,10 +56,8 @@ interface IndustryReportsProps {
   download: any // TODO: type better
   marketInsights: any // TODO: type better
   industryReports: any // TODO: type better
-  selectedIndustry: string
-  setSelectedIndustry: Dispatch<SetStateAction<string>>
+  selectedIndustries: Array<string>
   selectedTheme: string
-  setSelectedTheme: Dispatch<SetStateAction<string>>
 }
 
 export default function IndustryReports ({
@@ -59,14 +65,16 @@ export default function IndustryReports ({
   download,
   marketInsights,
   industryReports,
-  selectedIndustry,
-  setSelectedIndustry,
-  selectedTheme,
-  setSelectedTheme
+  selectedIndustries,
+  selectedTheme
 }: IndustryReportsProps) {
   const { theme } = useThemeUI()
+  const scrollContainer = useRef(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedIndustries, setSelectedIndustries] = useState([])
+  const [
+    selectedIndustriesForDownload,
+    setSelectedIndustriesForDownload
+  ] = useState([])
   const [downloading, setDownloading] = useState(false)
   const [downloadSuccess, setDownloadSuccess] = useState(null)
   const { register, handleSubmit, errors, setValue } = useForm({
@@ -89,42 +97,38 @@ export default function IndustryReports ({
     }
   })
 
+  const filteredMarketInsights = marketInsights.filter(mi =>
+    selectedTheme && selectedIndustries.length > 0
+      ? mi.Themes &&
+        mi.Themes.includes(selectedTheme) &&
+        mi.Industries &&
+        selectedIndustries.some(si => mi.Industries.includes(si))
+      : selectedTheme
+      ? mi.Themes && mi.Themes.includes(selectedTheme)
+      : selectedIndustries.length > 0
+      ? mi.Industries &&
+        selectedIndustries.some(si => mi.Industries.includes(si))
+      : mi
+  )
+
+  const handleScrollContainer = (direction: string) => () => {
+    // N.B. this isn't a perfect calculation, but it's close
+    const insightWidth =
+      scrollContainer.current.scrollWidth / filteredMarketInsights.length +
+      filteredMarketInsights.length
+
+    scrollContainer.current.scroll({
+      left:
+        direction === 'left'
+          ? scrollContainer.current.scrollLeft + insightWidth
+          : scrollContainer.current.scrollLeft - insightWidth,
+      behavior: 'smooth'
+    })
+  }
+
   return (
     <FullWidthCentered bg='greyBackground'>
-      <Flex px={[3, 5]} mb={5} mt={4} sx={{ flexDirection: 'column' }}>
-        <OneThenTwoColumns
-          mb={4}
-          firstColumnContent={
-            <Text variant='button2' sx={{ flex: 1 }}>
-              FILTER BY:
-            </Text>
-          }
-          remainingContent={
-            <Flex ml={[0, 4]} sx={{ flex: 2, justifyContent: 'space-between' }}>
-              <Flex mr={4} sx={{ flex: 1 }}>
-                <Dropdown
-                  items={industries}
-                  selectedItemName={selectedIndustry}
-                  placeholder='Industry'
-                  onChange={({ selectedItem }) =>
-                    setSelectedIndustry(selectedItem.name)
-                  }
-                />
-              </Flex>
-              <Flex ml={4} sx={{ flex: 1 }}>
-                <Dropdown
-                  items={themes}
-                  selectedItemName={selectedTheme}
-                  placeholder='Theme'
-                  onChange={({ selectedItem }) =>
-                    setSelectedTheme(selectedItem.name)
-                  }
-                />
-              </Flex>
-            </Flex>
-          }
-        />
-
+      <Flex px={[3, 5]} my={5} sx={{ flexDirection: 'column' }}>
         <OneThenTwoColumns
           mb={4}
           firstColumnContent={<Heading variant='h1'>{copy.Title}</Heading>}
@@ -143,36 +147,59 @@ export default function IndustryReports ({
           }
         />
 
-        <Flex py={4} sx={{ overflowX: 'scroll' }}>
-          {marketInsights
-            .filter(mi =>
-              selectedTheme && selectedIndustry
-                ? mi.Themes.includes(selectedTheme) &&
-                  mi.Industries.includes(selectedIndustry)
-                : selectedTheme
-                ? mi.Themes.includes(selectedTheme)
-                : selectedIndustry
-                ? mi.Industries.includes(selectedIndustry)
-                : mi
-            )
-            .map((mi, i) => (
+        <Flex sx={{ position: 'relative' }}>
+          {filteredMarketInsights.length > 0 && (
+            <Button
+              onClick={handleScrollContainer('right')}
+              variant='tertiary'
+              bg='initial'
+              sx={{
+                position: 'absolute',
+                left: 0,
+                top: [100, 128],
+                zIndex: 100
+              }}
+            >
+              <Image src='/icons/chevron-left.svg' sx={{ height: 5 }} />
+            </Button>
+          )}
+          <Flex ref={scrollContainer} py={4} sx={{ overflowX: 'scroll' }}>
+            {filteredMarketInsights.map(mi => (
               <Box
-                key={i}
+                key={mi.id}
                 mr={[3, 5]}
                 sx={{
                   minWidth: [200, 7]
                 }}
               >
-                <NextImage
-                  src={mi.Image[0].url}
-                  alt='Market Insight'
-                  // @ts-expect-error
-                  width={theme.sizes[7]}
-                  // @ts-expect-error
-                  height={theme.sizes[7]}
-                />
+                <Link href={mi['Source Link']} target='_blank'>
+                  <NextImage
+                    src={mi.Image[0].url}
+                    alt='Market Insight'
+                    // @ts-expect-error
+                    width={theme.sizes[7]}
+                    // @ts-expect-error
+                    height={theme.sizes[7]}
+                  />
+                </Link>
               </Box>
             ))}
+          </Flex>
+          {filteredMarketInsights.length > 0 && (
+            <Button
+              onClick={handleScrollContainer('left')}
+              variant='tertiary'
+              bg='initial'
+              sx={{
+                position: 'absolute',
+                right: 0,
+                top: [100, 128],
+                zIndex: 100
+              }}
+            >
+              <Image src='/icons/chevron-right.svg' sx={{ height: 5 }} />
+            </Button>
+          )}
         </Flex>
 
         <Flex
@@ -209,6 +236,7 @@ export default function IndustryReports ({
           borderWidth: '1px',
           borderColor: 'lightGrey'
         }}
+        style={{ overlay: { zIndex: 100 } }}
       >
         <Flex p={5} sx={{ flexDirection: 'column' }}>
           <Flex>
@@ -220,39 +248,77 @@ export default function IndustryReports ({
             </Text>
           </Flex>
           <Flex mt={3} sx={{ flexWrap: 'wrap' }}>
-            {industries.map((industry, i) => (
-              <Flex
-                key={i}
-                pr={3}
-                py={2}
-                onClick={getHandleSelectIndustry({
-                  industry: industry.name,
-                  selectedIndustries,
-                  setSelectedIndustries
-                })}
-                sx={{
-                  width: 160,
-                  alignItems: 'center',
-                  cursor: 'pointer',
-                  opacity: selectedIndustries.includes(industry.name)
-                    ? '1'
-                    : '0.4',
-                  '&:hover': {
-                    opacity: selectedIndustries.includes(industry.name)
+            {plainIndustries
+              .filter(pi => Object.keys(industryReports).includes(pi.name))
+              .map((industry, i) => (
+                <Flex
+                  key={i}
+                  pr={3}
+                  py={2}
+                  onClick={getHandleSelectIndustry({
+                    industry: industry.name,
+                    selectedIndustriesForDownload,
+                    setSelectedIndustriesForDownload
+                  })}
+                  sx={{
+                    width: 160,
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                    opacity: selectedIndustriesForDownload.includes(
+                      industry.name
+                    )
                       ? '1'
-                      : '0.7'
-                  }
-                }}
-              >
-                <Image
-                  mr={2}
-                  src={industry.icon}
-                  sx={{ width: 4, minWidth: 4 }}
-                />
-                <Text>{industry.name}</Text>
-              </Flex>
-            ))}
+                      : '0.4',
+                    '&:hover': {
+                      opacity: selectedIndustriesForDownload.includes(
+                        industry.name
+                      )
+                        ? '1'
+                        : '0.7'
+                    }
+                  }}
+                >
+                  <Image
+                    mr={2}
+                    src={industry.icon}
+                    sx={{ width: 4, minWidth: 4 }}
+                  />
+                  <Text>{industry.name}</Text>
+                </Flex>
+              ))}
           </Flex>
+          {plainIndustries.filter(
+            pi => !Object.keys(industryReports).includes(pi.name)
+          ).length > 0 && (
+            <>
+              <Heading mt={4} variant='h3'>
+                Coming soon:
+              </Heading>
+              <Flex mt={3} sx={{ flexWrap: 'wrap' }}>
+                {plainIndustries
+                  .filter(pi => !Object.keys(industryReports).includes(pi.name))
+                  .map((industry, i) => (
+                    <Flex
+                      key={i}
+                      pr={3}
+                      py={2}
+                      sx={{
+                        width: 160,
+                        alignItems: 'center',
+                        opacity: 0.4
+                      }}
+                    >
+                      <Image
+                        mr={2}
+                        src={industry.icon}
+                        sx={{ width: 4, minWidth: 4 }}
+                      />
+                      <Text>{industry.name}</Text>
+                    </Flex>
+                  ))}
+              </Flex>
+            </>
+          )}
           <Flex as='form' mt={3} sx={{ alignItems: 'flex-start' }}>
             <Flex sx={{ flexDirection: 'column' }}>
               <Input name='email' placeholder='Email' ref={register} />
@@ -273,15 +339,15 @@ export default function IndustryReports ({
             <Button
               ml={2}
               variant={
-                downloading || selectedIndustries.length < 1
+                downloading || selectedIndustriesForDownload.length < 1
                   ? 'disabled'
                   : 'primary'
               }
-              disabled={downloading || selectedIndustries.length < 1}
+              disabled={downloading || selectedIndustriesForDownload.length < 1}
               onClick={handleSubmit(data =>
                 downloadPDF({
                   pdfType: 'Industry Report',
-                  selected: selectedIndustries.map(si => ({
+                  selected: selectedIndustriesForDownload.map(si => ({
                     id: industryReports[si].id,
                     Link: industryReports[si].Link
                   })),

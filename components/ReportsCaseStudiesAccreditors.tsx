@@ -1,62 +1,147 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, Flex, Box, Text } from 'theme-ui'
+import { Dispatch, SetStateAction } from 'react'
+import without from 'lodash/without'
 
+import Dropdown from './Dropdown'
 import IndustryReports from './IndustryReports'
 import CaseStudies from './CaseStudies'
 import AccreditorsAndCertifications from './AccreditorsAndCertifications'
 import Latest from './Latest'
 import Footer from './Footer'
+import OneThenTwoColumns from './OneThenTwoColumns'
+
+import themes from '../util/themes'
+import industries from '../util/industries'
+import FullWidthCentered from './FullWidthCentered'
+
+import useFilters from '../hooks/useFilters'
+
+const plainIndustries = Object.keys(industries).map(i => ({
+  name: i,
+  icon: industries[i].plain
+}))
+
+interface ReportsCaseStudiesAccreditorsProps {
+  commonContent: any
+  footer: any
+  marketInsights: any
+  industryReports: any
+  caseStudies: any
+  accreditors: any
+  defaultTheme?: string
+}
 
 export default function ReportsCaseStudiesAccreditors ({
   commonContent,
-  selectedIndustry,
-  setSelectedIndustry,
-  selectedTheme,
-  setSelectedTheme,
+  footer,
   marketInsights,
   industryReports,
   caseStudies,
-  accreditors
-}) {
+  accreditors,
+  defaultTheme
+}: ReportsCaseStudiesAccreditorsProps) {
+  const {
+    selectedIndustries,
+    setSelectedIndustries,
+    selectedTheme,
+    setSelectedTheme
+  } = useFilters({
+    initialTheme: defaultTheme
+  })
   return (
     <>
+      <Box bg='greyBackground' sx={{ position: 'sticky', top: 0, zIndex: 10 }}>
+        <FullWidthCentered bg='greyBackground'>
+          <Flex px={[3, 5]} mt={4} sx={{ flexDirection: 'column' }}>
+            <OneThenTwoColumns
+              mb={4}
+              firstColumnContent={
+                <Text variant='button2' sx={{ flex: 1 }}>
+                  FILTER BY:
+                </Text>
+              }
+              remainingContent={
+                <Flex
+                  ml={[0, 4]}
+                  sx={{
+                    flex: 2,
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-end',
+                    width: '100%'
+                  }}
+                >
+                  <Flex mr={[2, 4]} sx={{ flex: 1 }}>
+                    <Dropdown
+                      multiple
+                      items={plainIndustries}
+                      controlledSelectedItems={selectedIndustries}
+                      placeholder='Industry'
+                      onChange={({ selectedItem }) => {
+                        if (selectedIndustries.includes(selectedItem.name)) {
+                          setSelectedIndustries(
+                            without(selectedIndustries, selectedItem.name)
+                          )
+                        } else {
+                          setSelectedIndustries(
+                            selectedIndustries.concat(selectedItem.name)
+                          )
+                        }
+                      }}
+                    />
+                  </Flex>
+                  <Flex ml={[2, 4]} sx={{ flex: 1 }}>
+                    <Dropdown
+                      items={themes}
+                      controlledSelectedItem={selectedTheme}
+                      placeholder='Theme'
+                      onChange={({ selectedItem }) =>
+                        setSelectedTheme(selectedItem.name)
+                      }
+                    />
+                  </Flex>
+                </Flex>
+              }
+            />
+          </Flex>
+        </FullWidthCentered>
+      </Box>
+
       <IndustryReports
         copy={commonContent['Industry Reports']}
         download={commonContent['Download Industry Report']}
         marketInsights={marketInsights}
         industryReports={industryReports}
-        selectedIndustry={selectedIndustry}
-        setSelectedIndustry={setSelectedIndustry}
+        selectedIndustries={selectedIndustries}
         selectedTheme={selectedTheme}
-        setSelectedTheme={setSelectedTheme}
       />
 
       <CaseStudies
         caseStudies={caseStudies}
         copy={commonContent['Case Studies']}
         download={commonContent['Download Case Study']}
-        selectedIndustry={selectedIndustry}
+        selectedIndustries={selectedIndustries}
         selectedTheme={selectedTheme}
       />
 
       <AccreditorsAndCertifications
         accreditors={accreditors}
         copy={commonContent.Accreditors}
-        selectedIndustry={selectedIndustry}
         selectedTheme={selectedTheme}
       />
 
       <Latest copy={commonContent.Latest} />
 
       <Footer
-        logoWestpac={commonContent['Westpac'].Image}
-        logoWWF={commonContent['WWF'].Image}
-        logoBusinessGovtNZ={commonContent['business.govt.nz'].Image}
-        logoSustainableBusinessNetwork={
-          commonContent['Sustainable Business Network'].Image
-        }
-        logoCoGo={commonContent['CoGo'].Image}
+        footer={footer}
+        // logoWestpac={commonContent['Westpac'].Image}
+        // logoWWF={commonContent['WWF'].Image}
+        // logoBusinessGovtNZ={commonContent['business.govt.nz'].Image}
+        // logoSustainableBusinessNetwork={
+        //   commonContent['Sustainable Business Network'].Image
+        // }
+        // logoCoGo={commonContent['CoGo'].Image}
       />
     </>
   )

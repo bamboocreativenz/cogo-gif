@@ -11,22 +11,30 @@ import { jsx, Flex } from 'theme-ui'
 interface FullWidthCentered {
   children: React.ReactNode // TODO: make more specific?
   bg?: string
+  height?: string | number
 }
 
 export default function FullWidthCentered ({
   children,
-  bg = 'white'
+  bg = 'white',
+  height = 'initial'
 }: FullWidthCentered) {
   return (
     <Flex
       bg={bg}
-      sx={{ width: '100%', flexDirection: 'column', alignItems: 'center' }}
+      sx={{
+        width: '100%',
+        height,
+        flexDirection: 'column',
+        alignItems: 'center'
+      }}
     >
       <Flex
         bg={bg}
         sx={{
           flexDirection: 'column',
           width: '100%',
+          height,
           maxWidth: theme => theme.maxWidth
         }}
       >

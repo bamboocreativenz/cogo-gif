@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex } from 'theme-ui'
+import { jsx, Flex, Box } from 'theme-ui'
 import NextImage from 'next/image'
 
 import FullWidthCentered from './FullWidthCentered'
@@ -23,23 +23,46 @@ export default function Banner ({
   return (
     <Flex
       sx={{
+        position: 'relative',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        backgroundImage: [
-          `url(${backgroundImage[0].thumbnails.large.url})`,
-          `url(${backgroundImage[0].url})`
-        ],
-        backgroundSize: 'cover',
-        backgroundPosition: backgroundImagePosition,
         height: [360, 8]
       }}
     >
-      <Nav />
-      <FullWidthCentered bg='none'>
-        <Flex py={4} px={[3, 5]}>
-          <Headline headline={headline} subHeadline={subHeadline} />
-        </Flex>
-      </FullWidthCentered>
+      <NextImage
+        src={backgroundImage[0].url}
+        layout='fill'
+        priority={true}
+        sx={{ objectFit: 'cover', objectPosition: backgroundImagePosition }}
+      />
+
+      <Flex
+        sx={{
+          position: 'absolute',
+          top: 0,
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '100%',
+          height: '100%',
+          backgroundImage: 'linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.4))'
+        }}
+      >
+        <FullWidthCentered bg='none' height='100%'>
+          <Flex
+            sx={{
+              flexDirection: 'column',
+              height: '100%',
+              justifyContent: 'space-between'
+            }}
+          >
+            <Nav />
+            <Flex py={4} px={[3, 5]}>
+              <Headline headline={headline} subHeadline={subHeadline} />
+            </Flex>
+          </Flex>
+        </FullWidthCentered>
+      </Flex>
     </Flex>
   )
 }

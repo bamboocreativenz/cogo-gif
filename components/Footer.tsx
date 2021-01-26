@@ -1,25 +1,42 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import Link from 'next/link'
+import NextImage from 'next/image'
 import { jsx, Flex, Box, Text, Image, Link as TUILink } from 'theme-ui'
 
 import FullWidthCentered from './FullWidthCentered'
 
-interface FooterProps {
-  logoWestpac: any
-  logoWWF: any
-  logoBusinessGovtNZ: any
-  logoSustainableBusinessNetwork: any
-  logoCoGo: any
+interface FooterLogoProps {
+  src: string
+  alt: string
 }
 
-export default function Footer ({
-  logoWestpac,
-  logoWWF,
-  logoBusinessGovtNZ,
-  logoSustainableBusinessNetwork,
-  logoCoGo
-}: FooterProps) {
+function FooterLogo ({ src, alt }: FooterLogoProps) {
+  return (
+    <Box
+      mr={[0, 4]}
+      mb={[4, 0]}
+      sx={{
+        position: 'relative',
+        height: [5, 50],
+        width: [100, '100%']
+      }}
+    >
+      <NextImage
+        src={src}
+        alt={alt}
+        layout='fill'
+        sx={{ objectFit: 'contain', objectPosition: 'center' }}
+      />
+    </Box>
+  )
+}
+
+interface FooterProps {
+  footer: Array<any>
+}
+
+export default function Footer ({ footer }: FooterProps) {
   return (
     <FullWidthCentered bg='text'>
       <Flex
@@ -27,75 +44,27 @@ export default function Footer ({
         py={5}
         sx={{ flexDirection: 'column', alignItems: ['center', 'initial'] }}
       >
-        <Text variant='h3' sx={{ color: 'white' }}>
-          Brought to you by
-        </Text>
+        {footer.length > 0 && (
+          <Box mb={5}>
+            <Text variant='h3' sx={{ color: 'white' }}>
+              Brought to you by
+            </Text>
+
+            <Flex
+              mt={4}
+              sx={{
+                flexDirection: ['column', 'row'],
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}
+            >
+              {footer.map(f => (
+                <FooterLogo key={f.Name} src={f.Image[0].url} alt={f.Name} />
+              ))}
+            </Flex>
+          </Box>
+        )}
         <Flex
-          mt={4}
-          sx={{
-            flexDirection: ['column', 'row'],
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }}
-        >
-          <Image
-            mr={[0, 4]}
-            mb={[4, 0]}
-            src={logoWestpac[0].url}
-            sx={{
-              flex: 1,
-              maxHeight: ['none', 50],
-              maxWidth: [100, 'none'],
-              objectFit: 'contain'
-            }}
-          />
-          <Image
-            mx={[0, 4]}
-            mb={[4, 0]}
-            src={logoWWF[0].url}
-            sx={{
-              flex: 1,
-              maxHeight: ['none', 50],
-              maxWidth: [100, 'none'],
-              objectFit: 'contain'
-            }}
-          />
-          <Image
-            mx={[0, 4]}
-            mb={[4, 0]}
-            src={logoBusinessGovtNZ[0].url}
-            sx={{
-              flex: 1,
-              maxHeight: ['none', 50],
-              maxWidth: [100, 'none'],
-              objectFit: 'contain'
-            }}
-          />
-          <Image
-            mx={[0, 4]}
-            mb={[4, 0]}
-            src={logoSustainableBusinessNetwork[0].url}
-            sx={{
-              flex: 1,
-              maxHeight: ['none', 50],
-              maxWidth: [100, 'none'],
-              objectFit: 'contain'
-            }}
-          />
-          <Image
-            ml={[0, 4]}
-            mb={[4, 0]}
-            src={logoCoGo[0].url}
-            sx={{
-              flex: 1,
-              maxHeight: ['none', 50],
-              maxWidth: [100, 'none'],
-              objectFit: 'contain'
-            }}
-          />
-        </Flex>
-        <Flex
-          mt={4}
           sx={{
             flexDirection: 'column',
             alignItems: ['flex-start', 'flex-end']

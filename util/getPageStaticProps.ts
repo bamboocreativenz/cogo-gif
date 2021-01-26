@@ -26,7 +26,7 @@ export default async function getPageStaticProps ({
   if (shouldFetchReportsCaseStudiesAccreditors) {
     const marketInsightsRecords = await airtable.listRecords({
       tableName: 'Market Insights',
-      viewName: 'Grid View'
+      viewName: 'Grid view'
     })
 
     marketInsights = marketInsightsRecords
@@ -34,7 +34,7 @@ export default async function getPageStaticProps ({
       .map(c => ({ id: c.id, ...c.fields }))
     const industryReportsRecords = await airtable.listRecords({
       tableName: 'Industry Reports',
-      viewName: 'Grid View'
+      viewName: 'Grid view'
     })
     // N.B. industryReports are only used for downloading the PDF links, so are returned keyed by industry
     // and are reduced to choose only the most recent report for that industry
@@ -44,51 +44,100 @@ export default async function getPageStaticProps ({
       .reduce(
         (acc, curr) => ({
           ...acc,
+          // @ts-expect-error
           [curr.Industry]: acc[curr.Industry]
-            ? curr.Date > acc[curr.Industry].Date
+            ? // @ts-expect-error
+              curr.Date > acc[curr.Industry].Date
               ? curr
-              : acc[curr.Industry]
+              : // @ts-expect-error
+                acc[curr.Industry]
             : curr
         }),
         {}
       )
     const caseStudiesRecords = await airtable.listRecords({
       tableName: 'Case Studies',
-      viewName: 'Grid View'
+      viewName: 'Grid view'
     })
     caseStudies = caseStudiesRecords
       .filter(c => !isEmpty(c.fields))
       .map(c => ({ id: c.id, ...c.fields }))
     const accreditorsRecords = await airtable.listRecords({
       tableName: 'Accreditors',
-      viewName: 'Grid View'
+      viewName: 'Grid view'
     })
     accreditors = accreditorsRecords
       .filter(c => !isEmpty(c.fields))
       .map(c => ({ id: c.id, ...c.fields }))
   }
 
+  const aboutPageProdRecords = [
+    'Who',
+    'Partner 1',
+    'Partner 2',
+    'Partner 3',
+    'Partner 4',
+    'Partner 5'
+  ]
   const pageRecords = await airtable.listRecords({
     tableName,
-    viewName: 'Grid View'
+    viewName: 'Grid view'
   })
   const page = keyBy(
-    pageRecords.filter(c => !isEmpty(c.fields)).map(c => c.fields),
+    pageRecords
+      .filter(c => {
+        if (tableName === 'About Page') {
+          // handle partner images only being shown in non-prod for now
+          if (process.env.VERCEL_ENV !== 'production') {
+            return !isEmpty(c.fields)
+          } else {
+            return (
+              !isEmpty(c.fields) &&
+              !(
+                (
+                // @ts-expect-error
+                  aboutPageProdRecords.includes(c.fields.Name) &&
+                  !c.fields['Production (only relevant for Who and Partners)']
+                )
+              )
+            )
+          }
+        } else {
+          return !isEmpty(c.fields)
+        }
+      })
+      .map(c => c.fields),
     'Name'
   )
 
   const commonContentRecords = await airtable.listRecords({
     tableName: 'Common Page Content',
-    viewName: 'Grid View'
+    viewName: 'Grid view'
   })
   const commonContent = keyBy(
     commonContentRecords.filter(c => !isEmpty(c.fields)).map(c => c.fields),
     'Name'
   )
 
+  const footerRecords = await airtable.listRecords({
+    tableName: 'Footer',
+    viewName: 'Grid view'
+  })
+  const footer = footerRecords
+    .filter(c => {
+      if (process.env.VERCEL_ENV !== 'production') {
+        return !isEmpty(c.fields)
+      } else {
+        // @ts-expect-error
+        return !isEmpty(c.fields) && c.fields.Production
+      }
+    })
+    .map(c => c.fields)
+
   return {
     props: {
       commonContent,
+      footer,
       marketInsights,
       industryReports,
       caseStudies,
